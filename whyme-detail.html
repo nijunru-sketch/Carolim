@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="data:," />
+    <title>Why Me Detail</title>
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #121714;
+        --muted: rgba(18, 23, 20, 0.7);
+        --line: rgba(18, 23, 20, 0.1);
+        --soft: rgba(18, 23, 20, 0.04);
+        --shell: min(1760px, calc(100vw - 48px));
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+      }
+
+      body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        color: var(--ink);
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica,
+          Arial, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .whymeDetail {
+        position: relative;
+        min-height: 100dvh;
+        background: var(--bg);
+      }
+
+      .moody__back {
+        position: absolute;
+        top: clamp(1.25rem, 2vw, 1.8rem);
+        left: clamp(1.4rem, 2.1vw, 2rem);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(2.7rem, 3.2vw, 3.4rem);
+        height: clamp(2.7rem, 3.2vw, 3.4rem);
+        color: rgba(18, 23, 20, 0.42);
+        text-decoration: none;
+        z-index: 3;
+        opacity: 0;
+        transform: translateX(0.5rem);
+        animation: none;
+        transition:
+          opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .moody__back:focus-visible {
+        outline: 1px solid rgba(18, 23, 20, 0.28);
+        outline-offset: 0.18rem;
+      }
+
+      .moody__backIcon {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform: rotate(90deg);
+        fill: currentColor;
+      }
+
+      .whymeDetail-ready .moody__back {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .detailShell {
+        width: var(--shell);
+        margin: 0 auto;
+        padding: clamp(5.5rem, 9vw, 7.5rem) 0 clamp(6rem, 9vw, 8rem);
+        display: grid;
+        gap: clamp(5rem, 10vw, 9rem);
+      }
+
+      .detailSection {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.52fr) minmax(0, 1fr);
+        gap: clamp(1rem, 2.2vw, 2rem);
+        align-items: start;
+      }
+
+      .detailSection__copy {
+        display: grid;
+        gap: 1rem;
+        max-width: 34rem;
+        padding-left: clamp(1.1rem, 2.6vw, 2.8rem);
+      }
+
+      .detailSection__title {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.3rem, 4vw, 4.6rem);
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+        font-weight: 700;
+      }
+
+      .detailSection__body {
+        display: grid;
+        gap: 0.42rem;
+        margin-top: 1.8rem;
+        color: var(--muted);
+        font-size: clamp(1.1875rem, 1.38vw, 1.33rem);
+        line-height: 1.4;
+        letter-spacing: -0.022em;
+      }
+
+      .detailSection__body p {
+        margin: 0;
+      }
+
+      .detailSection__media {
+        min-height: clamp(280px, 34vw, 520px);
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(180deg, rgba(18, 23, 20, 0.02), rgba(18, 23, 20, 0.01)),
+          #ffffff;
+      }
+
+      .detailSection--copy .detailSection__media {
+        display: none;
+      }
+
+      .detailSection--copy {
+        grid-template-columns: 1fr;
+      }
+
+      .detailSection--copy .detailSection__copy {
+        max-width: none;
+      }
+
+      .detailSection__line--nowrap {
+        white-space: nowrap;
+      }
+
+      .detailSection__line--force-nowrap {
+        white-space: nowrap !important;
+      }
+
+      .detailSection--space .detailSection__media {
+        min-height: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .detailSection--space {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .spaceMedia {
+        display: grid;
+        gap: 0;
+      }
+
+      .spaceProject {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(340px, 480px) minmax(0, 1fr);
+        gap: clamp(1rem, 2vw, 1.8rem);
+        align-items: start;
+        padding: 0 0 0.42rem;
+        border-bottom: 0;
+      }
+
+      .spaceProject + .spaceProject {
+        margin-top: 1rem;
+      }
+
+      .spaceProject::after {
+        content: "";
+        position: absolute;
+        left: clamp(1.1rem, 2.6vw, 2.8rem);
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: rgba(18, 23, 20, 0.18);
+      }
+
+      .spaceProject__label {
+        padding-left: clamp(1.1rem, 2.6vw, 2.8rem);
+        padding-top: 2.15rem;
+      }
+
+      .spaceProject__label--ripple {
+        padding-top: 0.35rem;
+      }
+
+      .spaceProject__label p {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1.2375rem, 1.54vw, 1.41rem);
+        line-height: 1.45;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+
+      .spaceProject__panel {
+        position: relative;
+        margin-top: var(--panel-top-offset, 0);
+        min-height: clamp(180px, 18vw, 230px);
+        padding-bottom: 0;
+        transition: min-height 780ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .spaceProject.is-open .spaceProject__panel {
+        min-height: var(--panel-open-height, 620px);
+      }
+
+      .spaceProject:hover .spaceProject__panel,
+      .spaceProject:focus-within .spaceProject__panel {
+        min-height: var(--panel-open-height, 620px);
+      }
+
+      .spaceProject__trigger {
+        position: absolute;
+        top: 0;
+        left: calc(100% - min(100%, 300px));
+        width: min(100%, 300px);
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        display: block;
+        z-index: 3;
+        transition:
+          opacity 240ms ease,
+          transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .spaceProject__trigger img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .spaceProject__trigger:focus-visible {
+        outline: 1px solid rgba(18, 23, 20, 0.24);
+        outline-offset: 0.2rem;
+      }
+
+      .spaceProject.is-open .spaceProject__trigger {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.985);
+      }
+
+      .spaceProject:hover .spaceProject__trigger,
+      .spaceProject:focus-within .spaceProject__trigger {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.985);
+      }
+
+      .spaceProject__gallery {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-0.8rem);
+        transition:
+          max-height 780ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 420ms ease,
+          transform 780ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .spaceProject.is-open .spaceProject__gallery {
+        max-height: 1200px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .spaceProject:hover .spaceProject__gallery,
+      .spaceProject:focus-within .spaceProject__gallery {
+        max-height: 1200px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .spaceProject__galleryGrid {
+        display: grid;
+        gap: 6px;
+        background: #ffffff;
+        align-items: start;
+      }
+
+      .spaceProject__galleryGrid--three {
+        grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.1fr);
+        grid-template-rows: auto auto;
+      }
+
+      .spaceProject__galleryGrid--three .spaceProject__galleryItem:first-child {
+        grid-row: 1 / span 2;
+      }
+
+      .spaceProject__galleryGrid--four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px;
+      }
+
+      .spaceProject__galleryItem img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        background: #ffffff;
+        transition:
+          opacity 460ms ease,
+          transform 780ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .spaceProject__galleryItem {
+        overflow: hidden;
+        background: #ffffff;
+        display: grid;
+      }
+
+      .spaceProject__galleryItem:not(.spaceProject__galleryItem--lead) img {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      .spaceProject.is-open .spaceProject__galleryItem:not(.spaceProject__galleryItem--lead) img,
+      .spaceProject:hover .spaceProject__galleryItem:not(.spaceProject__galleryItem--lead) img,
+      .spaceProject:focus-within .spaceProject__galleryItem:not(.spaceProject__galleryItem--lead) img {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .spaceProject__galleryItem--delay-1 img {
+        transition-delay: 90ms;
+      }
+
+      .spaceProject__galleryItem--delay-2 img {
+        transition-delay: 150ms;
+      }
+
+      .spaceProject__galleryItem--delay-3 img {
+        transition-delay: 220ms;
+      }
+
+      .spaceProject__galleryItem--landscape {
+        aspect-ratio: 1.66;
+      }
+
+      .spaceProject__galleryItem--portrait {
+        aspect-ratio: 1.66;
+      }
+
+      .detailSection--copy,
+      .detailSection--shoot,
+      .detailSection--space {
+        margin-top: -3rem;
+      }
+
+      .detailSection--planning {
+        align-items: start;
+        grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+        gap: clamp(0.75rem, 1.8vw, 1.4rem);
+      }
+
+      .planningMedia {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 10px;
+        column-gap: 0;
+        align-items: start;
+        border: 0;
+        background: transparent;
+        min-height: 0;
+        width: min(100%, 832px);
+        justify-self: end;
+        align-self: start;
+      }
+
+      .planningCard {
+        position: relative;
+        aspect-ratio: 0.86;
+        perspective: 1200px;
+        transform-style: preserve-3d;
+      }
+
+      .planningCard__inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .planningCard:hover .planningCard__inner,
+      .planningCard:focus-visible .planningCard__inner {
+        transform: rotateY(180deg);
+      }
+
+      .planningCard:focus-visible {
+        outline: 1px solid rgba(18, 23, 20, 0.28);
+        outline-offset: 0.18rem;
+      }
+
+      .planningCard__face {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        background: #ffffff;
+      }
+
+      .planningCard__face--back {
+        transform: rotateY(180deg);
+      }
+
+      .planningCard__face img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+      }
+
+      .detailSection--shoot {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+
+      .detailSection--shoot .detailSection__copy {
+        max-width: none;
+      }
+
+      .shootMedia {
+        position: relative;
+        margin-top: 3.2rem;
+        min-height: clamp(240px, 24vw, 340px);
+        border: 0;
+        background: transparent;
+        overflow: hidden;
+      }
+
+      .shootCarousel {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .shootTrack {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.22rem;
+        width: max-content;
+        animation: shoot-marquee 34s linear infinite;
+        will-change: transform;
+      }
+
+      .shootCarousel:hover .shootTrack,
+      .shootCarousel:focus-within .shootTrack {
+        animation-play-state: paused;
+      }
+
+      .shootSlide {
+        flex: 0 0 auto;
+        height: clamp(220px, 22vw, 310px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .shootSlide img {
+        display: block;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        box-shadow: 0 12px 30px rgba(18, 23, 20, 0.08);
+      }
+
+      .shootSlide--wide img {
+        aspect-ratio: auto;
+      }
+
+      .shootSlide--narrow img {
+        aspect-ratio: auto;
+      }
+
+      @keyframes shoot-marquee {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .detailSection {
+          grid-template-columns: 1fr;
+        }
+
+        .detailSection__copy {
+          max-width: none;
+          padding-left: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .detailSection--planning {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+
+        .detailSection--copy,
+        .detailSection--shoot,
+        .detailSection--space {
+          margin-top: -1.6rem;
+        }
+
+        .planningMedia {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .detailSection__line--nowrap {
+          white-space: normal;
+        }
+
+        .spaceProject__label p {
+          white-space: normal;
+        }
+
+        .shootMedia {
+          margin-top: 2.4rem;
+          min-height: 220px;
+        }
+
+        .shootTrack {
+          gap: 0.35rem;
+        }
+
+        .shootSlide {
+          height: min(46vw, 270px);
+        }
+
+        .spaceProject {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+        }
+
+        .spaceProject__label {
+          padding-left: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .spaceProject__panel {
+          min-height: 220px;
+        }
+
+        .spaceProject__trigger {
+          width: min(100%, 360px);
+          left: auto;
+          right: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .planningMedia {
+          grid-template-columns: 1fr;
+        }
+
+        .shootMedia {
+          margin-top: -2.6rem;
+          min-height: 200px;
+        }
+
+        .shootSlide {
+          height: min(52vw, 230px);
+        }
+
+        .spaceProject__galleryGrid--three,
+        .spaceProject__galleryGrid--four {
+          grid-template-columns: 1fr;
+        }
+
+        .spaceProject__galleryGrid--three .spaceProject__galleryItem:first-child {
+          grid-row: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="whymeDetail" aria-label="Why Me detail page">
+      <a
+        id="whyme-detail-back"
+        class="moody__back"
+        href="./whyme.html"
+        aria-label="Back to why me"
+      >
+        <svg class="moody__backIcon" viewBox="0 0 24 24" role="presentation">
+          <path d="M1 6.5C5.2 8.8 8.2 10.3 12 10.3C15.8 10.3 18.8 8.8 23 6.5C20.4 10.6 17.4 15.7 12 23C6.6 15.7 3.6 10.6 1 6.5Z" />
+        </svg>
+      </a>
+
+      <div class="detailShell">
+        <section class="detailSection detailSection--planning" aria-labelledby="planning-title">
+          <div class="detailSection__copy">
+            <h2 class="detailSection__title" id="planning-title">策划</h2>
+            <div class="detailSection__body">
+              <p>同一套产品不同策划下的呈现</p>
+              <p class="detailSection__line--force-nowrap">卖给女性 vs 卖给男性的视觉对比</p>
+            </div>
+          </div>
+          <div class="detailSection__media planningMedia" aria-label="策划案例图组">
+            <article class="planningCard" tabindex="0" aria-label="策划案例 1">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A1.jpg" alt="策划案例 A1" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B1.png" alt="策划案例 B1" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 2">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A2.jpg" alt="策划案例 A2" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B2.jpg" alt="策划案例 B2" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 3">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A3.jpg" alt="策划案例 A3" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B3.png" alt="策划案例 B3" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 4">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A4.png" alt="策划案例 A4" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B4.jpg" alt="策划案例 B4" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 5">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A5.jpg" alt="策划案例 A5" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B5.jpg" alt="策划案例 B5" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 6">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A6.png" alt="策划案例 A6" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B6.jpg" alt="策划案例 B6" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 7">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A7.jpg" alt="策划案例 A7" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B7.jpg" alt="策划案例 B7" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 8">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A8.jpg" alt="策划案例 A8" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B8.jpg" alt="策划案例 B8" />
+                </div>
+              </div>
+            </article>
+            <article class="planningCard" tabindex="0" aria-label="策划案例 9">
+              <div class="planningCard__inner">
+                <div class="planningCard__face planningCard__face--front">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/A组/A9.jpg" alt="策划案例 A9" />
+                </div>
+                <div class="planningCard__face planningCard__face--back">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/B组/B9.jpg" alt="策划案例 B9" />
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="detailSection detailSection--copy" aria-labelledby="copy-title">
+          <div class="detailSection__copy">
+            <h2 class="detailSection__title" id="copy-title">文案</h2>
+            <div class="detailSection__body">
+              <p>文笔不算强项，但十年来一直在输出</p>
+              <p>互联网、金融、食品、服饰…… 为不同风格咬过笔头</p>
+              <p>上能形而上—— 建过品牌世界观，起过名，写过 Slogan</p>
+              <p class="detailSection__line--nowrap">下能万物生—— 磨过详情页、海报、社交软文，公关稿、客服手册等等等等都一手包办</p>
+              <p>案例太多了，藏在了网站的各个角落</p>
+            </div>
+          </div>
+          <div class="detailSection__media" aria-hidden="true"></div>
+        </section>
+
+        <section class="detailSection detailSection--shoot" aria-labelledby="shoot-title">
+          <div class="detailSection__copy">
+            <h2 class="detailSection__title" id="shoot-title">拍摄</h2>
+            <div class="detailSection__body">
+              <p>举一个“产品形态单一如何拍摄”的小例子</p>
+            </div>
+          </div>
+          <div class="detailSection__media shootMedia" aria-label="拍摄案例图组">
+            <div class="shootCarousel">
+              <div class="shootTrack">
+                <figure class="shootSlide shootSlide--narrow">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/1.JPG" alt="拍摄案例 1" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/3.JPG" alt="拍摄案例 3" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/2.JPG" alt="拍摄案例 2" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/4.JPG" alt="拍摄案例 4" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/5.JPG" alt="拍摄案例 5" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/6.JPG" alt="拍摄案例 6" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/7.JPG" alt="拍摄案例 7" />
+                </figure>
+                <figure class="shootSlide shootSlide--narrow">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/8.JPG" alt="拍摄案例 8" />
+                </figure>
+
+                <figure class="shootSlide shootSlide--narrow" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/1.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/3.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/2.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/4.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/5.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/6.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--wide" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/7.JPG" alt="" />
+                </figure>
+                <figure class="shootSlide shootSlide--narrow" aria-hidden="true">
+                  <img src="/Users/junruni/Downloads/网站配图/why me/策划/熊猫/8.JPG" alt="" />
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="detailSection detailSection--space" aria-labelledby="space-title">
+          <div class="detailSection__copy">
+            <h2 class="detailSection__title" id="space-title">空间</h2>
+          </div>
+          <div class="detailSection__media spaceMedia">
+            <article
+              class="spaceProject"
+              data-space-project
+              style="--panel-top-offset: 2.15rem; --panel-open-height: min(34vw, 548px); --trigger-open-left: 0%; --trigger-open-top: 0%; --trigger-open-width: 67%;"
+            >
+              <div class="spaceProject__label">
+                <p>外滩源：Polaroid、Tims联合圣诞橱窗</p>
+              </div>
+              <div class="spaceProject__panel">
+                <button
+                  class="spaceProject__trigger"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="space-project-1"
+                >
+                  <img
+                    src="/Users/junruni/Downloads/网站配图/线下/外滩源1.jpg"
+                    alt="外滩源 Polaroid 与 Tims 联合圣诞橱窗主图"
+                  />
+                </button>
+                <div class="spaceProject__gallery" id="space-project-1">
+                  <div class="spaceProject__galleryGrid spaceProject__galleryGrid--three">
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--landscape spaceProject__galleryItem--lead">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/外滩源1.jpg" alt="外滩源圣诞橱窗全景" />
+                    </figure>
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--landscape spaceProject__galleryItem--delay-1">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/外滩源2.jpg" alt="外滩源圣诞橱窗街景" />
+                    </figure>
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--landscape spaceProject__galleryItem--delay-2">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/外滩源3.jpg" alt="外滩源圣诞橱窗近景" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="spaceProject"
+              data-space-project
+              style="--panel-top-offset: 0.35rem; --panel-open-height: min(54vw, 770px); --trigger-open-left: 50%; --trigger-open-top: 0%; --trigger-open-width: 50%;"
+            >
+              <div class="spaceProject__label spaceProject__label--ripple">
+                <p>静安嘉里中心：「涟漪」月饼快闪店</p>
+              </div>
+              <div class="spaceProject__panel">
+                <button
+                  class="spaceProject__trigger"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="space-project-2"
+                >
+                  <img
+                    src="/Users/junruni/Downloads/网站配图/线下/涟漪2.jpg"
+                    alt="静安嘉里中心 涟漪 月饼快闪店主图"
+                  />
+                </button>
+                <div class="spaceProject__gallery" id="space-project-2">
+                  <div class="spaceProject__galleryGrid spaceProject__galleryGrid--four">
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--portrait spaceProject__galleryItem--delay-1">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/涟漪1.jpg" alt="涟漪快闪店空间视角一" />
+                    </figure>
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--portrait spaceProject__galleryItem--lead">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/涟漪2.jpg" alt="涟漪快闪店空间视角二" />
+                    </figure>
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--portrait spaceProject__galleryItem--delay-2">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/涟漪3.jpg" alt="涟漪快闪店空间视角三" />
+                    </figure>
+                    <figure class="spaceProject__galleryItem spaceProject__galleryItem--portrait spaceProject__galleryItem--delay-3">
+                      <img src="/Users/junruni/Downloads/网站配图/线下/涟漪4.jpg" alt="涟漪快闪店空间视角四" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const backLink = document.getElementById("whyme-detail-back");
+      const returnTarget = new URLSearchParams(window.location.search).get(
+        "returnTo",
+      );
+
+      if (backLink && returnTarget === "why-me") {
+        backLink.href = "./index.html?returnTo=why-me#why-me";
+      }
+
+      const activateWhymeDetail = () => {
+        document.body.classList.add("whymeDetail-ready");
+      };
+
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      const updateShootStack = () => {
+        const section = document.querySelector(".detailSection--shoot");
+        const cards = document.querySelectorAll(".shootCard");
+
+        if (!section || !cards.length) {
+          return;
+        }
+
+        const rect = section.getBoundingClientRect();
+        const viewport = window.innerHeight || 1;
+        const progress = clamp(
+          (viewport - rect.top) / Math.max(rect.height - viewport * 0.4, 1),
+          0,
+          1,
+        );
+
+        cards.forEach((card, index) => {
+          const startLeft = Number(card.dataset.startLeft || 0);
+          const endLeft = Number(card.dataset.endLeft || startLeft);
+          const startTop = Number(card.dataset.startTop || 0);
+          const endTop = Number(card.dataset.endTop || startTop);
+          const currentLeft = startLeft + (endLeft - startLeft) * progress;
+          const currentTop = startTop + (endTop - startTop) * progress;
+          const rotate = 0;
+
+          card.style.setProperty("--track-left", `${currentLeft}%`);
+          card.style.setProperty("--track-top", `${currentTop}%`);
+          card.style.setProperty("--track-rotate", `${rotate}deg`);
+          card.style.zIndex = String(20 + index);
+        });
+      };
+
+      const setupSpaceProjects = () => {
+        const projects = document.querySelectorAll("[data-space-project]");
+
+        projects.forEach((project) => {
+          const trigger = project.querySelector(".spaceProject__trigger");
+
+          if (!trigger) {
+            return;
+          }
+
+          trigger.addEventListener("click", () => {
+            const isOpen = project.classList.toggle("is-open");
+            trigger.setAttribute("aria-expanded", String(isOpen));
+          });
+        });
+      };
+
+      if (prefersReducedMotion) {
+        activateWhymeDetail();
+      } else {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(activateWhymeDetail);
+        });
+      }
+
+      updateShootStack();
+      setupSpaceProjects();
+      window.addEventListener("scroll", updateShootStack, { passive: true });
+      window.addEventListener("resize", updateShootStack);
+    </script>
+  </body>
+</html>

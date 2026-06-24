@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <title>Plant Detail</title>
+    <style>
+      :root {
+        --bg: #f6f7f3;
+        --ink: #182018;
+        --muted: rgba(24, 32, 24, 0.58);
+        --line: rgba(24, 32, 24, 0.1);
+        --accent: #4caf50;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      .detailPage {
+        width: min(100%, 1480px);
+        margin: 0 auto;
+        padding: 28px 22px 40px;
+      }
+
+      .detailTop {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0 18px;
+        background: linear-gradient(180deg, var(--bg) 82%, rgba(246, 247, 243, 0));
+      }
+
+      .detailBack {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      .detailBack__chev {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+      }
+
+      .detailTitle {
+        margin: 0;
+        font-size: 0.92rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .detailPhone {
+        width: min(100%, 420px);
+        margin: 0 auto;
+      }
+
+      .detailImage {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 24px;
+      }
+
+      .detailHint {
+        margin: 16px auto 0;
+        width: min(100%, 420px);
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-align: center;
+      }
+
+      @media (max-width: 720px) {
+        .detailPage {
+          padding: 14px 10px 28px;
+        }
+
+        .detailTop {
+          padding-top: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="detailPage">
+      <div class="detailTop">
+        <a class="detailBack" href="./why-cork.html">
+          <span class="detailBack__chev">‹</span>
+          <span>Back</span>
+        </a>
+        <p class="detailTitle" id="detail-title">Plant Archive</p>
+        <div style="width: 72px;"></div>
+      </div>
+
+      <div class="detailPhone">
+        <img class="detailImage" id="detail-image" alt="植物档案长图" />
+      </div>
+
+      <p class="detailHint">Scroll to browse the full archive.</p>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const plant = params.get("plant") || "manyue";
+
+      const plantMap = {
+        manyue: {
+          title: "满月球兰",
+          image: "./assets/plant-details/final/manyue长图.png",
+        },
+        meidao: {
+          title: "美岛裂瓣球兰",
+          image: "./assets/plant-details/final/meidao长图.png",
+        },
+        zise: {
+          title: "紫色极光球兰",
+          image: "./assets/plant-details/final/zise长图.png",
+        },
+        zhusha: {
+          title: "朱砂泰彩",
+          image: "./assets/plant-details/final/zhusha长图.png",
+        },
+        hunsha: {
+          title: "婚纱泰彩",
+          image: "./assets/plant-details/final/hunsha长图.png",
+        },
+      };
+
+      const current = plantMap[plant] || plantMap.manyue;
+      document.title = `${current.title} - Plant Detail`;
+      document.getElementById("detail-title").textContent = current.title;
+      document.getElementById("detail-image").src = current.image;
+      document.getElementById("detail-image").alt = `${current.title}植物档案长图`;
+    </script>
+  </body>
+</html>

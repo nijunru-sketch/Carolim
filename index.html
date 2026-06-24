@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Junru | Carolim</title>
+    <meta
+      name="description"
+      content="A crisp personal portfolio with a clean white layout, refined typography, and a bottom video anchor."
+    />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/6e47ef470dd19698c911332a9b4d1cf4?family=Neue+Haas+Grotesk+Text+Pro"
+    />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/dec0d9b4e22ca588dc20e1e2e09a59b5?family=Neue+Haas+Grotesk+Display+Pro+55+Roman"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./why-cork-section.css" />
+    <script>
+      const __returnTo = new URLSearchParams(window.location.search).get(
+        "returnTo",
+      );
+      if (
+        (__returnTo === "career-overview" &&
+          window.location.hash === "#career-overview") ||
+        (__returnTo === "why-me" && window.location.hash === "#why-me")
+      ) {
+        document.documentElement.classList.add("is-restoring-overview");
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+      }
+    </script>
+    <style>
+      html.is-restoring-overview,
+      html.is-restoring-overview body {
+        background: #ffffff !important;
+      }
+
+      html.is-restoring-overview body {
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <div class="loader" data-loader aria-label="Loading">
+      <div class="loader__frame">
+        <div class="loader__topline">
+          <span class="loader__meta loader__meta--strong">0%</span>
+          <span class="loader__meta">portfolio sequence</span>
+        </div>
+
+        <div class="loader__body">
+          <p class="loader__kicker">loading</p>
+          <p class="loader__counter" data-counter>00</p>
+          <p class="loader__copy">curating pages / preparing motion / setting the tone</p>
+        </div>
+
+        <div class="loader__bottomline">
+          <span class="loader__rule"><span data-bar></span></span>
+          <span class="loader__meta">ready in a moment</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="page">
+      <section class="hero" data-hero>
+        <div class="hero__media" aria-hidden="true">
+          <video
+            class="hero__video"
+            src="./assets/home-video.mp4"
+            poster="./assets/home-video-poster.png"
+            autoplay
+            muted
+            playsinline
+            loop
+            preload="metadata"
+          ></video>
+        </div>
+
+        <div class="hero__veil" aria-hidden="true"></div>
+
+        <div class="hero__scrim" aria-hidden="true"></div>
+
+        <div class="hero__copy" aria-label="Intro copy">
+          <p class="hero__line">
+            Hey <strong>CAROLIM</strong>
+          </p>
+          <p class="hero__line">
+            I’m <strong>Junru</strong>
+          </p>
+          <p class="hero__line">
+            Explore beyond my résumé
+          </p>
+          <p class="hero__line">
+            Discover <strong class="hero__emphasis">WHY ME</strong>
+          </p>
+        </div>
+
+        <div class="hero__cue" aria-hidden="true">
+          <svg class="hero__cueIcon" viewBox="0 0 24 24" role="presentation">
+            <path d="M1 6.5C5.2 8.8 8.2 10.3 12 10.3C15.8 10.3 18.8 8.8 23 6.5C20.4 10.6 17.4 15.7 12 23C6.6 15.7 3.6 10.6 1 6.5Z" />
+          </svg>
+        </div>
+      </section>
+
+      <section
+        class="career"
+        id="career-overview"
+        aria-labelledby="career-overview-title"
+      >
+        <div class="career__shell">
+          <header class="career__header">
+            <h2 class="career__title" id="career-overview-title">
+              Career Overview
+            </h2>
+          </header>
+
+          <div class="career__grid" role="list" aria-label="Career timeline">
+            <article class="career__item" role="listitem">
+              <div class="career__copy">
+                <p class="career__duration">Since 2011</p>
+                <h3 class="career__company">上海外国语大学</h3>
+                <p class="career__detail">英语+德语系</p>
+              </div>
+
+              <figure class="career__media career__media--campus">
+                <img
+                  src="./assets/career-sisu.jpg"
+                  alt="上海外国语大学校园"
+                />
+              </figure>
+            </article>
+
+            <article class="career__item" role="listitem">
+              <div class="career__copy">
+                <p class="career__duration">1.5years</p>
+                <h3 class="career__company">互联网startup</h3>
+                <p class="career__detail">“家庭餐桌”共享经济</p>
+                <p class="career__detail">0-1商业模式探索</p>
+              </div>
+
+              <div class="career__entry">
+                <a
+                  class="career__mediaLink"
+                  href="./career-zuijiao.html"
+                  aria-label="Open the 互联网 startup experience page"
+                >
+                  <figure class="career__media career__media--home">
+                    <video
+                      class="career__video"
+                      src="./assets/career-house-dinner.mp4"
+                      poster="./assets/career-house-dinner-poster.jpg"
+                      autoplay
+                      muted
+                      playsinline
+                      loop
+                      preload="metadata"
+                    ></video>
+                  </figure>
+                </a>
+
+                <a
+                  class="career__entryArrow"
+                  href="./career-zuijiao.html"
+                  aria-label="Open the 互联网 startup experience page"
+                >
+                  <span class="career__entryPrompt">Discover more</span>
+                  <svg
+                    class="career__entryArrowIcon"
+                    viewBox="0 0 56 56"
+                    role="presentation"
+                  >
+                    <path d="M12 10L42 10L42 40" />
+                    <path d="M14 38L42 10" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="career__item" role="listitem">
+              <div class="career__copy">
+                <p class="career__duration">3years</p>
+                <h3 class="career__company">头部4A广告集团</h3>
+                <p class="career__detail">信用卡全案客户</p>
+                <p class="career__detail">各种营销摸个遍</p>
+              </div>
+
+              <figure class="career__media career__media--brand">
+                <img
+                  src="./assets/career-bluefocus.jpg"
+                  alt="蓝标办公楼标识"
+                />
+              </figure>
+            </article>
+
+            <article class="career__item" role="listitem">
+              <div class="career__copy">
+                <p class="career__duration">2years</p>
+                <h3 class="career__company">食品startup</h3>
+                <p class="career__detail">创意礼盒定制</p>
+                <p class="career__detail">让产品本身成为故事</p>
+              </div>
+
+              <div class="career__entry">
+                <a
+                  class="career__mediaLink"
+                  href="./career-moody.html"
+                  aria-label="Open the Moody experience page"
+                >
+                  <figure class="career__media career__media--moody">
+                    <img
+                      src="./assets/career-mooncake.jpg"
+                      alt="moody mooncake 礼盒"
+                    />
+                  </figure>
+                </a>
+
+                <a
+                  class="career__entryArrow"
+                  href="./career-moody.html"
+                  aria-label="Open the Moody experience page"
+                >
+                  <span class="career__entryPrompt">Discover more</span>
+                  <svg
+                    class="career__entryArrowIcon"
+                    viewBox="0 0 56 56"
+                    role="presentation"
+                  >
+                    <path d="M12 10L42 10L42 40" />
+                    <path d="M14 38L42 10" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="career__item" role="listitem">
+              <div class="career__copy">
+                <p class="career__duration">2years</p>
+                <h3 class="career__company">电商服饰startup</h3>
+                <p class="career__detail">换一种方式卖丝袜</p>
+                <p class="career__detail">0-1市场全链路</p>
+              </div>
+
+              <div class="career__entry">
+                <a
+                  class="career__mediaLink"
+                  href="./career-exory.html"
+                  aria-label="Open the Exory experience page"
+                >
+                  <figure class="career__media career__media--video">
+                    <video
+                      class="career__video"
+                      src="./assets/career-stockings.mp4"
+                      poster="./assets/career-stockings-poster.jpg"
+                      autoplay
+                      muted
+                      playsinline
+                      loop
+                      preload="metadata"
+                    ></video>
+                  </figure>
+                </a>
+
+                <a
+                  class="career__entryArrow"
+                  href="./career-exory.html"
+                  aria-label="Open the Exory experience page"
+                >
+                  <span class="career__entryPrompt">Discover more</span>
+                  <svg
+                    class="career__entryArrowIcon"
+                    viewBox="0 0 56 56"
+                    role="presentation"
+                  >
+                    <path d="M12 10L42 10L42 40" />
+                    <path d="M14 38L42 10" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="whyCorkPage" id="why-cork" aria-labelledby="why-cork-title">
+        <div class="whyCorkPage__inner">
+          <header class="whyCorkHeader" aria-label="Why Cork title">
+            <h2 class="whyCorkTitle" id="why-cork-title">Why Cork</h2>
+          </header>
+
+          <section class="spread" aria-label="Why Cork static layout">
+            <aside class="copy" aria-label="Why Cork copy draft">
+              <div class="copy__block">
+                <div class="copyGroup">
+                  <p>其实本来不打算投消费行业了</p>
+                  <p>因为我成了AI的信徒</p>
+                </div>
+
+                <div class="copyGroup">
+                  <p>故事开始于家里的植物养多了</p>
+                  <p>被每日的浇水任务搞得头大</p>
+                  <p>正好<span class="latin">vibe coding</span>的风吹来</p>
+                  <p>于是我干出了自己的微信小程序</p>
+                  <p>现在轻松帮我<span class="latin">hold</span>住快100株小家伙</p>
+                </div>
+
+                <div class="copyGroup">
+                  <p>后来就越搓越多（比如这个网站</p>
+                  <p>每一个新尝试都让我兴奋</p>
+                </div>
+
+                <div class="copyGroup">
+                  <p>在职业选择上</p>
+                  <p>我向来只遵循热爱</p>
+                  <p>这是第一次</p>
+                  <p>我的热爱，站在了风口</p>
+                </div>
+              </div>
+            </aside>
+
+            <section class="sim" aria-label="Plant manager mini program preview">
+              <div class="stackStage">
+                <article class="screenCard" data-screen="index" aria-label="Home screen">
+                  <div class="guideCue handHint" data-hand-hint aria-hidden="true"></div>
+                  <p class="indexCueLabel">试试我的小程序</p>
+                  <div class="phoneShell">
+                    <div class="archiveReplica">
+                      <div class="archiveScroll">
+                        <div class="indexShotMap" data-index-map aria-label="植物档案列表">
+                          <img class="archiveImage" src="./assets/why-cork/screens/植物档案.PNG" alt="植物档案页面长图" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="screenCard" data-screen="add" aria-label="Add plant screen">
+                  <div class="phoneShell">
+                    <div class="archiveReplica">
+                      <div class="archiveScroll" data-archive-scroll>
+                        <img class="archiveImage" data-archive-image src="./assets/plant-details/final/manyue长图.png" alt="满月球兰植物档案长图" />
+                      </div>
+                    </div>
+                    <div class="guideCue scrollHint" data-scroll-hint aria-hidden="true"></div>
+                  </div>
+                </article>
+
+                <article class="screenCard" data-screen="todo" aria-label="Care calendar screen">
+                  <div class="phoneShell">
+                    <div class="archiveReplica">
+                      <div class="archiveScroll">
+                        <img class="archiveImage" data-todo-image src="./assets/why-cork/screens/养护日历.png" alt="养护日历页面长图" />
+                      </div>
+                    </div>
+                    <div class="guideCue weekHint" data-week-hint aria-hidden="true"></div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </section>
+
+          <section class="corkAfter" aria-label="Why Cork second half">
+            <aside class="corkAfter__copyCol" aria-label="Why Cork continuation copy">
+              <div class="corkAfter__intro">
+                <p>然而老天奶挺爱开玩笑</p>
+                <p>随手刷到招聘笔记</p>
+                <p>又是思维泉涌的一夜</p>
+                <p>果然，我始终，还是那个我</p>
+              </div>
+            </aside>
+
+            <div class="corkAfter__body">
+              <section class="corkTreeStrip" aria-label="Cork forest and material collage">
+                <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-1.png" alt="一片栓皮栎树林" /></figure>
+                <figure class="corkTreeStrip__cell">
+                  <video
+                    src="./assets/why-cork/part2/cork-tree-2.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    aria-label="采收栓皮栎树皮的场景视频"
+                  ></video>
+                </figure>
+                <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-3.jpeg" alt="卷曲的树皮横截面" /></figure>
+                <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-4.jpeg" alt="软木材料板层细节" /></figure>
+              </section>
+
+              <section class="corkEssay" aria-label="Why Cork editorial reflection">
+                <div class="corkEssayTop">
+                  <p class="corkAfter__hit">我想，我应该是被这一段文字击中了</p>
+                  <blockquote class="corkReflection__quote">
+                    <span class="corkReflection__quoteLine">一颗栓皮栎要耐心生长25年</span>
+                    <span class="corkReflection__quoteLine">才能迎来首次树皮采收</span>
+                    <span class="corkReflection__quoteLine">这确保了它足够强壮</span>
+                    <span class="corkReflection__quoteLine">此后，每9年才能再次采收</span>
+                    <span class="corkReflection__quoteLine">树木会利用这段漫长的时间</span>
+                    <span class="corkReflection__quoteLine">从容地长出完整、厚实的新树皮，如此循环</span>
+                    <span class="corkReflection__quoteLine">一棵树能温柔地为我们奉献150-200年</span>
+                    <span class="corkReflection__quoteLine">生生不息</span>
+                  </blockquote>
+                </div>
+
+                <p class="corkReflection__slogan corkReflection">Healing within
+Embracing without</p>
+
+                <p class="corkAfter__ignite">我想，我应该是被软木的可能性点燃了</p>
+
+                <div class="corkProductArea">
+                  <div class="corkProductGrid" aria-label="Cork products moodboard">
+                    <figure class="corkProductCard corkProductCard--1"><img src="./assets/why-cork/part2/cork-product-1.jpeg" alt="软木椅子产品图" /></figure>
+                    <figure class="corkProductCard corkProductCard--2"><img src="./assets/why-cork/part2/cork-product-5.jpeg" alt="软木吊灯产品图" /></figure>
+                    <figure class="corkProductCard corkProductCard--3"><img src="./assets/why-cork/part2/cork-product-9.jpeg" alt="软木墙面材料图" /></figure>
+                    <figure class="corkProductCard corkProductCard--4"><img src="./assets/why-cork/part2/cork-product-10.jpeg" alt="软木收纳托盘产品图" /></figure>
+                    <figure class="corkProductCard corkProductCard--5"><img src="./assets/why-cork/part2/cork-product-4.jpeg" alt="软木圆桌产品图" /></figure>
+                    <figure class="corkProductCard corkProductCard--6"><img src="./assets/why-cork/part2/cork-product-2.jpeg" alt="软木桌子产品图" /></figure>
+                    <figure class="corkProductCard corkProductCard--7"><img src="./assets/why-cork/part2/cork-product-6.jpg" alt="软木椅子近景图" /></figure>
+                    <figure class="corkProductCard corkProductCard--8"><img src="./assets/why-cork/part2/cork-product-3.jpg" alt="软木楼梯空间图" /></figure>
+                    <figure class="corkProductCard corkProductCard--9"><img src="./assets/why-cork/part2/cork-product-8.jpg" alt="软木礼盒产品图" /></figure>
+                  </div>
+
+                  <p class="corkProductArea__slogan"><span>Rooted in one</span><span>Branching into all</span></p>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="whymePage" id="why-me" aria-labelledby="why-me-title">
+        <div class="whymeShell">
+          <header class="whymeHeader">
+            <h2 class="whymeTitle" id="why-me-title">Why Me</h2>
+          </header>
+
+          <div class="whymeGrid" aria-label="Why me questions">
+            <a
+              class="whymeCard whymeCard--link"
+              href="./whyme-detail.html?returnTo=why-me#why-me"
+              aria-label="干得好0-1吗，点击查看详细页面"
+            >
+              <div class="whymeCard__media" aria-hidden="true">
+                <img src="./assets/whyme/1.png" alt="" />
+              </div>
+              <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+              <div class="whymeCard__overlay" aria-hidden="true"></div>
+              <div class="whymeCard__top" aria-hidden="true">
+                <div class="whymeCard__topInner">
+                  <p class="whymeCard__eyebrow">If you’re wondering</p>
+                  <h3 class="whymeCard__question">干得好0-1吗？</h3>
+                </div>
+              </div>
+              <div class="whymeCard__bottom">
+                <div class="whymeCard__bottomInner">
+                  <h3 class="whymeCard__answerTitle">3次实战经验<br />敢想象、能落地</h3>
+                  <div class="whymeCard__footerRow">
+                    <ul class="whymeCard__list whymeCard__list--twoCol" aria-label="第一张卡片能力清单">
+                      <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>策划</span></li>
+                      <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>线下空间</span></li>
+                      <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>文案</span></li>
+                      <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>拍摄创意</span></li>
+                    </ul>
+                    <p class="whymeCard__cta whymeCard__cta--aligned">
+                      <span class="whymeCard__ctaArrow" aria-hidden="true">←</span>
+                      <span>click to check</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <article class="whymeCard" tabindex="0" aria-label="适合软木这个行业吗">
+              <div class="whymeCard__media" aria-hidden="true">
+                <img src="./assets/whyme/2.png" alt="" />
+              </div>
+              <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+              <div class="whymeCard__overlay" aria-hidden="true"></div>
+              <div class="whymeCard__top" aria-hidden="true">
+                <div class="whymeCard__topInner">
+                  <p class="whymeCard__eyebrow">If you’re wondering</p>
+                  <h3 class="whymeCard__question">适合软木这个行业吗？</h3>
+                </div>
+              </div>
+              <div class="whymeCard__bottom">
+                <div class="whymeCard__bottomInner">
+                  <ul class="whymeCard__list whymeCard__list--compact" aria-label="第二张卡片判断清单">
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>刚搞好装修，最懂C端心</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>不断跨行业跨岗位的“变形金刚”</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>喜欢空间、家具、器物、自然</span></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="whymeCard" tabindex="0" aria-label="和别人比比呢">
+              <div class="whymeCard__media" aria-hidden="true">
+                <img src="./assets/whyme/3.png" alt="" />
+              </div>
+              <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+              <div class="whymeCard__overlay" aria-hidden="true"></div>
+              <div class="whymeCard__top" aria-hidden="true">
+                <div class="whymeCard__topInner">
+                  <p class="whymeCard__eyebrow">If you’re wondering</p>
+                  <h3 class="whymeCard__question">和别人比比呢？</h3>
+                </div>
+              </div>
+              <div class="whymeCard__bottom">
+                <div class="whymeCard__bottomInner">
+                  <ul class="whymeCard__list whymeCard__list--compact" aria-label="第三张卡片比较清单">
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>对标品牌经理，多了一层产品思维</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>对标老骨干，多了一级 AI 进化</span></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contactPage" id="contact-me" aria-labelledby="contact-title">
+        <div class="contactCanvas">
+          <div class="contactMeta">
+            <h1 class="contactTitle" id="contact-title">NI</h1>
+            <a
+              class="contactResume"
+              href="./assets/Junru_Resume.pdf"
+              download="Junru_Resume.pdf"
+              aria-label="Download Junru resume"
+            >
+              Click to download my resume
+            </a>
+          </div>
+
+          <figure class="contactArt" aria-hidden="true">
+            <img src="./assets/contact-add-me.png" alt="" />
+          </figure>
+
+          <button
+            class="contactYesHotspot"
+            type="button"
+            aria-label="Show WeChat QR code"
+          ></button>
+
+          <div class="contactPointer" aria-hidden="true">
+            <img src="./assets/contact-finger-pointer.png" alt="" />
+          </div>
+
+          <div class="contactWordmark">
+            <p class="contactWordmarkTitle">JUNRU</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="contactQrLayer" hidden>
+      <button
+        class="contactQrBackdrop"
+        type="button"
+        aria-label="Close QR code"
+      ></button>
+      <div
+        class="contactQrCard"
+        role="dialog"
+        aria-modal="true"
+        aria-label="WeChat QR code"
+      >
+        <img class="contactQrImage" src="./assets/wechat-qr.jpg" alt="WeChat QR code" />
+      </div>
+    </div>
+
+    <script src="./why-cork-section.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

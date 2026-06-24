@@ -1,0 +1,9 @@
+.DS_Store
+.playwright-cli/
+.superpowers/
+.tmp-zuijiao-figma/
+backups/
+mockups/
+career-zuijiao-figma-test.html.png
+career-zuijiao-layout-test.html.png
+index.html.png

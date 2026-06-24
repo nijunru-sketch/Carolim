@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="data:," />
+    <title>Junru | Why Me</title>
+    <meta
+      name="description"
+      content="Why Me page with editorial hover cards for Junru's personal portfolio."
+    />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/6e47ef470dd19698c911332a9b4d1cf4?family=Neue+Haas+Grotesk+Text+Pro"
+    />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/dec0d9b4e22ca588dc20e1e2e09a59b5?family=Neue+Haas+Grotesk+Display+Pro+55+Roman"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #121714;
+        --muted: rgba(18, 23, 20, 0.6);
+        --card-bg: #020304;
+        --card-line: rgba(18, 23, 20, 0.12);
+        --card-overlay: rgba(0, 0, 0, 0.08);
+        --card-overlay-hover: rgba(0, 0, 0, 0.58);
+        --card-copy: #ffffff;
+        --card-copy-muted: rgba(255, 255, 255, 0.78);
+        --shell-width: min(1600px, calc(100vw - 16px));
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica,
+          Arial, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+      }
+
+      .whymePage {
+        width: 100%;
+        min-height: 100dvh;
+        padding: 8px 0 60px;
+        background: var(--bg);
+      }
+
+      .whymeShell {
+        width: var(--shell-width);
+        margin: 0 auto;
+      }
+
+      .whymeHeader {
+        min-height: clamp(180px, 24vw, 260px);
+        padding: clamp(0.95rem, 1.7vw, 1.4rem) clamp(0.9rem, 1.3vw, 1.2rem) 0
+          clamp(0.1rem, 0.2vw, 0.25rem);
+      }
+
+      .whymeTitle {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.3rem, 3.9vw, 3.9rem);
+        font-weight: 700;
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+        transform-origin: left top;
+        transform: scale(var(--why-me-title-scale, 1));
+        will-change: transform;
+      }
+
+      .whymeGrid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(26px, 2.1vw, 36px);
+        padding: 0 0 0 0;
+      }
+
+      .whymeCard {
+        position: relative;
+        display: block;
+        min-height: clamp(520px, 39vw, 640px);
+        border: 1px solid var(--card-line);
+        background: var(--card-bg);
+        color: var(--card-copy);
+        overflow: hidden;
+        text-decoration: none;
+        isolation: isolate;
+      }
+
+      .whymeCard:focus-visible {
+        outline: 1px solid rgba(18, 23, 20, 0.38);
+        outline-offset: 4px;
+      }
+
+      .whymeCard__media,
+      .whymeCard__overlay,
+      .whymeCard__top,
+      .whymeCard__bottom {
+        position: absolute;
+        inset: 0;
+      }
+
+      .whymeCard__media {
+        z-index: 0;
+      }
+
+      .whymeCard__media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.01);
+        transition:
+          transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, filter;
+      }
+
+      .whymeCard__overlay {
+        z-index: 1;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.44) 34%, rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0) 72%),
+          linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.42) 100%);
+        transition:
+          background 520ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 520ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .whymeCard__top,
+      .whymeCard__bottom {
+        z-index: 2;
+        padding: 24px 24px 28px;
+        display: grid;
+      }
+
+      .whymeCard__top {
+        align-content: start;
+        gap: 8px;
+        transition:
+          transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 420ms ease;
+        will-change: transform, opacity;
+      }
+
+      .whymeCard__bottom {
+        align-content: end;
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 420ms ease;
+        will-change: transform, opacity;
+      }
+
+      .whymeCard__topInner,
+      .whymeCard__bottomInner {
+        display: grid;
+        width: 100%;
+      }
+
+      .whymeCard__topInner {
+        gap: 8px;
+      }
+
+      .whymeCard__bottomInner {
+        align-self: end;
+        gap: 0.72rem;
+      }
+
+      .whymeCard__eyebrow {
+        margin: 0;
+        color: var(--card-copy-muted);
+        font-size: 0.9rem;
+        line-height: 1;
+        letter-spacing: -0.015em;
+        font-weight: 500;
+        padding-left: 2px;
+      }
+
+      .whymeCard__question,
+      .whymeCard__answerTitle {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.4rem, 3vw, 3.55rem);
+        line-height: 0.94;
+        letter-spacing: -0.055em;
+        font-weight: 700;
+        text-wrap: balance;
+      }
+
+      .whymeCard__answer {
+        margin: 0;
+        max-width: 24ch;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 1rem;
+        line-height: 1.4;
+        letter-spacing: -0.018em;
+      }
+
+      .whymeCard__answerTitle--compact {
+        font-size: clamp(2rem, 2.45vw, 2.85rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .whymeCard__label {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.86rem;
+        line-height: 1;
+        letter-spacing: -0.015em;
+      }
+
+      .whymeCard__label--tight {
+        margin-bottom: -0.26rem;
+      }
+
+      .whymeCard__cta {
+        margin: 0 auto 0 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.38rem;
+        color: rgba(255, 255, 255, 0.96);
+        font-size: 0.86rem;
+        line-height: 1;
+        letter-spacing: -0.015em;
+        text-align: right;
+        align-self: end;
+      }
+
+      .whymeCard__cta--aligned {
+        margin-bottom: -0.04rem;
+        margin-left: 0.6rem;
+      }
+
+      .whymeCard__footerRow {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .whymeCard__hoverCue {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        z-index: 3;
+        width: 26px;
+        height: 26px;
+        border: 2px solid #73d25a;
+        background: rgba(115, 210, 90, 0.12);
+        box-shadow: 0 0 18px rgba(115, 210, 90, 0.22);
+        pointer-events: none;
+        animation: whymeCueSpin 3.4s linear infinite;
+        transition:
+          opacity 320ms ease,
+          transform 320ms ease;
+      }
+
+      .whymeCard__ctaArrow {
+        flex: 0 0 auto;
+        font-size: 0.96rem;
+        line-height: 1;
+        transform: translateX(0);
+      }
+
+      .whymeCard__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.18rem;
+        color: rgba(255, 255, 255, 0.94);
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(1.08rem, 1.45vw, 1.22rem);
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+      }
+
+      .whymeCard__list--twoCol {
+        grid-template-columns: repeat(2, minmax(0, max-content));
+        column-gap: 1.1rem;
+        row-gap: 0.16rem;
+      }
+
+      .whymeCard__list--compact {
+        font-size: clamp(1.08rem, 1.45vw, 1.22rem);
+        line-height: 1.08;
+        letter-spacing: -0.022em;
+      }
+
+      .whymeCard__listItem {
+        display: flex;
+        align-items: baseline;
+        gap: 0.52rem;
+      }
+
+      .whymeCard__list--twoCol .whymeCard__listItem {
+        white-space: nowrap;
+      }
+
+      .whymeCard__square {
+        flex: 0 0 auto;
+        font-size: 0.9em;
+        line-height: 1;
+        transform: translateY(-0.02em);
+      }
+
+      .whymeCard:is(:hover, :focus-visible) .whymeCard__top {
+        opacity: 0;
+        transform: translateY(-56px);
+      }
+
+      .whymeCard:is(:hover, :focus-visible) .whymeCard__bottom {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .whymeCard:is(:hover, :focus-visible) .whymeCard__hoverCue {
+        opacity: 0;
+        transform: scale(0.72);
+      }
+
+      .whymeCard--link:is(:hover, :focus-visible) .whymeCard__cta,
+      .whymeCard--link:is(:hover, :focus-visible) .whymeCard__ctaArrow {
+        animation: whymeCtaNudge 980ms ease-in-out infinite;
+      }
+
+      .whymeCard:is(:hover, :focus-visible) .whymeCard__overlay {
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.18) 28%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1) 18%, rgba(0, 0, 0, 0.72) 100%);
+      }
+
+      .whymeCard:is(:hover, :focus-visible) .whymeCard__media img {
+        transform: scale(1.045);
+        filter: saturate(0.92) brightness(0.82);
+      }
+
+      @media (hover: none) {
+        .whymeCard__overlay {
+          background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.44) 34%, rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0) 72%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.06) 18%, rgba(0, 0, 0, 0.64) 100%);
+        }
+
+        .whymeCard__top {
+          opacity: 0;
+          transform: translateY(-56px);
+        }
+
+        .whymeCard__bottom {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .whymeCard__media img {
+          transform: scale(1.02);
+          filter: saturate(0.92) brightness(0.82);
+        }
+
+        .whymeCard--link .whymeCard__cta,
+        .whymeCard--link .whymeCard__ctaArrow {
+          animation: whymeCtaNudge 980ms ease-in-out infinite;
+        }
+      }
+
+      @media (max-width: 1080px) {
+        .whymeGrid {
+          grid-template-columns: 1fr;
+        }
+
+        .whymeCard {
+          min-height: 420px;
+        }
+
+        .whymeCard__question,
+        .whymeCard__answerTitle {
+          font-size: clamp(2.1rem, 7.6vw, 3.6rem);
+        }
+
+        .whymeCard__answerTitle--compact {
+          font-size: clamp(1.7rem, 5.6vw, 2.5rem);
+        }
+
+        .whymeCard__list {
+          font-size: clamp(1rem, 4.1vw, 1.22rem);
+        }
+      }
+
+      @media (max-width: 680px) {
+        .whymeCard__overlay {
+          background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.44) 34%, rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0) 72%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.06) 18%, rgba(0, 0, 0, 0.64) 100%);
+        }
+
+        .whymeCard__top {
+          opacity: 0;
+          transform: translateY(-56px);
+        }
+
+        .whymeCard__bottom {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .whymeCard__media img {
+          transform: scale(1.02);
+          filter: saturate(0.92) brightness(0.82);
+        }
+      }
+
+      @keyframes whymeCtaNudge {
+        0%,
+        100% {
+          opacity: 0.72;
+          transform: translateX(0);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translateX(-8px);
+        }
+      }
+
+      @keyframes whymeCueSpin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="whymePage">
+      <div class="whymeShell">
+        <header class="whymeHeader">
+          <h1 class="whymeTitle">Why Me</h1>
+        </header>
+
+        <section class="whymeGrid" aria-label="Why me questions">
+          <a
+            class="whymeCard whymeCard--link"
+            href="./whyme-detail.html"
+            aria-label="干得好0-1吗，点击查看详细页面"
+          >
+            <div class="whymeCard__media" aria-hidden="true">
+              <img src="./assets/whyme/1.png" alt="" />
+            </div>
+            <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+            <div class="whymeCard__overlay" aria-hidden="true"></div>
+            <div class="whymeCard__top" aria-hidden="true">
+              <div class="whymeCard__topInner">
+                <p class="whymeCard__eyebrow">If you’re wondering</p>
+                <h2 class="whymeCard__question">干得好0-1吗？</h2>
+              </div>
+            </div>
+            <div class="whymeCard__bottom">
+              <div class="whymeCard__bottomInner">
+                <h2 class="whymeCard__answerTitle">3次实战经验<br />敢想象、能落地</h2>
+                <div class="whymeCard__footerRow">
+                  <ul class="whymeCard__list whymeCard__list--twoCol" aria-label="第一张卡片能力清单">
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>策划</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>线下空间</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>文案</span></li>
+                    <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>拍摄创意</span></li>
+                  </ul>
+                  <p class="whymeCard__cta whymeCard__cta--aligned">
+                    <span class="whymeCard__ctaArrow" aria-hidden="true">←</span>
+                    <span>click to check</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <article class="whymeCard" tabindex="0" aria-label="适合软木这个行业吗">
+            <div class="whymeCard__media" aria-hidden="true">
+              <img src="./assets/whyme/2.png" alt="" />
+            </div>
+            <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+            <div class="whymeCard__overlay" aria-hidden="true"></div>
+            <div class="whymeCard__top" aria-hidden="true">
+              <div class="whymeCard__topInner">
+                <p class="whymeCard__eyebrow">If you’re wondering</p>
+                <h2 class="whymeCard__question">适合软木这个行业吗？</h2>
+              </div>
+            </div>
+            <div class="whymeCard__bottom">
+              <div class="whymeCard__bottomInner">
+                <ul class="whymeCard__list whymeCard__list--compact" aria-label="第二张卡片判断清单">
+                  <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>刚搞好装修，最懂C端心</span></li>
+                  <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>不断跨行业跨岗位的“变形金刚”</span></li>
+                  <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>喜欢空间、家具、器物、自然</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="whymeCard" tabindex="0" aria-label="和别人比比呢">
+            <div class="whymeCard__media" aria-hidden="true">
+              <img src="./assets/whyme/3.png" alt="" />
+            </div>
+            <div class="whymeCard__hoverCue" aria-hidden="true"></div>
+            <div class="whymeCard__overlay" aria-hidden="true"></div>
+            <div class="whymeCard__top" aria-hidden="true">
+              <div class="whymeCard__topInner">
+                <p class="whymeCard__eyebrow">If you’re wondering</p>
+                <h2 class="whymeCard__question">和别人比比呢？</h2>
+              </div>
+            </div>
+            <div class="whymeCard__bottom">
+              <div class="whymeCard__bottomInner">
+                <ul class="whymeCard__list whymeCard__list--compact" aria-label="第三张卡片比较清单">
+                  <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>对标品牌经理，多了一层产品思维</span></li>
+                  <li class="whymeCard__listItem"><span class="whymeCard__square">■</span><span>对标老骨干，多了一级 AI 进化</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <script>
+      (() => {
+        const section = document.querySelector(".whymePage");
+        const title = document.querySelector(".whymeTitle");
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        let frameId = 0;
+
+        function clamp(value, min, max) {
+          return Math.min(Math.max(value, min), max);
+        }
+
+        function updateTitleScale() {
+          frameId = 0;
+
+          if (!section || !title) {
+            return;
+          }
+
+          if (prefersReducedMotion) {
+            title.style.setProperty("--why-me-title-scale", "1");
+            return;
+          }
+
+          const rect = section.getBoundingClientRect();
+          const viewportHeight =
+            window.innerHeight || document.documentElement.clientHeight;
+          const progress = clamp(
+            (viewportHeight - rect.top) / viewportHeight,
+            0,
+            1,
+          );
+          const scale = 2 - progress;
+
+          title.style.setProperty("--why-me-title-scale", scale.toFixed(3));
+        }
+
+        function scheduleTitleScale() {
+          if (frameId) {
+            return;
+          }
+
+          frameId = window.requestAnimationFrame(updateTitleScale);
+        }
+
+        window.addEventListener("scroll", scheduleTitleScale, {
+          passive: true,
+        });
+        window.addEventListener("resize", scheduleTitleScale);
+        window.addEventListener("load", scheduleTitleScale, { once: true });
+
+        if (document.readyState !== "loading") {
+          scheduleTitleScale();
+        } else {
+          document.addEventListener("DOMContentLoaded", scheduleTitleScale, {
+            once: true,
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

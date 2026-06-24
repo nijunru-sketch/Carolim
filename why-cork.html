@@ -1,0 +1,2757 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Why Cork</title>
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/6e47ef470dd19698c911332a9b4d1cf4?family=Neue+Haas+Grotesk+Text+Pro"
+    />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/dec0d9b4e22ca588dc20e1e2e09a59b5?family=Neue+Haas+Grotesk+Display+Pro+55+Roman"
+    />
+    <script>
+      if (new URLSearchParams(window.location.search).has("embedded")) {
+        document.documentElement.classList.add("embedded");
+        document.documentElement.setAttribute("data-embedded", "1");
+
+        const embeddedStyle = document.createElement("style");
+        embeddedStyle.textContent =
+          'html[data-embedded="1"] .whyCorkHeader, html[data-embedded="1"] .whyCorkTitle { display: none !important; }';
+        document.head.appendChild(embeddedStyle);
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #121714;
+        --muted: rgba(18, 23, 20, 0.56);
+        --line: rgba(18, 23, 20, 0.1);
+        --line-strong: rgba(18, 23, 20, 0.16);
+        --soft: rgba(18, 23, 20, 0.04);
+        --accent: #4caf50;
+        --screen: #f8faf8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-synthesis: none;
+      }
+
+      html.embedded .whyCorkHeader,
+      html.embedded .whyCorkTitle {
+        display: none;
+      }
+
+      .whyCorkHeader {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        pointer-events: none;
+        padding: clamp(0.95rem, 1.7vw, 1.4rem) clamp(0.9rem, 1.3vw, 1.2rem)
+          0 clamp(0.1rem, 0.2vw, 0.25rem);
+        background: #ffffff;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        overflow: visible;
+        padding-bottom: 0.18rem;
+      }
+
+      .whyCorkTitle {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.3rem, 3.9vw, 3.9rem);
+        font-weight: 700;
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+        transform-origin: left top;
+        opacity: 0;
+        transform: scale(2);
+        transition:
+          opacity 640ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      body.is-ready .whyCorkTitle {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .page {
+        width: min(1720px, calc(100vw - 48px));
+        min-height: calc(100dvh - 88px);
+        height: auto;
+        margin: 0 auto;
+        padding: 34px 18px 38px;
+        overflow: visible;
+      }
+
+      .spread {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+        gap: clamp(8px, 0.8vw, 16px);
+        align-items: stretch;
+        min-height: auto;
+        height: auto;
+      }
+
+      .copy {
+        max-width: 25rem;
+        padding-top: 108px;
+        padding-left: 60px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .copy__block {
+        margin: 0;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 1.48;
+        letter-spacing: -0.032em;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 1.78rem;
+        padding: 2px 0 8px;
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+        transition:
+          opacity 620ms cubic-bezier(0.16, 1, 0.3, 1) 120ms,
+          transform 620ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
+        will-change: transform, opacity;
+      }
+
+      body.is-ready .copy__block {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .copyGroup {
+        display: grid;
+        gap: 0.08rem;
+      }
+
+      .copyGroup p {
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .copyGroup .latin {
+        font-weight: 300;
+        font-style: normal;
+        font-synthesis: none;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+      }
+
+      .sim {
+        display: grid;
+        gap: 14px;
+        grid-template-rows: auto minmax(0, 1fr);
+        min-height: 100%;
+        height: auto;
+        padding-top: clamp(106px, 7vw, 126px);
+        padding-right: 0;
+        margin-left: 0;
+        overflow: visible;
+      }
+
+      .corkAfter {
+        display: block;
+        padding-top: 0;
+        padding-bottom: clamp(80px, 10vw, 140px);
+      }
+
+      .corkAfter__copyCol {
+        padding-left: 60px;
+        margin-top: -82px;
+        padding-bottom: clamp(20px, 2.2vw, 34px);
+      }
+
+      .corkAfter__intro {
+        max-width: 25rem;
+        display: grid;
+        gap: 0.08rem;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 1.48;
+        letter-spacing: -0.032em;
+        font-weight: 300;
+      }
+
+      .corkAfter__intro p,
+      .corkAfter__hit,
+      .corkAfter__ignite {
+        margin: 0;
+      }
+
+      .corkAfter__intro p {
+        font-weight: 300;
+      }
+
+      .corkAfter__intro p:last-child {
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        font-weight: 700;
+        letter-spacing: -0.042em;
+        margin-top: 0.24rem;
+      }
+
+      .corkAfter__body {
+        min-width: 0;
+        margin-top: 0;
+      }
+
+      .corkTreeStrip {
+        display: grid;
+        grid-template-columns: 2.15fr 1.18fr 1fr 1fr;
+        gap: 0;
+        overflow: hidden;
+        background: #0d0d0d;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+      }
+
+      .corkTreeStrip__cell {
+        margin: 0;
+        min-width: 0;
+      }
+
+      .corkTreeStrip__cell img,
+      .corkTreeStrip__cell video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: clamp(280px, 27vw, 480px);
+        object-fit: cover;
+      }
+
+      .corkEssay {
+        padding-top: clamp(28px, 3vw, 44px);
+        padding-left: 0;
+      }
+
+      .corkEssayTop {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.85fr) minmax(420px, 1fr);
+        gap: clamp(30px, 3vw, 64px);
+        row-gap: clamp(16px, 2vw, 28px);
+        align-items: start;
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 60px;
+      }
+
+      .corkAfter__hit {
+        max-width: 28rem;
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        line-height: 1.28;
+        letter-spacing: -0.042em;
+        font-weight: 700;
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .corkReflection__slogan,
+      .corkProductArea__slogan {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.08rem, 3vw, 3.38rem);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        font-weight: 700;
+        white-space: pre-line;
+        color: rgba(18, 23, 20, 0.12);
+      }
+
+      .corkReflection__quote {
+        margin: 0;
+        max-width: 30rem;
+        color: rgba(18, 23, 20, 0.92);
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 2.02;
+        letter-spacing: -0.04em;
+        font-style: normal;
+        font-weight: 300;
+        justify-self: end;
+        text-align: right;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: start;
+        transform: translateY(-6px);
+      }
+
+      .corkReflection__quoteLine {
+        display: block;
+      }
+
+      .corkReflection {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+        margin-top: 0;
+        padding-left: 60px;
+        transform: translateY(-100px);
+      }
+
+      .corkAfter__ignite {
+        margin-top: clamp(74px, 7vw, 106px);
+        max-width: none;
+        width: fit-content;
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        line-height: 1.28;
+        letter-spacing: -0.042em;
+        font-weight: 700;
+        padding-left: 60px;
+        white-space: nowrap;
+      }
+
+      .corkProductArea {
+        margin-top: clamp(22px, 2.2vw, 32px);
+        position: relative;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        min-height: clamp(760px, 66vw, 1060px);
+      }
+
+      .corkProductGrid {
+        display: grid;
+        width: 100vw;
+        grid-template-columns: repeat(20, minmax(0, 1fr));
+        grid-auto-rows: clamp(68px, 6.2vw, 108px);
+        gap: 8px;
+      }
+
+      .corkProductCard {
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .corkProductCard img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #f7f3ee;
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .corkProductCard:hover img {
+        transform: scale(1.035);
+      }
+
+      .corkProductCard--1 {
+        grid-column: 1 / span 4;
+        grid-row: 1 / span 4;
+      }
+
+      .corkProductCard--2 {
+        grid-column: 5 / span 3;
+        grid-row: 1 / span 3;
+      }
+
+      .corkProductCard--3 {
+        grid-column: 7 / span 5;
+        grid-row: 1 / span 5;
+      }
+
+      .corkProductCard--4 {
+        grid-column: 12 / span 3;
+        grid-row: 1 / span 2;
+      }
+
+      .corkProductCard--5 {
+        grid-column: 15 / span 5;
+        grid-row: 1 / span 4;
+      }
+
+      .corkProductCard--6 {
+        grid-column: 1 / span 5;
+        grid-row: 5 / span 4;
+      }
+
+      .corkProductCard--7 {
+        grid-column: 5 / span 3;
+        grid-row: 4 / span 2;
+      }
+
+      .corkProductCard--8 {
+        grid-column: 12 / span 3;
+        grid-row: 3 / span 3;
+      }
+
+      .corkProductCard--9 {
+        grid-column: 16 / span 4;
+        grid-row: 5 / span 3;
+      }
+
+      .corkProductCard--9 img {
+        transform: translateY(-42px) scale(0.85);
+        transform-origin: center center;
+      }
+
+      .corkProductCard--7:hover img {
+        transform: scale(0.735);
+      }
+
+      .corkProductCard--9:hover img {
+        transform: translateY(-42px) scale(0.88);
+      }
+
+      .corkProductCard--10 {
+        grid-column: 5 / span 3;
+        grid-row: 8 / span 3;
+      }
+
+      .corkProductCard--7 img {
+        transform: scale(0.7);
+        transform-origin: center center;
+      }
+
+      .corkProductArea__slogan {
+        position: absolute;
+        right: max(112px, calc((100vw - 1720px) / 2 + 112px));
+        bottom: clamp(136px, 9.2vw, 204px);
+        text-align: right;
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.02em;
+      }
+
+      .corkProductArea__slogan span {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .sim__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 4px 2px 0;
+        color: var(--muted);
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .stackStage {
+        --stack-gap: clamp(18px, 1.2vw, 26px);
+        --stack-offset-a: 0px;
+        --stack-offset-b: 0px;
+        --stack-offset-c: 0px;
+        --card-shell-ratio: 356 / 648;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+        gap: var(--stack-gap);
+        min-height: clamp(860px, 58vw, 1020px);
+        padding: 0;
+        overflow: visible;
+      }
+
+      .screenCard {
+        --card-offset-y: 0px;
+        --card-enter-y: 28px;
+        position: relative;
+        width: 100%;
+        height: auto;
+        aspect-ratio: var(--card-shell-ratio);
+        justify-self: stretch;
+        align-self: start;
+        transform-origin: center top;
+        opacity: 0;
+        transform: translate3d(0, calc(var(--card-offset-y) + var(--card-enter-y)), 0)
+          scale(var(--card-scale, 1));
+        overflow: hidden;
+        border: 0;
+        border-radius: 26px;
+        background: #f6f8f5;
+        box-shadow: 0 18px 42px rgba(18, 23, 20, 0.08);
+        transition:
+          transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          filter 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+        cursor: pointer;
+        user-select: none;
+        will-change: transform, opacity, filter, box-shadow;
+      }
+
+      body.is-ready .screenCard {
+        --card-enter-y: 0px;
+        opacity: 1;
+      }
+
+      body.is-ready .screenCard:nth-of-type(1) {
+        transition-delay: 120ms;
+      }
+
+      body.is-ready .screenCard:nth-of-type(2) {
+        transition-delay: 200ms;
+      }
+
+      body.is-ready .screenCard:nth-of-type(3) {
+        transition-delay: 280ms;
+      }
+
+      .screenCard::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        border: 1.5px solid rgba(18, 23, 20, 0.18);
+        pointer-events: none;
+      }
+
+      .screenCard[data-screen="index"] {
+        background: #f5f7f4;
+        overflow: visible;
+      }
+
+      .screenCard[data-screen="add"] {
+        background: #f5f7f4;
+        overflow: visible;
+        border-radius: 26px;
+      }
+
+      .screenCard[data-screen="todo"] {
+        background: #f5f7f4;
+      }
+
+      .screenCard.slot-a {
+        grid-column: 1;
+        margin-top: var(--stack-offset-a);
+        z-index: 3;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.slot-b {
+        grid-column: 2;
+        margin-top: var(--stack-offset-b);
+        z-index: 2;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.slot-c {
+        grid-column: 3;
+        margin-top: var(--stack-offset-c);
+        z-index: 1;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.is-passive {
+        opacity: 0.9;
+        filter: saturate(0.9) brightness(0.985) contrast(0.98);
+        box-shadow: 0 14px 30px rgba(18, 23, 20, 0.06);
+      }
+
+      .screenCard.is-active {
+        opacity: 1;
+        filter: saturate(1.02) brightness(1.01) contrast(1);
+        box-shadow: 0 26px 58px rgba(18, 23, 20, 0.13);
+      }
+
+      .screenCard.is-large {
+        --card-scale: 1.09;
+        --card-offset-y: -8px;
+        z-index: 4;
+      }
+
+      .screenCard.is-medium {
+        --card-scale: 0.96;
+        --card-offset-y: 4px;
+        z-index: 3;
+      }
+
+      .screenCard.is-small {
+        --card-scale: 0.96;
+        --card-offset-y: 4px;
+        z-index: 2;
+      }
+
+      .guideCue {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        z-index: 8;
+        pointer-events: none;
+        opacity: 0;
+        border-radius: 0;
+        background: #2f80ff;
+        box-shadow: 0 8px 22px rgba(47, 128, 255, 0.24);
+        transition: opacity 180ms ease;
+      }
+
+      .handHint {
+        left: 10%;
+        top: 46.6%;
+        transform: translate3d(-50%, -50%, 0);
+      }
+
+      .indexCueLabel {
+        position: absolute;
+        left: 4%;
+        top: -26px;
+        margin: 0;
+        color: #4caf50;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+
+      .handHint.is-visible {
+        opacity: 1;
+        animation: cueSpin 1.2s linear infinite;
+      }
+
+      .scrollHint {
+        left: 50%;
+        bottom: -62px;
+        transform: translate3d(-50%, 0, 0);
+        transform-origin: center center;
+      }
+
+      .scrollHint.is-visible {
+        opacity: 1;
+        animation: cueScroll 1.15s ease-in-out infinite;
+      }
+
+      .weekHint {
+        left: 23.5%;
+        top: 21.4%;
+        transform: translate3d(-50%, -50%, 0);
+        transform-origin: center center;
+      }
+
+      .weekHint.is-visible {
+        opacity: 1;
+        animation: cueSpin 1.05s linear infinite;
+      }
+
+      @keyframes cueSpin {
+        0%,
+        100% {
+          opacity: 1;
+          transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translate3d(-50%, -50%, 0) rotate(180deg) scale(0.95);
+        }
+      }
+
+      @keyframes cueScroll {
+        0%,
+        100% {
+          opacity: 1;
+          transform: translate3d(-50%, 0, 0) rotate(0deg) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translate3d(-50%, 34px, 0) rotate(180deg) scale(0.95);
+        }
+      }
+
+      .phoneShell {
+        position: relative;
+        height: 100%;
+        padding: 0;
+        background: transparent;
+        border-radius: inherit;
+      }
+
+      .phoneStatus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        padding: 18px 20px 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .phoneStatus__signal,
+      .phoneStatus__battery {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .phoneSignalBars {
+        display: inline-grid;
+        grid-auto-flow: column;
+        gap: 2px;
+        align-items: end;
+        height: 10px;
+      }
+
+      .phoneSignalBars span {
+        display: block;
+        width: 2px;
+        background: currentColor;
+        border-radius: 99px;
+      }
+
+      .phoneSignalBars span:nth-child(1) {
+        height: 4px;
+      }
+
+      .phoneSignalBars span:nth-child(2) {
+        height: 6px;
+      }
+
+      .phoneSignalBars span:nth-child(3) {
+        height: 8px;
+      }
+
+      .phoneSignalBars span:nth-child(4) {
+        height: 10px;
+      }
+
+      .phoneBattery {
+        position: relative;
+        width: 18px;
+        height: 9px;
+        border: 1px solid currentColor;
+        border-radius: 2px;
+      }
+
+      .phoneBattery::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        right: -3px;
+        width: 2px;
+        height: 4px;
+        border-radius: 0 1px 1px 0;
+        background: currentColor;
+      }
+
+      .phoneBattery__fill {
+        position: absolute;
+        inset: 1px;
+        width: 68%;
+        border-radius: 1px;
+        background: currentColor;
+      }
+
+      .shotFill {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+
+      .shotWrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #f7f8f5;
+      }
+
+      .hotspot {
+        position: absolute;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .hotspotButton {
+        display: block;
+        appearance: none;
+        padding: 0;
+        z-index: 2;
+      }
+
+      .hotspot--todo-month {
+        left: 12px;
+        top: 147px;
+        width: 110px;
+        height: 34px;
+        border-radius: 999px;
+      }
+
+      .hotspot--todo-week {
+        left: 124px;
+        top: 147px;
+        width: 96px;
+        height: 34px;
+        border-radius: 999px;
+      }
+
+      .hotspot--manyue {
+        left: 3.2%;
+        top: 28.9%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--meidao {
+        left: 3.2%;
+        top: 40%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--zise {
+        left: 3.2%;
+        top: 51.1%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--zhusha {
+        left: 3.2%;
+        top: 62.3%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--hunsha {
+        left: 3.2%;
+        top: 73.4%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--banyin {
+        left: 3.2%;
+        top: 84.5%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--yindou {
+        left: 3.2%;
+        top: 95.6%;
+        width: 93.2%;
+        height: 4.2%;
+      }
+
+      .todoReplica {
+        height: 100%;
+        background: #f5f7f4;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .todoReplica .miniTopbar {
+        height: 96px;
+        flex: 0 0 auto;
+      }
+
+      .todoReplicaBody {
+        flex: 1;
+        padding: 20px 14px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        overscroll-behavior: contain;
+        padding-bottom: 88px;
+      }
+
+      .todoReplicaBody::-webkit-scrollbar {
+        display: none;
+      }
+
+      .todoReplicaTitle {
+        margin: 0;
+        color: #26384a;
+        font-size: 1.08rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .todoReplicaControls {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .todoReplicaPillGroup {
+        display: inline-flex;
+        background: #e7ece7;
+        border-radius: 999px;
+        padding: 3px;
+      }
+
+      .todoReplicaPill {
+        border: 0;
+        background: transparent;
+        color: #98a29a;
+        border-radius: 999px;
+        padding: 7px 14px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .todoReplicaPill.is-active {
+        background: #ffffff;
+        color: #35b756;
+      }
+
+      .todoReplicaTemp {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #ffffff;
+      }
+
+      .todoReplicaTemp__label,
+      .todoReplicaTemp__unit {
+        color: #9aa39d;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTemp__value {
+        min-width: 26px;
+        text-align: center;
+        color: #35b756;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaConfirm {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        border: 0;
+        background: #35b756;
+        color: #fff;
+        font-size: 0.84rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .todoReplicaNav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        color: #35b756;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 2px 2px 0;
+      }
+
+      .todoReplicaNav__button {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+        justify-self: start;
+      }
+
+      .todoReplicaNav__button:last-child {
+        justify-self: end;
+      }
+
+      .todoReplicaNav__label {
+        color: #111;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .todoReplicaMonthCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 10px 10px 12px;
+      }
+
+      .todoReplicaWeekHead {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        color: #c6cbc7;
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+      }
+
+      .todoReplicaMonthGrid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+      }
+
+      .todoReplicaDay {
+        min-height: 54px;
+        border: 0;
+        background: transparent;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        cursor: pointer;
+      }
+
+      .todoReplicaDay.is-active {
+        background: #eef8f0;
+      }
+
+      .todoReplicaDay__num {
+        color: #111;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaDay.is-active .todoReplicaDay__num {
+        color: #35b756;
+      }
+
+      .todoReplicaDay__icons {
+        color: #2bb6ff;
+        font-size: 0.78rem;
+        line-height: 1;
+      }
+
+      .todoReplicaWeekCard {
+        background: #fff;
+        border-radius: 0;
+        overflow: hidden;
+        display: none;
+      }
+
+      .todoReplicaWeekCard.is-visible,
+      .todoReplicaMonthCard.is-visible {
+        display: block;
+      }
+
+      .todoReplicaWeekScroller {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .todoReplicaWeekRow {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 12px;
+        padding: 12px 10px 12px 14px;
+        border-bottom: 1px solid #f1f3f1;
+      }
+
+      .todoReplicaWeekRow.is-active {
+        background: #f6fcf8;
+        border-left: 6px solid #33c766;
+        padding-left: 8px;
+      }
+
+      .todoReplicaWeekMeta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .todoReplicaWeekMeta small {
+        color: #c2c7c2;
+        font-size: 0.68rem;
+      }
+
+      .todoReplicaWeekMeta strong {
+        color: #111;
+        font-size: 1rem;
+      }
+
+      .todoReplicaWeekTags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+        align-content: center;
+      }
+
+      .todoReplicaWeekTag {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid #edf0ed;
+        background: #fff;
+        color: #1f2421;
+        font-size: 0.72rem;
+        white-space: nowrap;
+        line-height: 1;
+      }
+
+      .todoReplicaSectionHead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .todoReplicaSectionTitle {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+
+      .todoReplicaSectionTitle strong {
+        color: #111;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .todoReplicaSectionTitle span {
+        color: #c6cbc7;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow: visible;
+        padding-bottom: 58px;
+      }
+
+      .todoReplicaTaskCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 14px 14px 16px;
+      }
+
+      .todoReplicaTaskHead {
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .todoReplicaAvatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        object-fit: cover;
+        background: var(--avatar-bg, #e7ece7);
+        display: grid;
+        place-items: center;
+        color: var(--avatar-fg, #4c5b4f);
+        font-size: 0.9rem;
+        font-weight: 700;
+        overflow: hidden;
+      }
+
+      .todoReplicaPlantName {
+        color: #26384a;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaArrow {
+        color: #d6d9d6;
+        font-size: 1.1rem;
+      }
+
+      .todoReplicaTaskRow {
+        display: grid;
+        grid-template-columns: 54px 1fr 54px;
+        align-items: center;
+        gap: 8px;
+        min-height: 74px;
+        background: #f8f9f6;
+        padding: 0 10px;
+      }
+
+      .todoReplicaCheck {
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        border: 2px solid #d7dad7;
+        background: #fff;
+        color: transparent;
+        font-size: 1.05rem;
+        line-height: 1;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      }
+
+      .todoReplicaCheck.is-done {
+        background: #93e3b0;
+        border-color: #93e3b0;
+        color: #fff;
+      }
+
+      .todoReplicaTaskInfo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #2b4763;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskInfo.is-done {
+        color: #d4d7d4;
+      }
+
+      .todoReplicaDate {
+        width: 40px;
+        height: 40px;
+        justify-self: end;
+        border-radius: 10px;
+        background: #f4e6e6;
+        color: #ffffff;
+        display: grid;
+        grid-template-rows: 12px 1fr;
+        overflow: hidden;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+      }
+
+      .todoReplicaDate__month {
+        display: grid;
+        place-items: center;
+        background: #e7c8c8;
+        font-size: 0.42rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .todoReplicaDate__day {
+        display: grid;
+        place-items: center;
+        color: #ead4d4;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskTypeCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 16px 14px;
+      }
+
+      .todoReplicaTaskTypeHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .todoReplicaTaskTypeLabel {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #26384a;
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskTypeIcon {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: #eef8f0;
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+      }
+
+      .todoReplicaTaskTypeMeta {
+        color: #9ea49f;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskTypeBody {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .todoReplicaTaskChip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f8f9f6;
+        color: #33485c;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskChip__drop {
+        color: #36b7ff;
+      }
+
+      .todoReplicaTaskEmpty {
+        color: #c3c8c3;
+        font-size: 0.78rem;
+        padding: 18px 4px 0;
+      }
+
+      .archiveReplica {
+        height: 100%;
+        background: #f7f8f5;
+        overflow: hidden;
+        border-radius: inherit;
+      }
+
+      .indexShotMap {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .archiveScroll {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: inherit;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(24, 32, 24, 0.18) transparent;
+      }
+
+      .archiveScroll::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .archiveScroll::-webkit-scrollbar-thumb {
+        background: rgba(24, 32, 24, 0.18);
+        border-radius: 999px;
+      }
+
+      .archiveImage {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .homeReplica {
+        height: 100%;
+        background: #f6f8f6;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .homeReplicaBody {
+        flex: 1;
+        padding: 18px 14px 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .homeReplicaHeader {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .homeReplicaTitleWrap {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .homeReplicaTitle {
+        margin: 0;
+        color: #283a29;
+        font-size: 1.28rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .homeReplicaCount {
+        color: #97a395;
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      .homeReplicaAdmin {
+        border: 1px solid #d7ead7;
+        border-radius: 999px;
+        background: #eef8ef;
+        color: #3ca855;
+        font-size: 0.76rem;
+        font-weight: 700;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+
+      .homeReplicaSearch {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 42px;
+        background: #fff;
+        border-radius: 999px;
+        padding: 0 14px;
+        color: #b3b8b1;
+        font-size: 0.82rem;
+        margin-bottom: 16px;
+      }
+
+      .homeReplicaList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .homeReplicaRow {
+        width: 100%;
+        border: 0;
+        background: #fff;
+        border-radius: 18px;
+        min-height: 78px;
+        padding: 0 14px 0 12px;
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+        cursor: pointer;
+        box-shadow: inset -2px 0 0 #57bb5e;
+      }
+
+      .homeReplicaThumb {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #edf1ec;
+      }
+
+      .homeReplicaThumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .homeReplicaName {
+        color: #283a4b;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .homeReplicaChevron {
+        color: #d4d7d4;
+        font-size: 1rem;
+      }
+
+      .homeReplicaFloat {
+        position: absolute;
+        right: 18px;
+        bottom: 56px;
+        border: 0;
+        border-radius: 999px;
+        background: #54b853;
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 13px 18px;
+        pointer-events: none;
+      }
+
+      .miniTopbar {
+        height: 94px;
+        background: #4caf50;
+        border-radius: 24px 24px 0 0;
+        position: relative;
+      }
+
+      .miniTopbar__title {
+        position: absolute;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        margin: 0;
+        color: #f6fff2;
+        font-size: 0.94rem;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
+
+      .miniTopbar__back {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        color: #f6fff2;
+        font-size: 1.3rem;
+        line-height: 1;
+      }
+
+      .miniTopbar__capsule {
+        position: absolute;
+        right: 16px;
+        bottom: 14px;
+        width: 74px;
+        height: 34px;
+        border-radius: 999px;
+        background: rgba(44, 136, 47, 0.72);
+      }
+
+      .miniTopbar__capsule::before,
+      .miniTopbar__capsule::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .miniTopbar__capsule::before {
+        left: 18px;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #f4fff0;
+        box-shadow: 10px 0 0 #f4fff0;
+      }
+
+      .miniTopbar__capsule::after {
+        right: 14px;
+        width: 14px;
+        height: 14px;
+        border: 2px solid #f4fff0;
+        border-radius: 999px;
+      }
+
+      .miniBody {
+        height: calc(100% - 94px);
+        padding: 18px 14px 14px;
+        background: #f7f8f5;
+      }
+
+      .indexTop,
+      .addTop,
+      .todoTop {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 2px 8px;
+      }
+
+      .indexTop__title,
+      .addTop__title,
+      .todoTop__title {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: 1.32rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        color: #26384a;
+      }
+
+      .indexTop__count,
+      .addTop__count {
+        margin: 0;
+        color: #97a593;
+        font-size: 0.8rem;
+      }
+
+      .phoneSub {
+        margin: 0;
+        color: #46a950;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .searchBar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 42px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: #fff;
+        border: 0;
+      }
+
+      .searchBar__text {
+        font-size: 0.82rem;
+        color: #b0b7ad;
+      }
+
+      .plantCards,
+      .addFields,
+      .todoList {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .plantRow,
+      .addField,
+      .todoItem {
+        background: #fff;
+        border: 1px solid #edf2ed;
+      }
+
+      .plantRow {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        height: 70px;
+        padding: 0 14px 0 12px;
+        border-radius: 18px;
+        box-shadow: inset -2px 0 0 #58bc5f;
+      }
+
+      .plantThumb {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #cfe0cf, #9fb89f);
+      }
+
+      .plantRow__name {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.1;
+        color: #2c3f52;
+        font-weight: 600;
+      }
+
+      .plantRow__arrow {
+        color: #c4cbc4;
+        font-size: 1rem;
+      }
+
+      .indexFloat {
+        position: absolute;
+        right: 16px;
+        bottom: 56px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .photoBox {
+        height: 160px;
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(76, 175, 80, 0.16), rgba(76, 175, 80, 0.04)),
+          linear-gradient(135deg, #dfe9df, #b8d0b8);
+        border: 0;
+      }
+
+      .addField {
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+
+      .addField__label {
+        display: block;
+        margin: 0 0 6px;
+        font-size: 0.72rem;
+        color: #afb5ad;
+      }
+
+      .addField__value {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.34;
+        color: #364758;
+      }
+
+      .addBtn {
+        width: 100%;
+        height: 48px;
+        border-radius: 999px;
+        border: 0;
+        background: #4caf50;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .addCanvas {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .todoControls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .todoToggle {
+        display: inline-flex;
+        padding: 3px;
+        border-radius: 999px;
+        background: #e6ece5;
+      }
+
+      .todoToggle__item {
+        border: 0;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        color: #93a09a;
+        background: transparent;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .todoToggle__item.is-active {
+        background: #fff;
+        color: #36b655;
+        font-weight: 700;
+      }
+
+      .todoTemp {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 7px;
+        border-radius: 999px;
+        background: #fff;
+        border: 0;
+        font-size: 0.74rem;
+        color: #99a7a2;
+      }
+
+      .todoTemp__button {
+        width: 22px;
+        height: 22px;
+        border: 0;
+        border-radius: 999px;
+        background: #eef7ef;
+        color: #36b655;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .todoTemp__value {
+        min-width: 28px;
+        text-align: center;
+        color: #36b655;
+        font-weight: 700;
+      }
+
+      .todoNav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 2px 8px;
+        color: #36b655;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .todoNav__button {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .todoNav__label {
+        margin: 0;
+      }
+
+      .todoCalendar {
+        background: #fff;
+        border-radius: 22px;
+        border: 0;
+        padding: 10px 10px 12px;
+      }
+
+      .todoCalendar__week {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        color: #bdc3c7;
+        font-size: 0.72rem;
+        text-align: center;
+      }
+
+      .todoCalendar__grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 5px;
+        margin-top: 8px;
+      }
+
+      .todoCalendar__day {
+        min-height: 40px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: #ffffff;
+        font-size: 0.84rem;
+        color: #212b24;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .todoCalendar__day.is-active {
+        background: #eef8f0;
+        color: #36b655;
+      }
+
+      .todoCalendar__day.is-done {
+        background: #eef7ef;
+        color: #27ae60;
+      }
+
+      .todoCalendar__weekView {
+        display: none;
+        gap: 8px;
+      }
+
+      .todoCalendar.is-week .todoCalendar__monthView {
+        display: none;
+      }
+
+      .todoCalendar.is-week .todoCalendar__weekView {
+        display: grid;
+      }
+
+      .todoWeekRow {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f2f4f2;
+      }
+
+      .todoWeekRow:last-child {
+        border-bottom: 0;
+      }
+
+      .todoWeekRow__date {
+        color: #6f7d6f;
+        font-size: 0.72rem;
+      }
+
+      .todoWeekRow__preview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .todoWeekTag {
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #f4f7f4;
+        color: #567056;
+        font-size: 0.66rem;
+      }
+
+      .todoList {
+        margin-top: 12px;
+      }
+
+      .todoItem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+
+      .todoItem__name {
+        margin: 0;
+        font-size: 0.96rem;
+        color: #2c3f52;
+        font-weight: 700;
+      }
+
+      .todoItem__meta {
+        margin: 3px 0 0;
+        font-size: 0.72rem;
+        color: #a9b0aa;
+      }
+
+      .todoPill {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #eef7ef;
+        color: #36b655;
+        font-size: 0.7rem;
+        border: 0;
+      }
+
+      .todoPill--done {
+        background: #36b655;
+        color: #fff;
+      }
+
+      .miniTabs {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 54px;
+        background: rgba(255, 255, 255, 0.96);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        padding: 0 24px;
+        color: #b6b9b3;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+
+      .miniTabs span.is-active {
+        color: #4caf50;
+        font-weight: 600;
+      }
+
+      @media (max-width: 1160px) {
+        .spread {
+          grid-template-columns: 1fr;
+        }
+
+        .corkAfter {
+          display: block;
+        }
+
+        .copy {
+          max-width: 42rem;
+        }
+
+        .corkAfter__copyCol {
+          padding-left: 60px;
+        }
+
+        .sim {
+          margin-left: 0;
+        }
+
+        .stackStage {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+          min-height: auto;
+        }
+
+        .screenCard.slot-a,
+        .screenCard.slot-b,
+        .screenCard.slot-c {
+          grid-column: auto;
+          width: min(100%, 430px);
+          margin-top: 0;
+          justify-self: center;
+        }
+
+        .screenCard.is-large,
+        .screenCard.is-medium,
+        .screenCard.is-small {
+          --card-scale: 1;
+          z-index: auto;
+        }
+
+        .corkEssayTop {
+          grid-template-columns: 1fr;
+        }
+
+        .corkAfter__hit,
+        .corkReflection,
+        .corkReflection__quote {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        .corkReflection__quote {
+          justify-self: start;
+          text-align: left;
+        }
+
+        .corkProductArea__slogan {
+          position: static;
+          text-align: left;
+          width: auto;
+          margin-right: 0;
+          margin-top: 16px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          width: min(100vw, calc(100vw - 28px));
+          min-height: calc(100dvh - 28px);
+          height: auto;
+          padding: 16px 10px 16px;
+        }
+
+        .whyCorkHeader {
+          padding: clamp(0.95rem, 1.7vw, 1.2rem) clamp(0.8rem, 1.2vw, 1rem)
+            0 0.1rem;
+        }
+
+        .whyCorkTitle {
+          font-size: clamp(1.95rem, 8vw, 2.6rem);
+        }
+
+        .copy__block {
+          font-size: 1.04rem;
+          line-height: 1.28;
+          gap: 1.4rem;
+        }
+
+        .corkAfter__copyCol {
+          padding-left: 0;
+        }
+
+        .corkAfter__intro,
+        .corkAfter__hit,
+        .corkAfter__ignite {
+          max-width: none;
+          font-size: 1.04rem;
+          line-height: 1.34;
+        }
+
+        .corkAfter__intro p:last-child {
+          font-size: 1.28rem;
+        }
+
+        .corkTreeStrip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-left: calc(50% - 50vw);
+          margin-right: calc(50% - 50vw);
+        }
+
+        .corkTreeStrip__cell img {
+          min-height: 200px;
+        }
+
+        .corkReflection__slogan,
+        .corkProductArea__slogan {
+          font-size: clamp(1.72rem, 9vw, 2.6rem);
+        }
+
+        .corkProductArea {
+          margin-left: calc(50% - 50vw);
+          margin-right: calc(50% - 50vw);
+        }
+
+        .corkProductArea {
+          width: 100%;
+        }
+
+        .corkProductGrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-auto-rows: 180px;
+          gap: 8px;
+        }
+
+        .corkProductCard {
+          grid-column: auto !important;
+          grid-row: auto !important;
+        }
+
+        .stackStage {
+          gap: 16px;
+        }
+
+        .screenCard.slot-a,
+        .screenCard.slot-b,
+        .screenCard.slot-c {
+          width: min(100%, 100%);
+        }
+
+        .screenCard.is-large,
+        .screenCard.is-medium,
+        .screenCard.is-small {
+          --card-scale: 1;
+          z-index: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="whyCorkHeader" aria-label="Why Cork title">
+        <h2 class="whyCorkTitle">Why Cork</h2>
+      </header>
+
+      <section class="spread" aria-label="Why Cork static layout">
+        <aside class="copy" aria-label="Why Cork copy draft">
+          <div class="copy__block">
+            <div class="copyGroup">
+              <p>其实本来不打算投消费行业了</p>
+              <p>因为我成了AI的信徒</p>
+            </div>
+
+            <div class="copyGroup">
+              <p>故事开始于家里的植物养多了</p>
+              <p>被每日的浇水任务搞得头大</p>
+              <p>正好<span class="latin">vibe coding</span>的风吹来</p>
+              <p>于是我干出了自己的微信小程序</p>
+              <p>现在轻松帮我<span class="latin">hold</span>住快100株小家伙</p>
+            </div>
+
+            <div class="copyGroup">
+              <p>后来就越搓越多（比如这个网站</p>
+              <p>每一个新尝试都让我兴奋</p>
+            </div>
+
+            <div class="copyGroup">
+              <p>在职业选择上</p>
+              <p>我向来只遵循热爱</p>
+              <p>这是第一次</p>
+              <p>我的热爱，站在了风口</p>
+            </div>
+          </div>
+        </aside>
+
+        <section class="sim" aria-label="Plant manager mini program preview">
+          <div class="stackStage">
+            <article class="screenCard" data-screen="index" aria-label="Home screen">
+              <div class="guideCue handHint" data-hand-hint aria-hidden="true"></div>
+              <p class="indexCueLabel">试试我的小程序</p>
+              <div class="phoneShell">
+                <div class="archiveReplica">
+                  <div class="archiveScroll">
+                    <div class="indexShotMap" data-index-map aria-label="植物档案列表">
+                      <img class="archiveImage" src="./assets/why-cork/screens/植物档案.PNG" alt="植物档案页面长图" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="screenCard" data-screen="add" aria-label="Add plant screen">
+              <div class="phoneShell">
+                <div class="archiveReplica">
+                  <div class="archiveScroll" data-archive-scroll>
+                    <img class="archiveImage" data-archive-image src="./assets/plant-details/final/manyue长图.png" alt="满月球兰植物档案长图" />
+                  </div>
+                </div>
+                <div class="guideCue scrollHint" data-scroll-hint aria-hidden="true"></div>
+              </div>
+            </article>
+
+            <article class="screenCard" data-screen="todo" aria-label="Care calendar screen">
+              <div class="phoneShell">
+                <div class="archiveReplica">
+                  <div class="archiveScroll">
+                    <img class="archiveImage" data-todo-image src="./assets/why-cork/screens/养护日历.png" alt="养护日历页面长图" />
+                  </div>
+                </div>
+                <div class="guideCue weekHint" data-week-hint aria-hidden="true"></div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+      </section>
+
+      <section class="corkAfter" aria-label="Why Cork second half">
+        <aside class="corkAfter__copyCol" aria-label="Why Cork continuation copy">
+          <div class="corkAfter__intro">
+            <p>然而老天奶挺爱开玩笑</p>
+            <p>随手刷到招聘笔记</p>
+            <p>又是思维泉涌的一夜</p>
+            <p>果然，我始终，还是那个我</p>
+          </div>
+        </aside>
+
+        <div class="corkAfter__body">
+          <section class="corkTreeStrip" aria-label="Cork forest and material collage">
+            <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-1.png" alt="一片栓皮栎树林" /></figure>
+            <figure class="corkTreeStrip__cell">
+              <video
+                src="./assets/why-cork/part2/cork-tree-2.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                aria-label="采收栓皮栎树皮的场景视频"
+              ></video>
+            </figure>
+            <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-3.jpeg" alt="卷曲的树皮横截面" /></figure>
+            <figure class="corkTreeStrip__cell"><img src="./assets/why-cork/part2/cork-tree-4.jpeg" alt="软木材料板层细节" /></figure>
+          </section>
+
+          <section class="corkEssay" aria-label="Why Cork editorial reflection">
+            <div class="corkEssayTop">
+              <p class="corkAfter__hit">我想，我应该是被这一段文字击中了</p>
+              <blockquote class="corkReflection__quote">
+                <span class="corkReflection__quoteLine">一颗栓皮栎要耐心生长25年</span>
+                <span class="corkReflection__quoteLine">才能迎来首次树皮采收</span>
+                <span class="corkReflection__quoteLine">这确保了它足够强壮</span>
+                <span class="corkReflection__quoteLine">此后，每9年才能再次采收</span>
+                <span class="corkReflection__quoteLine">树木会利用这段漫长的时间</span>
+                <span class="corkReflection__quoteLine">从容地长出完整、厚实的新树皮，如此循环</span>
+                <span class="corkReflection__quoteLine">一棵树能温柔地为我们奉献150-200年</span>
+                <span class="corkReflection__quoteLine">生生不息</span>
+              </blockquote>
+            </div>
+
+            <p class="corkReflection__slogan corkReflection">Healing within
+Embracing without</p>
+
+            <p class="corkAfter__ignite">我想，我应该是被软木的可能性点燃了</p>
+
+            <div class="corkProductArea">
+              <div class="corkProductGrid" aria-label="Cork products moodboard">
+                <figure class="corkProductCard corkProductCard--1"><img src="./assets/why-cork/part2/cork-product-1.jpeg" alt="软木椅子产品图" /></figure>
+                <figure class="corkProductCard corkProductCard--2"><img src="./assets/why-cork/part2/cork-product-5.jpeg" alt="软木吊灯产品图" /></figure>
+                <figure class="corkProductCard corkProductCard--3"><img src="./assets/why-cork/part2/cork-product-9.jpeg" alt="软木墙面材料图" /></figure>
+                <figure class="corkProductCard corkProductCard--4"><img src="./assets/why-cork/part2/cork-product-10.jpeg" alt="软木收纳托盘产品图" /></figure>
+                <figure class="corkProductCard corkProductCard--5"><img src="./assets/why-cork/part2/cork-product-4.jpeg" alt="软木圆桌产品图" /></figure>
+                <figure class="corkProductCard corkProductCard--6"><img src="./assets/why-cork/part2/cork-product-2.jpeg" alt="软木桌子产品图" /></figure>
+                <figure class="corkProductCard corkProductCard--7"><img src="./assets/why-cork/part2/cork-product-6.jpg" alt="软木椅子近景图" /></figure>
+                <figure class="corkProductCard corkProductCard--8"><img src="./assets/why-cork/part2/cork-product-3.jpg" alt="软木楼梯空间图" /></figure>
+                <figure class="corkProductCard corkProductCard--9"><img src="./assets/why-cork/part2/cork-product-8.jpg" alt="软木礼盒产品图" /></figure>
+              </div>
+
+              <p class="corkProductArea__slogan"><span>Rooted in one</span><span>Branching into all</span></p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const cards = Array.from(document.querySelectorAll("[data-screen]"));
+      const slots = {
+        A: "index",
+        B: "add",
+        C: "todo",
+      };
+      let focusedCard = "a";
+      let selectedPlant = "manyue";
+      let todoScreen = "month";
+      let handDismissed = false;
+      let scrollHintDismissed = false;
+
+      const plantArchiveMap = {
+        manyue: {
+          title: "满月球兰",
+          image: "./assets/plant-details/final/manyue长图.png",
+        },
+        meidao: {
+          title: "美岛裂瓣球兰",
+          image: "./assets/plant-details/final/meidao长图.png",
+        },
+        zise: {
+          title: "紫色极光球兰",
+          image: "./assets/plant-details/final/zise长图.png",
+        },
+        zhusha: {
+          title: "朱砂泰彩",
+          image: "./assets/plant-details/final/zhusha长图.png",
+        },
+        hunsha: {
+          title: "婚纱泰彩",
+          image: "./assets/plant-details/final/hunsha长图.png",
+        },
+        banyin: {
+          title: "斑印球兰",
+          image: "./assets/plant-details/final/meidao长图.png",
+        },
+        yindou: {
+          title: "银豆子球兰",
+          image: "./assets/plant-details/final/manyue长图.png",
+        },
+      };
+
+      const todoState = {
+        viewMode: "month",
+        aggMode: "normal",
+        taskView: "plant",
+        monthIndex: 0,
+        selectedDate: "2026-06-22",
+        done: new Set(["black-water"]),
+      };
+
+      const monthLabels = ["2026年6月", "2026年7月", "2026年5月"];
+
+      const monthDays = Array.from({ length: 30 }, (_, index) => ({
+        day: index + 1,
+        date: `2026-06-${String(index + 1).padStart(2, "0")}`,
+        icons: ["💧"],
+      }));
+
+      const weekRows = [
+        ["2026-06-22", "周一", 22, ["黑叶冷水花", "王子蔓绿绒", "鱼骨", "卷卷松", "茶杯卡梅拉球兰", "全银梅芯球兰", "新几内亚鬼球兰", "074球兰", "贝拉球兰", "克林顿球兰", "姬凤梨", "卡梅拉球兰"]],
+        ["2026-06-23", "周二", 23, ["朱砂泰彩", "婚纱泰彩", "高斑瓦林球兰", "女王之心彩叶芋", "发色球兰", "章鱼内锦球兰", "紫茄", "绿孔雀球兰", "花朵冰糖球兰", "卷叶金丝吊兰", "秋海棠", "大盆桃蛋多肉", "黄盆羊脂玉球兰"]],
+        ["2026-06-24", "周三", 24, ["紫色极光球兰", "小方叶球兰", "湖心裂瓣球兰", "茶杯沙巴蜻蜓球兰", "椭圆叶球兰", "茶杯眼树莲球兰", "裂瓣板植球兰", "豹纹裂瓣球兰", "黑绿球兰", "玉扇锦多肉", "千手观音海芋", "章鱼外锦球兰"]],
+      ];
+
+      const taskGroupsByPlant = {
+        "2026-06-22": [
+          { key: "black-water", name: "黑叶冷水花", avatar: "黑", avatarBg: "#dce7dd", avatarFg: "#445947", type: "浇水", dueMonth: "JUL", dueDay: "17" },
+          { key: "prince-water", name: "王子蔓绿绒", avatar: "王", avatarBg: "#e8ddd2", avatarFg: "#6d5848", type: "浇水", dueMonth: "JUL", dueDay: "17" },
+          { key: "fish-water", name: "鱼骨", avatar: "鱼", avatarBg: "#e5efd9", avatarFg: "#4e6b45", type: "浇水", dueMonth: "JUL", dueDay: "17" },
+        ],
+        "2026-06-23": [
+          { key: "vera-water", name: "朱砂泰彩", avatar: "朱", avatarBg: "#f0dfdd", avatarFg: "#8b5e5b", type: "浇水", dueMonth: "JUL", dueDay: "18" },
+          { key: "marry-water", name: "婚纱泰彩", avatar: "婚", avatarBg: "#f2e6e8", avatarFg: "#8c6971", type: "浇水", dueMonth: "JUL", dueDay: "18" },
+        ],
+        "2026-06-24": [
+          { key: "purple-water", name: "紫色极光球兰", avatar: "紫", avatarBg: "#e5dff0", avatarFg: "#6e5b89", type: "浇水", dueMonth: "JUL", dueDay: "19" },
+        ],
+      };
+
+      const tasksByType = {
+        "2026-06-22": [
+          { key: "batch-water-1", name: "浇水", image: "💧", members: ["黑叶冷水花", "王子蔓绿绒", "鱼骨"] },
+        ],
+        "2026-06-23": [
+          { key: "batch-water-2", name: "浇水", image: "💧", members: ["朱砂泰彩", "婚纱泰彩"] },
+        ],
+        "2026-06-24": [
+          { key: "batch-water-3", name: "浇水", image: "💧", members: ["紫色极光球兰"] },
+        ],
+      };
+
+      function renderTodo() {
+        const grid = document.querySelector("[data-calendar-grid]");
+        const weekList = document.querySelector("[data-week-list]");
+        const taskList = document.querySelector("[data-task-list]");
+        const label = document.querySelector("[data-calendar-label]");
+        const selectedLabel = document.querySelector("[data-selected-label]");
+        const tempValue = document.querySelector("[data-temp-value]");
+        const monthCard = document.querySelector("[data-month-card]");
+        const weekCard = document.querySelector("[data-week-card]");
+        if (!grid || !weekList || !taskList || !label || !selectedLabel || !tempValue || !monthCard || !weekCard) return;
+
+        label.textContent = monthLabels[todoState.monthIndex] || "2026年6月";
+        selectedLabel.textContent = todoState.selectedDate.replace(/-/g, "/").replace("/0", "/");
+        tempValue.textContent = "26";
+
+        document.querySelectorAll("[data-view-mode]").forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.viewMode === todoState.viewMode);
+        });
+
+        document.querySelectorAll("[data-agg-mode]").forEach((button) => {
+          const mode = button.dataset.aggMode;
+          button.classList.toggle("is-active", (mode === "normal" && todoState.aggMode === "normal") || (mode === "light" && todoState.aggMode === "light"));
+        });
+
+        document.querySelectorAll("[data-task-view]").forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.taskView === todoState.taskView);
+        });
+
+        monthCard.classList.toggle("is-visible", todoState.viewMode === "month");
+        weekCard.classList.toggle("is-visible", todoState.viewMode === "week");
+
+        grid.innerHTML = monthDays.map((item) => `
+          <button class="todoReplicaDay ${item.date === todoState.selectedDate ? "is-active" : ""}" type="button" data-date="${item.date}">
+            <span class="todoReplicaDay__num">${item.day}</span>
+            <span class="todoReplicaDay__icons">${item.icons.join("")}</span>
+          </button>
+        `).join("");
+
+        weekList.innerHTML = weekRows.map(([date, week, day, names]) => `
+          <button class="todoReplicaWeekRow ${date === todoState.selectedDate ? "is-active" : ""}" type="button" data-date="${date}">
+            <div class="todoReplicaWeekMeta">
+              <small>${week}</small>
+              <strong>${day}</strong>
+            </div>
+            <div class="todoReplicaWeekTags">
+              ${names.slice(0, todoState.aggMode === "light" ? 6 : names.length).map((name) => `<span class="todoReplicaWeekTag">${name}<span>💧</span></span>`).join("")}
+            </div>
+          </button>
+        `).join("");
+
+        if (todoState.taskView === "plant") {
+          const list = taskGroupsByPlant[todoState.selectedDate] || [];
+          taskList.innerHTML = list.length ? list.map((task) => `
+            <div class="todoReplicaTaskCard">
+              <div class="todoReplicaTaskHead">
+                <div class="todoReplicaAvatar" style="--avatar-bg:${task.avatarBg};--avatar-fg:${task.avatarFg};">${task.avatar}</div>
+                <div class="todoReplicaPlantName">${task.name}</div>
+                <div class="todoReplicaArrow">›</div>
+              </div>
+              <div class="todoReplicaTaskRow">
+                <button class="todoReplicaCheck ${todoState.done.has(task.key) ? "is-done" : ""}" type="button" data-task-key="${task.key}">✓</button>
+                <div class="todoReplicaTaskInfo ${todoState.done.has(task.key) ? "is-done" : ""}">
+                  <span>💧</span>
+                  <span>${task.type}</span>
+                </div>
+                <div class="todoReplicaDate"><span class="todoReplicaDate__month">${task.dueMonth}</span><span class="todoReplicaDate__day">${task.dueDay}</span></div>
+              </div>
+            </div>
+          `).join("") : `<div class="todoReplicaTaskEmpty">今日无养护任务</div>`;
+        } else {
+          const list = tasksByType[todoState.selectedDate] || [];
+          taskList.innerHTML = list.length ? list.map((task) => `
+            <div class="todoReplicaTaskTypeCard">
+              <div class="todoReplicaTaskTypeHead">
+                <div class="todoReplicaTaskTypeLabel">
+                  <span class="todoReplicaTaskTypeIcon">${task.image}</span>
+                  <span>${task.name}</span>
+                </div>
+                <div class="todoReplicaTaskTypeMeta">${task.members.length}株</div>
+              </div>
+              <div class="todoReplicaTaskTypeBody">
+                ${task.members.slice(0, todoState.aggMode === "light" ? 4 : task.members.length).map((member) => `
+                  <span class="todoReplicaTaskChip">
+                    <span class="todoReplicaTaskChip__drop">💧</span>
+                    <span>${member}</span>
+                  </span>
+                `).join("")}
+              </div>
+            </div>
+          `).join("") : `<div class="todoReplicaTaskEmpty">今日无养护任务</div>`;
+        }
+      }
+
+      function renderStack() {
+        cards.forEach((card) => {
+          const screen = card.dataset.screen;
+          const slot = Object.entries(slots).find(([, value]) => value === screen)?.[0];
+          card.classList.remove("slot-a", "slot-b", "slot-c");
+          if (slot === "A") card.classList.add("slot-a");
+          if (slot === "B") card.classList.add("slot-b");
+          if (slot === "C") card.classList.add("slot-c");
+        });
+        renderCardSizes();
+        renderHandHint();
+        renderWeekHint();
+      }
+
+      function renderCardSizes() {
+        const sizeStateByFocus = {
+          a: {
+            index: "large",
+            add: "small",
+            todo: "small",
+          },
+          b: {
+            index: "small",
+            add: "large",
+            todo: "small",
+          },
+          c: {
+            index: "small",
+            add: "small",
+            todo: "large",
+          },
+        }[focusedCard] || {
+          index: "large",
+          add: "small",
+          todo: "small",
+        };
+
+        cards.forEach((card) => {
+          const screen = card.dataset.screen;
+          card.classList.remove("is-large", "is-medium", "is-small", "is-active", "is-passive");
+          const size = sizeStateByFocus[screen];
+          if (size === "large") card.classList.add("is-large");
+          if (size === "medium") card.classList.add("is-medium");
+          if (size === "small") card.classList.add("is-small");
+          if (size === "large") card.classList.add("is-active");
+          else card.classList.add("is-passive");
+        });
+      }
+
+      function renderArchive() {
+        const image = document.querySelector("[data-archive-image]");
+        const scroll = document.querySelector("[data-archive-scroll]");
+        const current = plantArchiveMap[selectedPlant] || plantArchiveMap.manyue;
+        if (!image || !scroll) return;
+        image.src = current.image;
+        image.alt = `${current.title}植物档案长图`;
+        scroll.scrollTop = 0;
+        renderScrollHint();
+      }
+
+      function renderTodoShot() {
+        const image = document.querySelector("[data-todo-image]");
+        if (!image) return;
+        if (todoScreen === "week") {
+          image.src = "./assets/why-cork/screens/周视图.png";
+          image.alt = "养护日历周视图长图";
+          return;
+        }
+        image.src = "./assets/why-cork/screens/养护日历.png";
+        image.alt = "养护日历页面长图";
+      }
+
+      function renderHandHint() {
+        const hand = document.querySelector("[data-hand-hint]");
+        if (!hand) return;
+        const show = focusedCard === "a" && !handDismissed;
+        hand.classList.toggle("is-visible", show);
+      }
+
+      function renderScrollHint() {
+        const hand = document.querySelector("[data-scroll-hint]");
+        const scroll = document.querySelector("[data-archive-scroll]");
+        if (!hand || !scroll) return;
+        const show = focusedCard === "b" && selectedPlant === "meidao" && !scrollHintDismissed && scroll.scrollTop < 24;
+        hand.classList.toggle("is-visible", show);
+      }
+
+      function renderWeekHint() {
+        const hand = document.querySelector("[data-week-hint]");
+        if (!hand) return;
+        const show = selectedPlant === "meidao" && todoScreen === "month" && scrollHintDismissed;
+        hand.classList.toggle("is-visible", show);
+      }
+
+      function focusCard(nextFocus) {
+        focusedCard = nextFocus;
+        renderStack();
+        renderScrollHint();
+        renderWeekHint();
+      }
+
+      function openPlantArchive(plantKey) {
+        if (!plantKey || plantKey === "banyin") return;
+        selectedPlant = plantKey;
+        if (plantKey === "meidao") {
+          handDismissed = true;
+          scrollHintDismissed = false;
+        } else {
+          handDismissed = true;
+          scrollHintDismissed = true;
+        }
+        renderArchive();
+        focusCard("b");
+      }
+
+      const indexMap = document.querySelector("[data-index-map]");
+      if (indexMap) {
+        indexMap.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const rect = indexMap.getBoundingClientRect();
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+          if (y >= 28.9 && y <= 35.7) {
+            handDismissed = true;
+            return openPlantArchive("manyue");
+          }
+          if (y >= 40.0 && y <= 46.8) {
+            handDismissed = true;
+            return openPlantArchive("meidao");
+          }
+          if (y >= 48.4 && y <= 59.4) {
+            handDismissed = true;
+            return openPlantArchive("zise");
+          }
+          return;
+        });
+      }
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const screen = card.dataset.screen;
+          if (screen === "index") focusCard("a");
+          if (screen === "add") focusCard("b");
+          if (screen === "todo") focusCard("c");
+        });
+      });
+
+      const archiveScroll = document.querySelector("[data-archive-scroll]");
+      if (archiveScroll) {
+        archiveScroll.addEventListener("scroll", () => {
+          if (archiveScroll.scrollTop > 18) {
+            scrollHintDismissed = true;
+          }
+          focusCard("b");
+          renderScrollHint();
+          renderWeekHint();
+        });
+      }
+
+      const todoCard = document.querySelector('[data-screen="todo"]');
+      if (todoCard) {
+        todoCard.addEventListener("click", (event) => {
+          const slot = Object.entries(slots).find(([, value]) => value === "todo")?.[0];
+          if (slot !== "C") return;
+
+          const image = todoCard.querySelector("[data-todo-image]");
+          if (!image) return;
+
+          const rect = image.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+          const isMonthViewTabBand = x >= 3.0 && x <= 29.8 && y >= 8.2 && y <= 12.9;
+          const isWeekViewTabBand = x >= 3.2 && x <= 29.2 && y >= 5.0 && y <= 8.9;
+          const monthWeekSplit = 15.9;
+
+          if (todoScreen === "month") {
+            if (!isMonthViewTabBand || x < monthWeekSplit) return;
+
+            event.stopPropagation();
+            todoScreen = "week";
+            renderTodoShot();
+            focusCard("c");
+            renderWeekHint();
+            return;
+          }
+
+          if (todoScreen === "week") {
+            if (!isWeekViewTabBand || x > monthWeekSplit) return;
+
+            event.stopPropagation();
+            todoScreen = "month";
+            renderTodoShot();
+            focusCard("c");
+            renderWeekHint();
+          }
+        }, true);
+      }
+
+      document.querySelectorAll("[data-view-mode]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          todoState.viewMode = button.dataset.viewMode;
+          renderTodo();
+        });
+      });
+
+      document.querySelectorAll("[data-agg-mode]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          todoState.aggMode = button.dataset.aggMode === "light" ? "light" : "normal";
+          renderTodo();
+        });
+      });
+
+      document.querySelectorAll("[data-task-view]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          todoState.taskView = button.dataset.taskView;
+          renderTodo();
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const day = event.target.closest("[data-date]");
+        if (day) {
+          event.stopPropagation();
+          todoState.selectedDate = day.dataset.date;
+          renderTodo();
+          return;
+        }
+
+        const shift = event.target.closest("[data-calendar-shift]");
+        if (shift) {
+          event.stopPropagation();
+          const delta = Number(shift.dataset.calendarShift);
+          todoState.monthIndex = Math.max(0, Math.min(monthLabels.length - 1, todoState.monthIndex + (delta < 0 ? 1 : -1)));
+          renderTodo();
+          return;
+        }
+
+        const task = event.target.closest("[data-task-key]");
+        if (task) {
+          event.stopPropagation();
+          const key = task.dataset.taskKey;
+          if (todoState.done.has(key)) todoState.done.delete(key);
+          else todoState.done.add(key);
+          renderTodo();
+        }
+      });
+
+      renderStack();
+      renderArchive();
+      renderTodoShot();
+      renderHandHint();
+      renderScrollHint();
+      renderWeekHint();
+      renderTodo();
+      renderCardSizes();
+
+      if (document.documentElement.classList.contains("embedded")) {
+        document.querySelector(".whyCorkHeader")?.remove();
+      }
+
+      window.requestAnimationFrame(() => {
+        document.body.classList.add("is-ready");
+      });
+
+      function postHeight() {
+        const height = Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight,
+        );
+
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage(
+            {
+              type: "why-cork:height",
+              height,
+            },
+            "*",
+          );
+        }
+      }
+
+      if ("ResizeObserver" in window) {
+        const heightObserver = new ResizeObserver(() => {
+          window.requestAnimationFrame(postHeight);
+        });
+
+        heightObserver.observe(document.documentElement);
+      }
+
+      window.addEventListener("load", postHeight);
+      window.addEventListener("resize", postHeight);
+      window.requestAnimationFrame(postHeight);
+    </script>
+  </body>
+</html>

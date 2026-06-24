@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="data:," />
+    <title>Junru | Contact</title>
+    <meta
+      name="description"
+      content="A one-screen contact page with a centered portrait, oversized NI wordmark, and a résumé download cue."
+    />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/6e47ef470dd19698c911332a9b4d1cf4?family=Neue+Haas+Grotesk+Text+Pro"
+    />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/dec0d9b4e22ca588dc20e1e2e09a59b5?family=Neue+Haas+Grotesk+Display+Pro+55+Roman"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #111513;
+        --muted: rgba(17, 21, 19, 0.56);
+        --line: rgba(17, 21, 19, 0.1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      html {
+        background: #fff;
+      }
+
+      body {
+        min-height: 100dvh;
+        overflow: hidden;
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica,
+          Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .contactPage {
+        width: 100vw;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 50% 34%, rgba(17, 21, 19, 0.03), transparent 38%),
+          linear-gradient(180deg, #ffffff 0%, #fcfcfb 100%);
+      }
+
+      .contactCanvas {
+        position: relative;
+        --art-width: min(38vw, 35rem);
+        --art-height: min(67vh, 48rem);
+        --art-top: clamp(3.2rem, 6vw, 4.5rem);
+        --meta-top: var(--art-top);
+        --wordmark-bottom: calc(
+          clamp(2.1rem, 4.2vw, 3.2rem) + clamp(3rem, 5.6vw, 4rem)
+        );
+        --side-gap: clamp(1.1rem, 2.2vw, 2rem);
+        width: min(100vw, calc(100dvh * 16 / 9));
+        height: min(100dvh, calc(100vw * 9 / 16));
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .contactMeta {
+        position: absolute;
+        top: var(--meta-top);
+        right: calc(
+          50% + (var(--art-width) / 2) + clamp(0.6rem, 1.2vw, 1.2rem)
+        );
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: clamp(1.15rem, 1.9vw, 1.75rem);
+        width: fit-content;
+      }
+
+      .contactTitle {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman",
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(7.8rem, 19vw, 14.8rem);
+        line-height: 0.78;
+        font-weight: 800;
+        letter-spacing: -0.11em;
+        color: var(--ink);
+        white-space: nowrap;
+        opacity: 0;
+        transform: translate3d(-4rem, 0.25rem, 0) scale(0.98);
+        will-change: transform, opacity;
+      }
+
+      .contactResume {
+        position: relative;
+        display: inline-block;
+        width: max-content;
+        max-width: none;
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(1rem, 1.75vw, 1.6rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+        color: var(--ink);
+        text-align: right;
+        opacity: 0;
+        transform: translate3d(0.4rem, 0, 0);
+        transition: color 220ms ease;
+        will-change: transform, opacity;
+      }
+
+      .contactResume::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.08rem;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right center;
+        transition: transform 220ms ease;
+      }
+
+      .contactResume:hover,
+      .contactResume:focus-visible {
+        color: rgba(17, 21, 19, 0.76);
+      }
+
+      .contactResume:hover::after,
+      .contactResume:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .contactResume:focus-visible {
+        outline: 1px solid rgba(17, 21, 19, 0.28);
+        outline-offset: 0.18rem;
+      }
+
+      .contactArt {
+        position: absolute;
+        left: 50%;
+        top: var(--art-top);
+        z-index: 1;
+        width: var(--art-width);
+        height: var(--art-height);
+        margin: 0;
+        opacity: 0;
+        transform: translate3d(-50%, 1.15rem, 0) scale(1.08);
+        will-change: transform, opacity;
+      }
+
+      .contactYesHotspot {
+        position: absolute;
+        left: calc(50% - (var(--art-width) * 0.2));
+        top: calc(var(--art-top) + (var(--art-height) * 0.225));
+        z-index: 4;
+        width: calc(var(--art-width) * 0.58);
+        height: calc(var(--art-height) * 0.27);
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        cursor: pointer;
+        opacity: 0;
+      }
+
+      .contactYesHotspot:focus-visible {
+        outline: 1px solid rgba(17, 21, 19, 0.34);
+        outline-offset: 0.35rem;
+      }
+
+      .contactPointer {
+        position: absolute;
+        left: calc(50% - (var(--art-width) * 0.495));
+        top: calc(var(--art-top) + (var(--art-height) * 0.465));
+        z-index: 4;
+        width: clamp(4.3rem, 7vw, 6.2rem);
+        aspect-ratio: 1;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate3d(0, 0.8rem, 0) scale(0.72);
+        transform-origin: 38% 28%;
+        will-change: transform, opacity;
+      }
+
+      .contactPointer.is-visible {
+        animation: pointerEnter 420ms cubic-bezier(0.16, 0.94, 0.2, 1)
+          forwards;
+      }
+
+      .contactPointer img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform-origin: 38% 28%;
+        will-change: transform;
+      }
+
+      .contactPointer.is-visible img {
+        animation: pointerPulse 900ms ease-in-out 900ms infinite;
+      }
+
+      .contactQrLayer {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 200ms ease,
+          background 200ms ease;
+      }
+
+      .contactQrLayer.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        background: rgba(0, 0, 0, 0.66);
+      }
+
+      .contactQrBackdrop {
+        position: absolute;
+        inset: 0;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        cursor: default;
+      }
+
+      .contactQrCard {
+        position: relative;
+        width: min(18.5rem, 72vw);
+        aspect-ratio: 1;
+        background: #fff;
+        box-shadow:
+          0 1.25rem 3rem rgba(17, 21, 19, 0.16),
+          0 0 0 1px rgba(17, 21, 19, 0.06);
+        transform: translate3d(0, 0.8rem, 0) scale(0.9);
+        opacity: 0;
+        transition:
+          transform 220ms cubic-bezier(0.12, 0.9, 0.16, 1),
+          opacity 180ms ease;
+      }
+
+      .contactQrLayer.is-open .contactQrCard {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1;
+      }
+
+      .contactQrImage {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @keyframes pointerEnter {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 0.45rem, 0) scale(0.92);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+
+      @keyframes pointerBlink {
+        0% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.08);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pointerPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.08);
+        }
+      }
+
+      .contactArt img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+      }
+
+      .contactWordmark {
+        position: absolute;
+        right: clamp(1.9rem, 4.2vw, 4rem);
+        bottom: calc(var(--wordmark-bottom) - clamp(0.35rem, 0.7vw, 0.7rem));
+        z-index: 2;
+        width: min(82vw, 74rem);
+        pointer-events: none;
+      }
+
+      .contactWordmarkTitle {
+        margin: 0;
+        text-align: right;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman",
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(7rem, 16.8vw, 15rem);
+        line-height: 0.82;
+        font-weight: 800;
+        letter-spacing: -0.12em;
+        color: var(--ink);
+        white-space: nowrap;
+        opacity: 0;
+        transform: translate3d(3rem, 1.05rem, 0) scale(1.01);
+        will-change: transform, opacity;
+      }
+
+      @media (max-width: 1024px) {
+        .contactCanvas {
+          --art-width: min(46vw, 32rem);
+          --art-height: min(60vh, 40rem);
+          --meta-top: var(--art-top);
+          --wordmark-bottom: calc(
+            clamp(2.1rem, 4.2vw, 3.2rem) + clamp(2.8rem, 5.4vw, 3.8rem)
+          );
+        }
+
+        .contactMeta {
+          right: calc(50% + (var(--art-width) / 2) + clamp(0.95rem, 2vw, 1.5rem));
+        }
+      }
+
+      @media (max-width: 720px) {
+        body {
+          overflow: auto;
+        }
+
+        .contactPage {
+          min-height: 100svh;
+        }
+
+        .contactCanvas {
+          width: 100vw;
+          height: 100svh;
+          --art-width: min(64vw, 22rem);
+          --art-height: min(52vh, 30rem);
+          --art-top: 0.4rem;
+          --meta-top: var(--art-top);
+          --wordmark-bottom: 2.7rem;
+          --side-gap: 1rem;
+        }
+
+        .contactMeta {
+          right: 1.2rem;
+          top: var(--meta-top);
+          gap: 0.95rem;
+        }
+
+        .contactTitle {
+          font-size: clamp(4.8rem, 18vw, 7rem);
+        }
+
+        .contactResume {
+          max-width: 10rem;
+          font-size: 0.95rem;
+        }
+
+        .contactArt {
+          transform: translate3d(-50%, 1.15rem, 0) scale(1.08);
+        }
+
+        .contactYesHotspot {
+          left: calc(50% - (var(--art-width) * 0.21));
+          top: calc(var(--art-top) + (var(--art-height) * 0.24));
+          width: calc(var(--art-width) * 0.61);
+          height: calc(var(--art-height) * 0.29);
+        }
+
+        .contactPointer {
+          left: calc(50% - (var(--art-width) * 0.5));
+          top: calc(var(--art-top) + (var(--art-height) * 0.49));
+          width: clamp(3.5rem, 11vw, 4.8rem);
+        }
+
+        .contactWordmark {
+          width: min(88vw, 34rem);
+          right: 1.1rem;
+          bottom: var(--wordmark-bottom);
+        }
+
+        .contactWordmarkTitle {
+          font-size: clamp(5rem, 20vw, 8rem);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .contactTitle,
+        .contactArt,
+        .contactWordmarkTitle,
+        .contactResume,
+        .contactPointer,
+        .contactQrLayer,
+        .contactQrCard {
+          opacity: 1 !important;
+          transition-duration: 0ms !important;
+          transform: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="contactPage">
+      <section class="contactCanvas" aria-labelledby="contact-title">
+        <div class="contactMeta">
+          <h1 class="contactTitle" id="contact-title">NI</h1>
+          <a
+            class="contactResume"
+            href="./assets/Junru_Resume.pdf"
+            download="Junru_Resume.pdf"
+            aria-label="Download Junru resume"
+          >
+            Click to download my resume
+          </a>
+        </div>
+
+        <figure class="contactArt" aria-hidden="true">
+          <img src="./assets/contact-add-me.png" alt="" />
+        </figure>
+
+        <button
+          class="contactYesHotspot"
+          type="button"
+          aria-label="Show WeChat QR code"
+        ></button>
+
+        <div class="contactPointer" aria-hidden="true">
+          <img src="./assets/contact-finger-pointer.png" alt="" />
+        </div>
+
+        <div class="contactWordmark">
+          <p class="contactWordmarkTitle">JUNRU</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="contactQrLayer" hidden>
+      <button class="contactQrBackdrop" type="button" aria-label="Close QR code"></button>
+      <div class="contactQrCard" role="dialog" aria-modal="true" aria-label="WeChat QR code">
+        <img class="contactQrImage" src="./assets/wechat-qr.jpg" alt="WeChat QR code" />
+      </div>
+    </div>
+
+    <script>
+      const body = document.body;
+      const art = document.querySelector(".contactArt");
+      const title = document.querySelector(".contactTitle");
+      const resume = document.querySelector(".contactResume");
+      const wordmark = document.querySelector(".contactWordmarkTitle");
+      const hotspot = document.querySelector(".contactYesHotspot");
+      const pointer = document.querySelector(".contactPointer");
+      const qrLayer = document.querySelector(".contactQrLayer");
+      const qrBackdrop = document.querySelector(".contactQrBackdrop");
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      function lockStyles(element, styles) {
+        if (!element) {
+          return;
+        }
+
+        for (const [property, value] of Object.entries(styles)) {
+          element.style[property] = value;
+        }
+      }
+
+      function settleAnimation(animation, element, styles) {
+        if (!animation) {
+          lockStyles(element, styles);
+          return Promise.resolve();
+        }
+
+        return animation.finished
+          .then(() => {
+            lockStyles(element, styles);
+            animation.cancel();
+          })
+          .catch(() => {
+            lockStyles(element, styles);
+          });
+      }
+
+      function setFinalState() {
+        body.classList.add("is-ready");
+
+        lockStyles(art, {
+          opacity: "1",
+          transform: "translate3d(-50%, 0, 0) scale(1)",
+        });
+
+        lockStyles(title, {
+          opacity: "1",
+          transform: "translate3d(0, 0, 0) scale(1)",
+        });
+
+        lockStyles(wordmark, {
+          opacity: "1",
+          transform: "translate3d(0, 0, 0) scale(1)",
+        });
+
+        lockStyles(resume, {
+          opacity: "1",
+          transform: "translate3d(0.4rem, 0, 0)",
+        });
+      }
+
+      function revealPointer() {
+        if (!pointer) {
+          return;
+        }
+
+        pointer.classList.add("is-visible");
+      }
+
+      function openQr() {
+        if (!qrLayer) {
+          return;
+        }
+
+        qrLayer.hidden = false;
+        window.requestAnimationFrame(() => {
+          qrLayer.classList.add("is-open");
+        });
+      }
+
+      function closeQr() {
+        if (!qrLayer) {
+          return;
+        }
+
+        qrLayer.classList.remove("is-open");
+
+        window.setTimeout(() => {
+          if (!qrLayer.classList.contains("is-open")) {
+            qrLayer.hidden = true;
+          }
+        }, 220);
+      }
+
+      function playIntro() {
+        if (!art || !title || !resume || !wordmark) {
+          setFinalState();
+          return;
+        }
+
+        if (reduceMotion || !art.animate || !title.animate || !resume.animate || !wordmark.animate) {
+          setFinalState();
+          return;
+        }
+
+        body.classList.add("is-ready");
+
+        const flyDistance = Math.max(window.innerWidth * 1.6, 1600);
+        const artIntro = art.animate(
+          [
+            {
+              opacity: 0,
+              transform: "translate3d(-50%, 0.3rem, 0) scale(3)",
+            },
+            {
+              opacity: 1,
+              transform: "translate3d(-50%, 0, 0) scale(1)",
+            },
+          ],
+          {
+            duration: reduceMotion ? 0 : 1000,
+            easing: "linear",
+            fill: "forwards",
+          },
+        );
+
+        const titleIntro = title.animate(
+          [
+            {
+              opacity: 0,
+              transform: `translate3d(-${flyDistance * 1.55}px, 0, 0)`,
+            },
+            {
+              opacity: 1,
+              transform: "translate3d(0, 0, 0) scale(1)",
+            },
+          ],
+          {
+            duration: reduceMotion ? 0 : 1300,
+            easing: "cubic-bezier(0.14, 0.84, 0.18, 1)",
+            fill: "forwards",
+          },
+        );
+
+        const wordmarkIntro = wordmark.animate(
+          [
+            {
+              opacity: 0,
+              transform: `translate3d(${flyDistance * 1.55}px, 0, 0)`,
+            },
+            {
+              opacity: 1,
+              transform: "translate3d(0, 0, 0) scale(1)",
+            },
+          ],
+          {
+            duration: reduceMotion ? 0 : 1300,
+            easing: "cubic-bezier(0.14, 0.84, 0.18, 1)",
+            fill: "forwards",
+          },
+        );
+
+        Promise.all([
+          settleAnimation(artIntro, art, {
+            opacity: "1",
+            transform: "translate3d(-50%, 0, 0) scale(1)",
+          }),
+          settleAnimation(titleIntro, title, {
+            opacity: "1",
+            transform: "translate3d(0, 0, 0) scale(1)",
+          }),
+          settleAnimation(wordmarkIntro, wordmark, {
+            opacity: "1",
+            transform: "translate3d(0, 0, 0) scale(1)",
+          }),
+        ]).then(() => {
+          const resumeIntro = resume.animate(
+            [
+              {
+                opacity: 0,
+                transform: "translate3d(0.4rem, 0, 0)",
+              },
+              {
+                opacity: 1,
+                transform: "translate3d(0.4rem, 0, 0)",
+              },
+            ],
+            {
+              duration: reduceMotion ? 0 : 500,
+              easing: "ease-out",
+              fill: "forwards",
+            },
+          );
+
+          settleAnimation(resumeIntro, resume, {
+            opacity: "1",
+            transform: "translate3d(0.4rem, 0, 0)",
+          }).then(() => {
+            window.setTimeout(() => {
+              revealPointer();
+            }, reduceMotion ? 0 : 500);
+          });
+        });
+      }
+
+      hotspot?.addEventListener("click", openQr);
+      qrBackdrop?.addEventListener("click", closeQr);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeQr();
+        }
+      });
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(playIntro);
+      });
+    </script>
+  </body>
+</html>

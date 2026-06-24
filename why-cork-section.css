@@ -1,0 +1,2097 @@
+.whyCorkPage {
+  --bg: #ffffff;
+  --ink: #121714;
+  --muted: rgba(18, 23, 20, 0.56);
+  --line: rgba(18, 23, 20, 0.1);
+  --line-strong: rgba(18, 23, 20, 0.16);
+  --soft: rgba(18, 23, 20, 0.04);
+  --accent: #4caf50;
+  --screen: #f8faf8;
+  width: 100%;
+  min-height: 100dvh;
+  background: #ffffff;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+.whyCorkPage * {
+  box-sizing: border-box;
+}
+
+      .whyCorkPage {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .whyCorkPage {
+
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-synthesis: none;
+      }
+
+      .whyCorkPage.is-embedded .whyCorkHeader,
+      .whyCorkPage.is-embedded .whyCorkTitle {
+        display: none;
+      }
+
+      .whyCorkHeader {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        pointer-events: none;
+        padding: clamp(0.95rem, 1.7vw, 1.4rem) clamp(0.9rem, 1.3vw, 1.2rem)
+          0 clamp(0.1rem, 0.2vw, 0.25rem);
+        background: #ffffff;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        overflow: visible;
+        padding-bottom: 0.18rem;
+      }
+
+      .whyCorkTitle {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.3rem, 3.9vw, 3.9rem);
+        font-weight: 700;
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+        transform-origin: left top;
+        opacity: 1;
+        transform: scale(var(--why-cork-title-scale, 1));
+        will-change: transform;
+      }
+
+      .whyCorkPage.is-ready .whyCorkTitle {
+        opacity: 1;
+      }
+      .whyCorkPage__inner {
+        width: min(1720px, calc(100vw - 48px));
+        min-height: calc(100dvh - 88px);
+        height: auto;
+        margin: 0 auto;
+        padding: 34px 18px 38px;
+        overflow: visible;
+      }
+
+      .spread {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+        gap: clamp(8px, 0.8vw, 16px);
+        align-items: stretch;
+        min-height: auto;
+        height: auto;
+      }
+
+      .copy {
+        max-width: 25rem;
+        padding-top: 108px;
+        padding-left: 60px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .copy__block {
+        margin: 0;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 1.48;
+        letter-spacing: -0.032em;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 1.78rem;
+        padding: 2px 0 8px;
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+        transition:
+          opacity 620ms cubic-bezier(0.16, 1, 0.3, 1) 120ms,
+          transform 620ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
+        will-change: transform, opacity;
+      }
+
+      .whyCorkPage.is-ready .copy__block {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .copyGroup {
+        display: grid;
+        gap: 0.08rem;
+      }
+
+      .copyGroup p {
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .copyGroup .latin {
+        font-weight: 300;
+        font-style: normal;
+        font-synthesis: none;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+      }
+
+      .sim {
+        display: grid;
+        gap: 14px;
+        grid-template-rows: auto minmax(0, 1fr);
+        min-height: 100%;
+        height: auto;
+        padding-top: clamp(106px, 7vw, 126px);
+        padding-right: 0;
+        margin-left: 0;
+        overflow: visible;
+      }
+
+      .corkAfter {
+        display: block;
+        padding-top: 0;
+        padding-bottom: clamp(80px, 10vw, 140px);
+      }
+
+      .corkAfter__copyCol {
+        padding-left: 60px;
+        margin-top: -82px;
+        padding-bottom: clamp(20px, 2.2vw, 34px);
+      }
+
+      .corkAfter__intro {
+        max-width: 25rem;
+        display: grid;
+        gap: 0.08rem;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 1.48;
+        letter-spacing: -0.032em;
+        font-weight: 300;
+      }
+
+      .corkAfter__intro p,
+      .corkAfter__hit,
+      .corkAfter__ignite {
+        margin: 0;
+      }
+
+      .corkAfter__intro p {
+        font-weight: 300;
+      }
+
+      .corkAfter__intro p:last-child {
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        font-weight: 700;
+        letter-spacing: -0.042em;
+        margin-top: 0.24rem;
+      }
+
+      .corkAfter__body {
+        min-width: 0;
+        margin-top: 0;
+      }
+
+      .corkTreeStrip {
+        display: grid;
+        grid-template-columns: 2.15fr 1.18fr 1fr 1fr;
+        gap: 0;
+        overflow: hidden;
+        background: #0d0d0d;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+      }
+
+      .corkTreeStrip__cell {
+        margin: 0;
+        min-width: 0;
+      }
+
+      .corkTreeStrip__cell img,
+      .corkTreeStrip__cell video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: clamp(280px, 27vw, 480px);
+        object-fit: cover;
+      }
+
+      .corkEssay {
+        padding-top: clamp(28px, 3vw, 44px);
+        padding-left: 0;
+      }
+
+      .corkEssayTop {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.85fr) minmax(420px, 1fr);
+        gap: clamp(30px, 3vw, 64px);
+        row-gap: clamp(16px, 2vw, 28px);
+        align-items: start;
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 60px;
+      }
+
+      .corkAfter__hit {
+        max-width: 28rem;
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        line-height: 1.28;
+        letter-spacing: -0.042em;
+        font-weight: 700;
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .corkReflection__slogan,
+      .corkProductArea__slogan {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: clamp(2.08rem, 3vw, 3.38rem);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        font-weight: 700;
+        white-space: pre-line;
+        color: rgba(18, 23, 20, 0.12);
+      }
+
+      .corkReflection__quote {
+        margin: 0;
+        max-width: 30rem;
+        color: rgba(18, 23, 20, 0.92);
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+        font-size: clamp(1.16rem, 1.12vw, 1.3rem);
+        line-height: 2.02;
+        letter-spacing: -0.04em;
+        font-style: normal;
+        font-weight: 300;
+        justify-self: end;
+        text-align: right;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: start;
+        transform: translateY(-6px);
+      }
+
+      .corkReflection__quoteLine {
+        display: block;
+      }
+
+      .corkReflection {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+        margin-top: 0;
+        padding-left: 60px;
+        transform: translateY(-100px);
+      }
+
+      .corkAfter__ignite {
+        margin-top: clamp(74px, 7vw, 106px);
+        max-width: none;
+        width: fit-content;
+        font-size: clamp(1.36rem, 1.38vw, 1.6rem);
+        line-height: 1.28;
+        letter-spacing: -0.042em;
+        font-weight: 700;
+        padding-left: 60px;
+        white-space: nowrap;
+      }
+
+      .corkProductArea {
+        margin-top: clamp(22px, 2.2vw, 32px);
+        position: relative;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        min-height: clamp(760px, 66vw, 1060px);
+      }
+
+      .corkProductGrid {
+        display: grid;
+        width: 100vw;
+        grid-template-columns: repeat(20, minmax(0, 1fr));
+        grid-auto-rows: clamp(68px, 6.2vw, 108px);
+        gap: 8px;
+      }
+
+      .corkProductCard {
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .corkProductCard img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #f7f3ee;
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .corkProductCard:hover img {
+        transform: scale(1.035);
+      }
+
+      .corkProductCard--1 {
+        grid-column: 1 / span 4;
+        grid-row: 1 / span 4;
+      }
+
+      .corkProductCard--2 {
+        grid-column: 5 / span 3;
+        grid-row: 1 / span 3;
+      }
+
+      .corkProductCard--3 {
+        grid-column: 7 / span 5;
+        grid-row: 1 / span 5;
+      }
+
+      .corkProductCard--4 {
+        grid-column: 12 / span 3;
+        grid-row: 1 / span 2;
+      }
+
+      .corkProductCard--5 {
+        grid-column: 15 / span 5;
+        grid-row: 1 / span 4;
+      }
+
+      .corkProductCard--6 {
+        grid-column: 1 / span 5;
+        grid-row: 5 / span 4;
+      }
+
+      .corkProductCard--7 {
+        grid-column: 5 / span 3;
+        grid-row: 4 / span 2;
+      }
+
+      .corkProductCard--8 {
+        grid-column: 12 / span 3;
+        grid-row: 3 / span 3;
+      }
+      .corkProductCard--9 {
+        grid-column: 16 / span 4;
+        grid-row: 5 / span 3;
+      }
+
+      .corkProductCard--9 img {
+        transform: translateY(-42px) scale(0.85);
+        transform-origin: center center;
+      }
+
+      .corkProductCard--7:hover img {
+        transform: scale(0.735);
+      }
+
+      .corkProductCard--9:hover img {
+        transform: translateY(-42px) scale(0.88);
+      }
+
+      .corkProductCard--10 {
+        grid-column: 5 / span 3;
+        grid-row: 8 / span 3;
+      }
+
+      .corkProductCard--7 img {
+        transform: scale(0.7);
+        transform-origin: center center;
+      }
+
+      .corkProductArea__slogan {
+        position: absolute;
+        right: max(112px, calc((100vw - 1720px) / 2 + 112px));
+        bottom: clamp(136px, 9.2vw, 204px);
+        text-align: right;
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.02em;
+      }
+
+      .corkProductArea__slogan span {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .sim__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 4px 2px 0;
+        color: var(--muted);
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .stackStage {
+        --stack-gap: clamp(18px, 1.2vw, 26px);
+        --stack-offset-a: 0px;
+        --stack-offset-b: 0px;
+        --stack-offset-c: 0px;
+        --card-shell-ratio: 356 / 648;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+        gap: var(--stack-gap);
+        min-height: clamp(860px, 58vw, 1020px);
+        padding: 0;
+        overflow: visible;
+      }
+
+      .screenCard {
+        --card-offset-y: 0px;
+        --card-enter-y: 28px;
+        position: relative;
+        width: 100%;
+        height: auto;
+        aspect-ratio: var(--card-shell-ratio);
+        justify-self: stretch;
+        align-self: start;
+        transform-origin: center top;
+        opacity: 0;
+        transform: translate3d(0, calc(var(--card-offset-y) + var(--card-enter-y)), 0)
+          scale(var(--card-scale, 1));
+        overflow: hidden;
+        border: 0;
+        border-radius: 26px;
+        background: #f6f8f5;
+        box-shadow: 0 18px 42px rgba(18, 23, 20, 0.08);
+        transition:
+          transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          filter 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+        cursor: pointer;
+        user-select: none;
+        will-change: transform, opacity, filter, box-shadow;
+      }
+
+      .whyCorkPage.is-ready .screenCard {
+        --card-enter-y: 0px;
+        opacity: 1;
+      }
+
+      .whyCorkPage.is-ready .screenCard:nth-of-type(1) {
+        transition-delay: 120ms;
+      }
+
+      .whyCorkPage.is-ready .screenCard:nth-of-type(2) {
+        transition-delay: 200ms;
+      }
+
+      .whyCorkPage.is-ready .screenCard:nth-of-type(3) {
+        transition-delay: 280ms;
+      }
+
+      .screenCard::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        border: 1.5px solid rgba(18, 23, 20, 0.18);
+        pointer-events: none;
+      }
+
+      .screenCard[data-screen="index"] {
+        background: #f5f7f4;
+        overflow: visible;
+      }
+
+      .screenCard[data-screen="add"] {
+        background: #f5f7f4;
+        overflow: visible;
+        border-radius: 26px;
+      }
+
+      .screenCard[data-screen="todo"] {
+        background: #f5f7f4;
+      }
+
+      .screenCard.slot-a {
+        grid-column: 1;
+        margin-top: var(--stack-offset-a);
+        z-index: 3;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.slot-b {
+        grid-column: 2;
+        margin-top: var(--stack-offset-b);
+        z-index: 2;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.slot-c {
+        grid-column: 3;
+        margin-top: var(--stack-offset-c);
+        z-index: 1;
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .screenCard.is-passive {
+        opacity: 0.9;
+        filter: saturate(0.9) brightness(0.985) contrast(0.98);
+        box-shadow: 0 14px 30px rgba(18, 23, 20, 0.06);
+      }
+
+      .screenCard.is-active {
+        opacity: 1;
+        filter: saturate(1.02) brightness(1.01) contrast(1);
+        box-shadow: 0 26px 58px rgba(18, 23, 20, 0.13);
+      }
+
+      .screenCard.is-large {
+        --card-scale: 1.09;
+        --card-offset-y: -8px;
+        z-index: 4;
+      }
+
+      .screenCard.is-medium {
+        --card-scale: 0.96;
+        --card-offset-y: 4px;
+        z-index: 3;
+      }
+
+      .screenCard.is-small {
+        --card-scale: 0.96;
+        --card-offset-y: 4px;
+        z-index: 2;
+      }
+
+      .guideCue {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        z-index: 8;
+        pointer-events: none;
+        opacity: 0;
+        border-radius: 0;
+        background: #2f80ff;
+        box-shadow: 0 8px 22px rgba(47, 128, 255, 0.24);
+        transition: opacity 180ms ease;
+      }
+
+      .handHint {
+        left: 10%;
+        top: 46.6%;
+        transform: translate3d(-50%, -50%, 0);
+      }
+
+      .indexCueLabel {
+        position: absolute;
+        left: 4%;
+        top: -26px;
+        margin: 0;
+        color: #4caf50;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+
+      .handHint.is-visible {
+        opacity: 1;
+        animation: cueSpin 1.2s linear infinite;
+      }
+
+      .scrollHint {
+        left: 50%;
+        bottom: -62px;
+        transform: translate3d(-50%, 0, 0);
+        transform-origin: center center;
+      }
+
+      .scrollHint.is-visible {
+        opacity: 1;
+        animation: cueScroll 1.15s ease-in-out infinite;
+      }
+
+      .weekHint {
+        left: 23.5%;
+        top: 21.4%;
+        transform: translate3d(-50%, -50%, 0);
+        transform-origin: center center;
+      }
+
+      .weekHint.is-visible {
+        opacity: 1;
+        animation: cueSpin 1.05s linear infinite;
+      }
+
+      @keyframes cueSpin {
+        0%,
+        100% {
+          opacity: 1;
+          transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translate3d(-50%, -50%, 0) rotate(180deg) scale(0.95);
+        }
+      }
+
+      @keyframes cueScroll {
+        0%,
+        100% {
+          opacity: 1;
+          transform: translate3d(-50%, 0, 0) rotate(0deg) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translate3d(-50%, 34px, 0) rotate(180deg) scale(0.95);
+        }
+      }
+
+      .phoneShell {
+        position: relative;
+        height: 100%;
+        padding: 0;
+        background: transparent;
+        border-radius: inherit;
+      }
+
+      .phoneStatus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        padding: 18px 20px 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .phoneStatus__signal,
+      .phoneStatus__battery {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .phoneSignalBars {
+        display: inline-grid;
+        grid-auto-flow: column;
+        gap: 2px;
+        align-items: end;
+        height: 10px;
+      }
+
+      .phoneSignalBars span {
+        display: block;
+        width: 2px;
+        background: currentColor;
+        border-radius: 99px;
+      }
+
+      .phoneSignalBars span:nth-child(1) {
+        height: 4px;
+      }
+
+      .phoneSignalBars span:nth-child(2) {
+        height: 6px;
+      }
+
+      .phoneSignalBars span:nth-child(3) {
+        height: 8px;
+      }
+
+      .phoneSignalBars span:nth-child(4) {
+        height: 10px;
+      }
+
+      .phoneBattery {
+        position: relative;
+        width: 18px;
+        height: 9px;
+        border: 1px solid currentColor;
+        border-radius: 2px;
+      }
+
+      .phoneBattery::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        right: -3px;
+        width: 2px;
+        height: 4px;
+        border-radius: 0 1px 1px 0;
+        background: currentColor;
+      }
+
+      .phoneBattery__fill {
+        position: absolute;
+        inset: 1px;
+        width: 68%;
+        border-radius: 1px;
+        background: currentColor;
+      }
+
+      .shotFill {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+
+      .shotWrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #f7f8f5;
+      }
+
+      .hotspot {
+        position: absolute;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .hotspotButton {
+        display: block;
+        appearance: none;
+        padding: 0;
+        z-index: 2;
+      }
+
+      .hotspot--todo-month {
+        left: 12px;
+        top: 147px;
+        width: 110px;
+        height: 34px;
+        border-radius: 999px;
+      }
+
+      .hotspot--todo-week {
+        left: 124px;
+        top: 147px;
+        width: 96px;
+        height: 34px;
+        border-radius: 999px;
+      }
+
+      .hotspot--manyue {
+        left: 3.2%;
+        top: 28.9%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--meidao {
+        left: 3.2%;
+        top: 40%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--zise {
+        left: 3.2%;
+        top: 51.1%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--zhusha {
+        left: 3.2%;
+        top: 62.3%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--hunsha {
+        left: 3.2%;
+        top: 73.4%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--banyin {
+        left: 3.2%;
+        top: 84.5%;
+        width: 93.2%;
+        height: 6.8%;
+      }
+
+      .hotspot--yindou {
+        left: 3.2%;
+        top: 95.6%;
+        width: 93.2%;
+        height: 4.2%;
+      }
+
+      .todoReplica {
+        height: 100%;
+        background: #f5f7f4;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .todoReplica .miniTopbar {
+        height: 96px;
+        flex: 0 0 auto;
+      }
+
+      .todoReplicaBody {
+        flex: 1;
+        padding: 20px 14px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        overscroll-behavior: contain;
+        padding-bottom: 88px;
+      }
+
+      .todoReplicaBody::-webkit-scrollbar {
+        display: none;
+      }
+
+      .todoReplicaTitle {
+        margin: 0;
+        color: #26384a;
+        font-size: 1.08rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .todoReplicaControls {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .todoReplicaPillGroup {
+        display: inline-flex;
+        background: #e7ece7;
+        border-radius: 999px;
+        padding: 3px;
+      }
+
+      .todoReplicaPill {
+        border: 0;
+        background: transparent;
+        color: #98a29a;
+        border-radius: 999px;
+        padding: 7px 14px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .todoReplicaPill.is-active {
+        background: #ffffff;
+        color: #35b756;
+      }
+
+      .todoReplicaTemp {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #ffffff;
+      }
+
+      .todoReplicaTemp__label,
+      .todoReplicaTemp__unit {
+        color: #9aa39d;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTemp__value {
+        min-width: 26px;
+        text-align: center;
+        color: #35b756;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaConfirm {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        border: 0;
+        background: #35b756;
+        color: #fff;
+        font-size: 0.84rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .todoReplicaNav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        color: #35b756;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 2px 2px 0;
+      }
+
+      .todoReplicaNav__button {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+        justify-self: start;
+      }
+
+      .todoReplicaNav__button:last-child {
+        justify-self: end;
+      }
+
+      .todoReplicaNav__label {
+        color: #111;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .todoReplicaMonthCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 10px 10px 12px;
+      }
+
+      .todoReplicaWeekHead {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        color: #c6cbc7;
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+      }
+
+      .todoReplicaMonthGrid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+      }
+
+      .todoReplicaDay {
+        min-height: 54px;
+        border: 0;
+        background: transparent;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        cursor: pointer;
+      }
+
+      .todoReplicaDay.is-active {
+        background: #eef8f0;
+      }
+
+      .todoReplicaDay__num {
+        color: #111;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaDay.is-active .todoReplicaDay__num {
+        color: #35b756;
+      }
+
+      .todoReplicaDay__icons {
+        color: #2bb6ff;
+        font-size: 0.78rem;
+        line-height: 1;
+      }
+
+      .todoReplicaWeekCard {
+        background: #fff;
+        border-radius: 0;
+        overflow: hidden;
+        display: none;
+      }
+
+      .todoReplicaWeekCard.is-visible,
+      .todoReplicaMonthCard.is-visible {
+        display: block;
+      }
+
+      .todoReplicaWeekScroller {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .todoReplicaWeekRow {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 12px;
+        padding: 12px 10px 12px 14px;
+        border-bottom: 1px solid #f1f3f1;
+      }
+
+      .todoReplicaWeekRow.is-active {
+        background: #f6fcf8;
+        border-left: 6px solid #33c766;
+        padding-left: 8px;
+      }
+
+      .todoReplicaWeekMeta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .todoReplicaWeekMeta small {
+        color: #c2c7c2;
+        font-size: 0.68rem;
+      }
+
+      .todoReplicaWeekMeta strong {
+        color: #111;
+        font-size: 1rem;
+      }
+
+      .todoReplicaWeekTags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+        align-content: center;
+      }
+
+      .todoReplicaWeekTag {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid #edf0ed;
+        background: #fff;
+        color: #1f2421;
+        font-size: 0.72rem;
+        white-space: nowrap;
+        line-height: 1;
+      }
+
+      .todoReplicaSectionHead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .todoReplicaSectionTitle {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+
+      .todoReplicaSectionTitle strong {
+        color: #111;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .todoReplicaSectionTitle span {
+        color: #c6cbc7;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow: visible;
+        padding-bottom: 58px;
+      }
+
+      .todoReplicaTaskCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 14px 14px 16px;
+      }
+
+      .todoReplicaTaskHead {
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .todoReplicaAvatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        object-fit: cover;
+        background: var(--avatar-bg, #e7ece7);
+        display: grid;
+        place-items: center;
+        color: var(--avatar-fg, #4c5b4f);
+        font-size: 0.9rem;
+        font-weight: 700;
+        overflow: hidden;
+      }
+
+      .todoReplicaPlantName {
+        color: #26384a;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaArrow {
+        color: #d6d9d6;
+        font-size: 1.1rem;
+      }
+
+      .todoReplicaTaskRow {
+        display: grid;
+        grid-template-columns: 54px 1fr 54px;
+        align-items: center;
+        gap: 8px;
+        min-height: 74px;
+        background: #f8f9f6;
+        padding: 0 10px;
+      }
+
+      .todoReplicaCheck {
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        border: 2px solid #d7dad7;
+        background: #fff;
+        color: transparent;
+        font-size: 1.05rem;
+        line-height: 1;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      }
+
+      .todoReplicaCheck.is-done {
+        background: #93e3b0;
+        border-color: #93e3b0;
+        color: #fff;
+      }
+
+      .todoReplicaTaskInfo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #2b4763;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskInfo.is-done {
+        color: #d4d7d4;
+      }
+
+      .todoReplicaDate {
+        width: 40px;
+        height: 40px;
+        justify-self: end;
+        border-radius: 10px;
+        background: #f4e6e6;
+        color: #ffffff;
+        display: grid;
+        grid-template-rows: 12px 1fr;
+        overflow: hidden;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+      }
+
+      .todoReplicaDate__month {
+        display: grid;
+        place-items: center;
+        background: #e7c8c8;
+        font-size: 0.42rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .todoReplicaDate__day {
+        display: grid;
+        place-items: center;
+        color: #ead4d4;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskTypeCard {
+        background: #fff;
+        border-radius: 22px;
+        padding: 16px 14px;
+      }
+
+      .todoReplicaTaskTypeHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .todoReplicaTaskTypeLabel {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #26384a;
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      .todoReplicaTaskTypeIcon {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: #eef8f0;
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+      }
+
+      .todoReplicaTaskTypeMeta {
+        color: #9ea49f;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskTypeBody {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .todoReplicaTaskChip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f8f9f6;
+        color: #33485c;
+        font-size: 0.72rem;
+      }
+
+      .todoReplicaTaskChip__drop {
+        color: #36b7ff;
+      }
+
+      .todoReplicaTaskEmpty {
+        color: #c3c8c3;
+        font-size: 0.78rem;
+        padding: 18px 4px 0;
+      }
+
+      .archiveReplica {
+        height: 100%;
+        background: #f7f8f5;
+        overflow: hidden;
+        border-radius: inherit;
+      }
+
+      .indexShotMap {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .archiveScroll {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: inherit;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(24, 32, 24, 0.18) transparent;
+      }
+
+      .archiveScroll::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .archiveScroll::-webkit-scrollbar-thumb {
+        background: rgba(24, 32, 24, 0.18);
+        border-radius: 999px;
+      }
+
+      .archiveImage {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .homeReplica {
+        height: 100%;
+        background: #f6f8f6;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .homeReplicaBody {
+        flex: 1;
+        padding: 18px 14px 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .homeReplicaHeader {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .homeReplicaTitleWrap {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .homeReplicaTitle {
+        margin: 0;
+        color: #283a29;
+        font-size: 1.28rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .homeReplicaCount {
+        color: #97a395;
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      .homeReplicaAdmin {
+        border: 1px solid #d7ead7;
+        border-radius: 999px;
+        background: #eef8ef;
+        color: #3ca855;
+        font-size: 0.76rem;
+        font-weight: 700;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+
+      .homeReplicaSearch {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 42px;
+        background: #fff;
+        border-radius: 999px;
+        padding: 0 14px;
+        color: #b3b8b1;
+        font-size: 0.82rem;
+        margin-bottom: 16px;
+      }
+
+      .homeReplicaList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .homeReplicaRow {
+        width: 100%;
+        border: 0;
+        background: #fff;
+        border-radius: 18px;
+        min-height: 78px;
+        padding: 0 14px 0 12px;
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+        cursor: pointer;
+        box-shadow: inset -2px 0 0 #57bb5e;
+      }
+
+      .homeReplicaThumb {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #edf1ec;
+      }
+
+      .homeReplicaThumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .homeReplicaName {
+        color: #283a4b;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .homeReplicaChevron {
+        color: #d4d7d4;
+        font-size: 1rem;
+      }
+
+      .homeReplicaFloat {
+        position: absolute;
+        right: 18px;
+        bottom: 56px;
+        border: 0;
+        border-radius: 999px;
+        background: #54b853;
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 13px 18px;
+        pointer-events: none;
+      }
+
+      .miniTopbar {
+        height: 94px;
+        background: #4caf50;
+        border-radius: 24px 24px 0 0;
+        position: relative;
+      }
+
+      .miniTopbar__title {
+        position: absolute;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        margin: 0;
+        color: #f6fff2;
+        font-size: 0.94rem;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
+
+      .miniTopbar__back {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        color: #f6fff2;
+        font-size: 1.3rem;
+        line-height: 1;
+      }
+
+      .miniTopbar__capsule {
+        position: absolute;
+        right: 16px;
+        bottom: 14px;
+        width: 74px;
+        height: 34px;
+        border-radius: 999px;
+        background: rgba(44, 136, 47, 0.72);
+      }
+
+      .miniTopbar__capsule::before,
+      .miniTopbar__capsule::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .miniTopbar__capsule::before {
+        left: 18px;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #f4fff0;
+        box-shadow: 10px 0 0 #f4fff0;
+      }
+
+      .miniTopbar__capsule::after {
+        right: 14px;
+        width: 14px;
+        height: 14px;
+        border: 2px solid #f4fff0;
+        border-radius: 999px;
+      }
+
+      .miniBody {
+        height: calc(100% - 94px);
+        padding: 18px 14px 14px;
+        background: #f7f8f5;
+      }
+
+      .indexTop,
+      .addTop,
+      .todoTop {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 2px 8px;
+      }
+
+      .indexTop__title,
+      .addTop__title,
+      .todoTop__title {
+        margin: 0;
+        font-family: "Neue Haas Grotesk Display Pro 55 Roman", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        font-size: 1.32rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        color: #26384a;
+      }
+
+      .indexTop__count,
+      .addTop__count {
+        margin: 0;
+        color: #97a593;
+        font-size: 0.8rem;
+      }
+
+      .phoneSub {
+        margin: 0;
+        color: #46a950;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .searchBar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 42px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: #fff;
+        border: 0;
+      }
+
+      .searchBar__text {
+        font-size: 0.82rem;
+        color: #b0b7ad;
+      }
+
+      .plantCards,
+      .addFields,
+      .todoList {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .plantRow,
+      .addField,
+      .todoItem {
+        background: #fff;
+        border: 1px solid #edf2ed;
+      }
+
+      .plantRow {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        height: 70px;
+        padding: 0 14px 0 12px;
+        border-radius: 18px;
+        box-shadow: inset -2px 0 0 #58bc5f;
+      }
+
+      .plantThumb {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #cfe0cf, #9fb89f);
+      }
+
+      .plantRow__name {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.1;
+        color: #2c3f52;
+        font-weight: 600;
+      }
+
+      .plantRow__arrow {
+        color: #c4cbc4;
+        font-size: 1rem;
+      }
+
+      .indexFloat {
+        position: absolute;
+        right: 16px;
+        bottom: 56px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .photoBox {
+        height: 160px;
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(76, 175, 80, 0.16), rgba(76, 175, 80, 0.04)),
+          linear-gradient(135deg, #dfe9df, #b8d0b8);
+        border: 0;
+      }
+
+      .addField {
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+
+      .addField__label {
+        display: block;
+        margin: 0 0 6px;
+        font-size: 0.72rem;
+        color: #afb5ad;
+      }
+
+      .addField__value {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.34;
+        color: #364758;
+      }
+
+      .addBtn {
+        width: 100%;
+        height: 48px;
+        border-radius: 999px;
+        border: 0;
+        background: #4caf50;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .addCanvas {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .todoControls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .todoToggle {
+        display: inline-flex;
+        padding: 3px;
+        border-radius: 999px;
+        background: #e6ece5;
+      }
+
+      .todoToggle__item {
+        border: 0;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        color: #93a09a;
+        background: transparent;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .todoToggle__item.is-active {
+        background: #fff;
+        color: #36b655;
+        font-weight: 700;
+      }
+
+      .todoTemp {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 7px;
+        border-radius: 999px;
+        background: #fff;
+        border: 0;
+        font-size: 0.74rem;
+        color: #99a7a2;
+      }
+
+      .todoTemp__button {
+        width: 22px;
+        height: 22px;
+        border: 0;
+        border-radius: 999px;
+        background: #eef7ef;
+        color: #36b655;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .todoTemp__value {
+        min-width: 28px;
+        text-align: center;
+        color: #36b655;
+        font-weight: 700;
+      }
+
+      .todoNav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 2px 8px;
+        color: #36b655;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .todoNav__button {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .todoNav__label {
+        margin: 0;
+      }
+
+      .todoCalendar {
+        background: #fff;
+        border-radius: 22px;
+        border: 0;
+        padding: 10px 10px 12px;
+      }
+
+      .todoCalendar__week {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        color: #bdc3c7;
+        font-size: 0.72rem;
+        text-align: center;
+      }
+
+      .todoCalendar__grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 5px;
+        margin-top: 8px;
+      }
+
+      .todoCalendar__day {
+        min-height: 40px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: #ffffff;
+        font-size: 0.84rem;
+        color: #212b24;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .todoCalendar__day.is-active {
+        background: #eef8f0;
+        color: #36b655;
+      }
+
+      .todoCalendar__day.is-done {
+        background: #eef7ef;
+        color: #27ae60;
+      }
+
+      .todoCalendar__weekView {
+        display: none;
+        gap: 8px;
+      }
+
+      .todoCalendar.is-week .todoCalendar__monthView {
+        display: none;
+      }
+
+      .todoCalendar.is-week .todoCalendar__weekView {
+        display: grid;
+      }
+
+      .todoWeekRow {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f2f4f2;
+      }
+
+      .todoWeekRow:last-child {
+        border-bottom: 0;
+      }
+
+      .todoWeekRow__date {
+        color: #6f7d6f;
+        font-size: 0.72rem;
+      }
+
+      .todoWeekRow__preview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .todoWeekTag {
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #f4f7f4;
+        color: #567056;
+        font-size: 0.66rem;
+      }
+
+      .todoList {
+        margin-top: 12px;
+      }
+
+      .todoItem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+
+      .todoItem__name {
+        margin: 0;
+        font-size: 0.96rem;
+        color: #2c3f52;
+        font-weight: 700;
+      }
+
+      .todoItem__meta {
+        margin: 3px 0 0;
+        font-size: 0.72rem;
+        color: #a9b0aa;
+      }
+
+      .todoPill {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #eef7ef;
+        color: #36b655;
+        font-size: 0.7rem;
+        border: 0;
+      }
+
+      .todoPill--done {
+        background: #36b655;
+        color: #fff;
+      }
+
+      .miniTabs {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 54px;
+        background: rgba(255, 255, 255, 0.96);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        padding: 0 24px;
+        color: #b6b9b3;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+
+      .miniTabs span.is-active {
+        color: #4caf50;
+        font-weight: 600;
+      }
+
+      @media (max-width: 1160px) {
+        .spread {
+          grid-template-columns: 1fr;
+        }
+
+        .corkAfter {
+          display: block;
+        }
+
+        .copy {
+          max-width: 42rem;
+        }
+
+        .corkAfter__copyCol {
+          padding-left: 60px;
+        }
+
+        .sim {
+          margin-left: 0;
+        }
+
+        .stackStage {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+          min-height: auto;
+        }
+
+        .screenCard.slot-a,
+        .screenCard.slot-b,
+        .screenCard.slot-c {
+          grid-column: auto;
+          width: min(100%, 430px);
+          margin-top: 0;
+          justify-self: center;
+        }
+
+        .screenCard.is-large,
+        .screenCard.is-medium,
+        .screenCard.is-small {
+          --card-scale: 1;
+          z-index: auto;
+        }
+
+        .corkEssayTop {
+          grid-template-columns: 1fr;
+        }
+
+        .corkAfter__hit,
+        .corkReflection,
+        .corkReflection__quote {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        .corkReflection__quote {
+          justify-self: start;
+          text-align: left;
+        }
+
+        .corkProductArea__slogan {
+          position: static;
+          text-align: left;
+          width: auto;
+          margin-right: 0;
+          margin-top: 16px;
+        }
+      }
+
+      @media (max-width: 720px) {
+      .whyCorkPage__inner {
+          width: min(100vw, calc(100vw - 28px));
+          min-height: calc(100dvh - 28px);
+          height: auto;
+          padding: 16px 10px 16px;
+        }
+
+        .whyCorkHeader {
+          padding: clamp(0.95rem, 1.7vw, 1.2rem) clamp(0.8rem, 1.2vw, 1rem)
+            0 0.1rem;
+        }
+
+        .whyCorkTitle {
+          font-size: clamp(1.95rem, 8vw, 2.6rem);
+        }
+
+        .copy__block {
+          font-size: 1.04rem;
+          line-height: 1.28;
+          gap: 1.4rem;
+        }
+
+        .corkAfter__copyCol {
+          padding-left: 0;
+        }
+
+        .corkAfter__intro,
+        .corkAfter__hit,
+        .corkAfter__ignite {
+          max-width: none;
+          font-size: 1.04rem;
+          line-height: 1.34;
+        }
+
+        .corkAfter__intro p:last-child {
+          font-size: 1.28rem;
+        }
+
+        .corkTreeStrip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-left: calc(50% - 50vw);
+          margin-right: calc(50% - 50vw);
+        }
+
+        .corkTreeStrip__cell img {
+          min-height: 200px;
+        }
+
+        .corkReflection__slogan,
+        .corkProductArea__slogan {
+          font-size: clamp(1.72rem, 9vw, 2.6rem);
+        }
+
+        .corkProductArea {
+          margin-left: calc(50% - 50vw);
+          margin-right: calc(50% - 50vw);
+        }
+
+        .corkProductArea {
+          width: 100%;
+        }
+
+        .corkProductGrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-auto-rows: 180px;
+          gap: 8px;
+        }
+
+        .corkProductCard {
+          grid-column: auto !important;
+          grid-row: auto !important;
+        }
+
+        .stackStage {
+          gap: 16px;
+        }
+
+        .screenCard.slot-a,
+        .screenCard.slot-b,
+        .screenCard.slot-c {
+          width: min(100%, 100%);
+        }
+
+        .screenCard.is-large,
+        .screenCard.is-medium,
+        .screenCard.is-small {
+          --card-scale: 1;
+          z-index: auto;
+        }
+      }

@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Career Moody</title>
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://db.onlinewebfonts.com/c/6e47ef470dd19698c911332a9b4d1cf4?family=Neue+Haas+Grotesk+Text+Pro"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #141414;
+        --muted: rgba(20, 20, 20, 0.62);
+        --line: rgba(20, 20, 20, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        width: min(1440px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 28px 0 80px;
+        display: grid;
+        gap: 72px;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 62vh;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+        gap: clamp(2.2rem, 3.1vw, 3.2rem);
+        padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.8rem, 2.5vw, 2.4rem)
+          clamp(1.4rem, 2vw, 1.8rem) clamp(2.6rem, 3.2vw, 3.4rem);
+        box-sizing: border-box;
+      }
+
+      .moody__back {
+        position: absolute;
+        top: clamp(1.25rem, 2vw, 1.8rem);
+        left: clamp(1.4rem, 2.1vw, 2rem);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(2.7rem, 3.2vw, 3.4rem);
+        height: clamp(2.7rem, 3.2vw, 3.4rem);
+        color: rgba(18, 23, 20, 0.42);
+        text-decoration: none;
+        z-index: 3;
+        opacity: 0;
+        transform: translateX(0.5rem);
+        animation: none;
+        transition:
+          opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .moody__back:focus-visible {
+        outline: 1px solid rgba(18, 23, 20, 0.28);
+        outline-offset: 0.18rem;
+      }
+
+      .moody__backIcon {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform: rotate(90deg);
+        fill: currentColor;
+      }
+
+      .moody__intro {
+        align-self: center;
+        justify-self: start;
+        width: min(100%, 46rem);
+        margin-left: clamp(4.3rem, 5vw, 5.8rem);
+        margin-top: clamp(3.4rem, 4.4vw, 4.6rem);
+        color: #121714;
+        transform: translateY(-0.4rem);
+      }
+
+      .moody__copy {
+        display: grid;
+        gap: clamp(3.2rem, 3.9vw, 4.4rem);
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+          "Hiragino Sans GB", sans-serif;
+        font-size: clamp(1.28rem, 1.56vw, 1.56rem);
+        font-weight: 300;
+        line-height: 1.26;
+        letter-spacing: -0.042em;
+        font-synthesis: none;
+      }
+
+      .moody__copy p {
+        margin: 0;
+      }
+
+      .moody__copyBlock {
+        --copy-delay-base: 0ms;
+        display: grid;
+        gap: 0.26rem;
+      }
+
+      .moody__copyBlock--lead {
+        width: min(100%, 36rem);
+      }
+
+      .moody__copyBlock--body {
+        width: min(100%, 44rem);
+      }
+
+      .moody__copyLine {
+        display: block;
+        opacity: 0;
+        transform: translateY(1.2rem);
+        filter: blur(8px);
+        text-wrap: balance;
+        transition:
+          opacity 980ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 980ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 980ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: calc(
+          var(--copy-delay-base, 0ms) + (var(--line-index, 0) * 140ms)
+        );
+      }
+
+      .moody__copyLine--accent {
+        font-size: 1.2em;
+        font-weight: 500;
+        line-height: 1.18;
+      }
+
+      .moody__copyLine--nowrap {
+        white-space: nowrap;
+      }
+
+      .moody__brand {
+        align-self: start;
+        justify-self: end;
+        margin: clamp(4.8rem, 5.8vw, 5.9rem) clamp(-0.8rem, 0.2vw, -0.2rem) 0 0;
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica,
+          Arial, sans-serif;
+        font-size: clamp(2.28rem, 3.45vw, 2.8rem);
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        color: #121714;
+        opacity: 0;
+        transform: translateY(1.8rem);
+        transition:
+          opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .story {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .storyScene {
+        position: relative;
+        height: 150vh;
+        background: #ffffff;
+      }
+
+      .storyScene + .storyScene {
+        border-top: 1px solid rgba(20, 20, 20, 0.08);
+      }
+
+      .storyScene__pin {
+        --scene-pad: clamp(1.6rem, 3.2vh, 2.4rem);
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: grid;
+        align-items: start;
+        padding-top: var(--scene-pad);
+        padding-bottom: var(--scene-pad);
+        overflow: hidden;
+      }
+
+      .storyScene__shell {
+        width: min(1640px, calc(100vw - 52px));
+        margin: 0 auto;
+        display: grid;
+        align-items: stretch;
+        gap: clamp(2.4rem, 4vw, 5.4rem);
+        min-height: calc(100vh - (var(--scene-pad) * 2));
+      }
+
+      .storyScene--right .storyScene__shell {
+        grid-template-columns: minmax(0, 1fr) clamp(360px, 25vw, 470px);
+      }
+
+      .storyScene--left .storyScene__shell {
+        grid-template-columns: clamp(360px, 25vw, 470px) minmax(0, 1fr);
+      }
+
+      .storyScene__meta {
+        display: grid;
+        gap: 1.3rem;
+        align-content: stretch;
+        grid-template-rows: auto 1fr;
+        height: 100%;
+      }
+
+      .storyScene--right .storyScene__meta {
+        justify-self: start;
+        padding-left: clamp(0.4rem, 1vw, 1rem);
+      }
+
+      .storyScene--left .storyScene__meta {
+        justify-self: end;
+        padding-right: clamp(0.4rem, 1vw, 1rem);
+      }
+
+      .storyScene__logo {
+        display: block;
+        width: clamp(170px, 12.8vw, 218px);
+        height: auto;
+        align-self: start;
+      }
+
+      .storyScene__logo--small {
+        width: clamp(122px, 9vw, 150px);
+      }
+
+      .storyScene__logo--medium {
+        width: clamp(132px, 9.6vw, 162px);
+      }
+
+      .storyScene__copy {
+        display: grid;
+        gap: 0.12rem;
+        max-width: 28rem;
+        font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica,
+          Arial, sans-serif;
+        font-size: clamp(1rem, 1.02vw, 1.08rem);
+        font-weight: 300;
+        line-height: 1.42;
+        letter-spacing: -0.03em;
+        text-align: right;
+        justify-items: end;
+        text-wrap: pretty;
+        align-self: end;
+      }
+
+      .storyScene__copy p {
+        margin: 0;
+      }
+
+      .storyScene__lane {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: grid;
+        align-items: center;
+      }
+
+      .storyScene__stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: clamp(380px, 54vh, 620px);
+      }
+
+      .storyScene__slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: translate3d(0, 2rem, 0) scale(0.985);
+        transition:
+          opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+      }
+
+      .storyScene__slide.is-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      .storyScene__card {
+        position: relative;
+        position: absolute;
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+        box-shadow: 0 24px 50px rgba(15, 15, 15, 0.08);
+      }
+
+      .storyScene__card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .storyScene__slide--a .storyScene__card--primary {
+        left: 0;
+        top: 7%;
+        width: 62%;
+        height: 78%;
+      }
+
+      .storyScene__slide--a .storyScene__card--secondary {
+        right: 1%;
+        top: 0;
+        width: 30%;
+        height: 47%;
+      }
+
+      .storyScene__slide--a .storyScene__card--tertiary {
+        right: 4%;
+        bottom: 3%;
+        width: 24%;
+        height: 33%;
+      }
+
+      .storyScene__slide--b .storyScene__card--primary {
+        left: 4%;
+        top: 2%;
+        width: 34%;
+        height: 52%;
+      }
+
+      .storyScene__slide--b .storyScene__card--secondary {
+        left: 29%;
+        bottom: 0;
+        width: 40%;
+        height: 72%;
+      }
+
+      .storyScene__slide--b .storyScene__card--tertiary {
+        right: 0;
+        top: 10%;
+        width: 29%;
+        height: 44%;
+      }
+
+      .storyScene__slide--c .storyScene__card--primary {
+        left: 0;
+        top: 4%;
+        width: 38%;
+        height: 54%;
+      }
+
+      .storyScene__slide--c .storyScene__card--secondary {
+        left: 24%;
+        top: 18%;
+        width: 34%;
+        height: 66%;
+      }
+
+      .storyScene__slide--c .storyScene__card--tertiary {
+        right: 0;
+        top: 0;
+        width: 38%;
+        height: 82%;
+      }
+
+      .archive {
+        display: grid;
+        gap: 0;
+        padding: 0;
+      }
+
+      .moodyFooterNav {
+        position: relative;
+        min-height: clamp(3.9rem, 5.4vw, 4.6rem);
+      }
+
+      .moody__back--footer {
+        top: clamp(0.35rem, 0.8vw, 0.55rem);
+        left: clamp(1.4rem, 2.1vw, 2rem);
+        opacity: 1;
+        transform: translateX(0);
+        animation: none;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: minmax(240px, 0.9fr) minmax(0, 2fr);
+        gap: 42px;
+        align-items: start;
+        padding: 28px clamp(1.2rem, 1.6vw, 1.6rem) 48px
+          clamp(1.7rem, 2.1vw, 2rem);
+        border-bottom: 1px solid var(--line);
+        transition: background 220ms ease, color 220ms ease;
+      }
+
+      .row:hover {
+        background: #515151;
+      }
+
+      .rowTitle {
+        margin: 0;
+        font-size: clamp(22px, 2vw, 34px);
+        font-weight: 300;
+        line-height: 1.14;
+        letter-spacing: -0.045em;
+        text-align: left;
+        transform: translateX(-0.5rem);
+        transition: color 220ms ease;
+      }
+
+      .row:hover .rowTitle {
+        color: #f8f6f1;
+      }
+
+      .thumbs {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 6px;
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      .rowMedia {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 34px;
+        transform: translateX(0.7rem);
+      }
+
+      .thumb {
+        margin: 0;
+        width: 156px;
+        min-width: 156px;
+        border-radius: 14px;
+        overflow: hidden;
+        cursor: zoom-in;
+      }
+
+      .thumb img {
+        width: 100%;
+        height: 228px;
+        display: block;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .thumb.more {
+        width: 156px;
+        min-width: 156px;
+        height: 228px;
+        display: grid;
+        place-items: center;
+        color: rgba(20, 20, 20, 0.48);
+        font-size: 14px;
+        letter-spacing: 0.03em;
+        background: #ece6da;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.82);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 36px;
+        z-index: 40;
+      }
+
+      .lightbox.is-open {
+        display: flex;
+      }
+
+      .lightbox img {
+        max-width: min(1100px, 88vw);
+        max-height: 84vh;
+        display: block;
+        border-radius: 16px;
+        background: white;
+      }
+
+      .lightboxClose {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        border: 0;
+        background: transparent;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      @keyframes moody-back-flicker {
+        0%,
+        100% {
+          transform: translateX(0);
+          opacity: 0.78;
+        }
+
+        50% {
+          transform: translateX(-0.3rem) scale(1.02);
+          opacity: 1;
+        }
+      }
+
+      .moody-ready .moody__back {
+        opacity: 1;
+        transform: translateX(0);
+        animation: moody-back-flicker 1.6s ease-in-out 0.65s infinite;
+      }
+
+      .moody-ready .moody__brand,
+      .moody-ready .moody__copyLine {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+
+      .scene {
+        min-height: clamp(420px, 56vh, 620px);
+        border-top: 1px solid var(--line);
+        display: grid;
+        align-items: center;
+        padding: 4px 0;
+      }
+
+      .story > .scene:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .scene__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: clamp(0.85rem, 1.2vw, 1.35rem);
+        align-items: stretch;
+      }
+
+      .scene > .scene__grid > .gallery {
+        order: 1;
+      }
+
+      .scene > .scene__grid > .meta {
+        order: 2;
+      }
+
+      .scene--left-meta .scene__grid {
+        grid-template-columns: 360px minmax(0, 1fr);
+      }
+
+      .scene--left-meta > .scene__grid > .meta {
+        order: 1;
+      }
+
+      .scene--left-meta > .scene__grid > .gallery {
+        order: 2;
+      }
+
+      .gallery {
+        --side-width: clamp(146px, 10.6vw, 180px);
+        --peek-gap: 0px;
+        --image-height: clamp(400px, 48vh, 520px);
+        --main-width: 470px;
+        --side-gap: 118px;
+        position: relative;
+        height: var(--image-height);
+        overflow: hidden;
+      }
+
+      .gallery--narrow {
+        --main-width: 435px;
+        --side-gap: 100px;
+      }
+
+      .gallery--medium {
+        --main-width: 452px;
+        --side-gap: 128px;
+      }
+
+      .gallery--hemu {
+        --landscape-side-offset: 84px;
+      }
+
+      .gallery__state {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        will-change: transform, opacity;
+      }
+
+      .gallery__state.is-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        pointer-events: auto;
+        z-index: 3;
+      }
+
+      .gallery__state.is-entering {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .gallery__state.is-exiting {
+        opacity: 0;
+        transform: translate3d(-0.7rem, 0, 0) scale(1);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .gallery.is-animating .gallery__state {
+        transition:
+          opacity 1500ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1500ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .gallery__main {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: min(var(--main-width), calc(100% - ((var(--side-width) * 2) + (var(--peek-gap) * 2))));
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+      }
+
+      .gallery__mainFrame {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .gallery__mainFrame img {
+        display: block;
+        width: auto;
+        height: 100%;
+        max-width: none;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .gallery--hemu .gallery__mainFrame img.is-landscape {
+        width: auto;
+        height: 100%;
+        max-width: none;
+        max-height: 100%;
+      }
+
+      .gallery--hemu .gallery__state.is-landscape-main-state .gallery__side--left {
+        transform: translateX(calc(var(--landscape-side-offset) * -1));
+      }
+
+      .gallery--hemu .gallery__state.is-landscape-main-state .gallery__side--right {
+        transform: translateX(var(--landscape-side-offset));
+      }
+
+      .gallery__sideInner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+      }
+
+      .gallery__sideFull {
+        display: block;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .gallery__side {
+        position: absolute;
+        top: 0;
+        width: var(--side-width);
+        height: 100%;
+        overflow: visible;
+        z-index: 1;
+        opacity: 0.92;
+      }
+
+      .gallery__side--left {
+        left: calc(50% - (min(var(--main-width), calc(100% - ((var(--side-width) * 2) + (var(--peek-gap) * 2)))) / 2) - var(--side-width) + var(--side-gap));
+      }
+
+      .gallery__side--left .gallery__sideInner {
+        mask-image: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.45) 40%,
+          rgba(0, 0, 0, 0.9) 75%,
+          rgba(0, 0, 0, 1) 100%
+        );
+      }
+
+      .gallery__side--left .gallery__sideFull {
+        transform: translateX(calc(-50% + 14px));
+      }
+
+      .gallery__side--right {
+        left: calc(50% + (min(var(--main-width), calc(100% - ((var(--side-width) * 2) + (var(--peek-gap) * 2)))) / 2) - var(--side-gap));
+        cursor: pointer;
+      }
+
+      .gallery__side--right .gallery__sideInner {
+        mask-image: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 0.9) 28%,
+          rgba(0, 0, 0, 0.45) 62%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+
+      .gallery__side--right .gallery__sideFull {
+        transform: translateX(calc(50% - 14px));
+      }
+
+      .meta {
+        height: var(--image-height);
+        display: grid;
+        grid-template-rows: auto 1fr;
+        align-content: stretch;
+        padding-inline: clamp(10px, 1vw, 16px);
+      }
+
+      .meta--left-top-right-bottom {
+        justify-items: start;
+        padding-left: clamp(20px, 1.9vw, 30px);
+        padding-right: clamp(4px, 0.5vw, 8px);
+      }
+
+      .meta--right {
+        justify-items: end;
+        text-align: right;
+        padding-right: clamp(20px, 1.9vw, 30px);
+        padding-left: clamp(4px, 0.5vw, 8px);
+      }
+
+      .meta--right .meta__logo {
+        justify-self: end;
+      }
+
+      .meta__logo {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .meta__logo--hemu {
+        width: clamp(180px, 16vw, 258px);
+        transform: translateX(44px);
+      }
+
+      .meta__logo--caifeng {
+        width: clamp(116px, 8.2vw, 142px);
+      }
+
+      .meta__logo--zong {
+        width: clamp(93px, 6.6vw, 114px);
+        transform: translateX(22px);
+      }
+
+      .meta__copy {
+        display: grid;
+        gap: 0.08rem;
+        font-size: clamp(1rem, 1.04vw, 1.14rem);
+        line-height: 1.42;
+        letter-spacing: -0.03em;
+        color: var(--muted);
+        align-self: end;
+      }
+
+      .meta__copy p {
+        margin: 0;
+      }
+
+      .meta__copy p.nowrap {
+        white-space: nowrap;
+      }
+
+      .meta__copy strong {
+        font-weight: 300;
+        color: var(--ink);
+      }
+
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: 1fr;
+          min-height: auto;
+          gap: 1.8rem;
+          padding: 4.6rem 1rem 0;
+        }
+
+        .moody__intro {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 0;
+          transform: none;
+        }
+
+        .moody__copyBlock--lead,
+        .moody__copyBlock--body {
+          width: 100%;
+        }
+
+        .moody__brand {
+          justify-self: start;
+          margin: 0;
+        }
+
+        .scene {
+          min-height: auto;
+          padding: 1rem 0 1.6rem;
+        }
+
+        .scene__grid,
+        .scene--left-meta .scene__grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery,
+        .meta {
+          height: auto;
+        }
+
+        .gallery {
+          min-height: 420px;
+        }
+
+        .gallery__state {
+          position: relative;
+          inset: auto;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+        }
+
+        .gallery__state:not(:first-child) {
+          display: none;
+        }
+
+        .gallery__mainFrame {
+          width: 100%;
+          height: 420px;
+        }
+
+        .gallery__side {
+          width: 90px;
+        }
+
+        .meta,
+        .meta--right,
+        .meta--left-top-right-bottom {
+          justify-items: start;
+          text-align: left;
+          gap: 1rem;
+          align-content: start;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .rowTitle,
+        .rowMedia {
+          transform: none;
+        }
+
+        .thumbs {
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .thumb img,
+        .thumb.more,
+        .thumb {
+          width: 136px;
+          min-width: 136px;
+          height: 198px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <a
+          class="moody__back"
+          href="./index.html?returnTo=career-overview#career-overview"
+          aria-label="Back to career overview"
+        >
+          <svg class="moody__backIcon" viewBox="0 0 24 24" role="presentation">
+            <path d="M1 6.5C5.2 8.8 8.2 10.3 12 10.3C15.8 10.3 18.8 8.8 23 6.5C20.4 10.6 17.4 15.7 12 23C6.6 15.7 3.6 10.6 1 6.5Z" />
+          </svg>
+        </a>
+
+        <div class="moody__intro">
+          <div class="moody__copy">
+            <p class="moody__copyBlock moody__copyBlock--lead" style="--copy-delay-base: 180ms">
+              <span class="moody__copyLine" style="--line-index: 0">3年广告传播经验，让我看清了营销的局限</span>
+              <span class="moody__copyLine moody__copyLine--accent moody__copyLine--nowrap" style="--line-index: 1">产品本身，才是用户最直接的品牌体验，是一切的起点</span>
+            </p>
+
+            <p class="moody__copyBlock moody__copyBlock--body" style="--copy-delay-base: 620ms">
+              <span class="moody__copyLine" style="--line-index: 0">于是我回到源头，成为产品经理</span>
+              <span class="moody__copyLine" style="--line-index: 1">2年时间，主导自营创意食品与企业礼盒定制，落地15款产品</span>
+              <span class="moody__copyLine" style="--line-index: 2">跑通从策划、原型、打样、供应链大货到最终销售的产品全链路</span>
+            </p>
+          </div>
+        </div>
+
+        <h1 class="moody__brand">moody</h1>
+      </section>
+
+      <section class="story" id="moody-stage">
+        <section class="scene">
+          <div class="scene__grid">
+            <div class="meta meta--right">
+              <img
+                class="meta__logo meta__logo--hemu"
+                src="./assets/career-moody-stage/hemu/logo-transparent.png"
+                alt="荷月饼 logo"
+              />
+              <div class="meta__copy">
+                <p>蛙声喧夏夜，鱼影动荷塘</p>
+                <p>月染活活色，风拂淡淡香</p>
+                <p>今年的夏季来得晚</p>
+                <p>忽觉花好月圆之时</p>
+                <p>也应有此荷香月色</p>
+                <p>这个中秋</p>
+                <p>想送你一池荷塘</p>
+                <p>一起观月纳凉</p>
+              </div>
+            </div>
+
+            <div
+              class="gallery gallery--hemu"
+              data-carousel
+              data-images="./assets/career-moody-stage/hemu/01.jpg|./assets/career-moody-stage/hemu/02.jpg|./assets/career-moody-stage/hemu/03.jpg|./assets/career-moody-stage/hemu/04.jpg|./assets/career-moody-stage/hemu/05.jpg|./assets/career-moody-stage/hemu/06.jpg"
+              data-landscapes="./assets/career-moody-stage/hemu/03.jpg|./assets/career-moody-stage/hemu/04.jpg|./assets/career-moody-stage/hemu/05.jpg|./assets/career-moody-stage/hemu/06.jpg"
+              aria-label="荷月饼静态构图提案"
+            >
+              <div class="gallery__slide is-active">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/02.jpg"
+                      alt="荷月饼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/hemu/01.jpg"
+                      alt="荷月饼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/03.jpg"
+                      alt="荷月饼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/05.jpg"
+                      alt="荷月饼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/hemu/04.jpg"
+                      alt="荷月饼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/06.jpg"
+                      alt="荷月饼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/03.jpg"
+                      alt="荷月饼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/hemu/06.jpg"
+                      alt="荷月饼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/hemu/01.jpg"
+                      alt="荷月饼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene scene--left-meta">
+          <div class="scene__grid">
+            <div class="meta meta--left-top-right-bottom">
+              <img
+                class="meta__logo meta__logo--caifeng"
+                src="./assets/career-moody-stage/caifenglou/logo-transparent.png"
+                alt="彩丰楼 logo"
+              />
+              <div class="meta__copy meta__copy--right" style="justify-items:end;text-align:right;">
+                <p>洲际酒店「彩丰楼」归翼中秋礼盒</p>
+                <p>以品牌「鸟」视觉核心为灵感</p>
+                <p>以飞鸟喻游子，借四首古诗词</p>
+                <p class="nowrap">串联起「寻爱、成家、功名、思归」的人生四部曲</p>
+                <p>但不论走多远，心底的归意始终不变</p>
+              </div>
+            </div>
+
+            <div
+              class="gallery gallery--narrow"
+              data-carousel
+              data-images="./assets/career-moody-stage/caifenglou/01.jpg|./assets/career-moody-stage/caifenglou/02.jpg|./assets/career-moody-stage/caifenglou/03.png|./assets/career-moody-stage/caifenglou/04.png|./assets/career-moody-stage/caifenglou/05.png|./assets/career-moody-stage/caifenglou/06.png|./assets/career-moody-stage/caifenglou/07.png"
+              aria-label="彩丰楼静态构图提案"
+            >
+              <div class="gallery__slide is-active">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/02.jpg"
+                      alt="彩丰楼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/caifenglou/01.jpg"
+                      alt="彩丰楼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/03.png"
+                      alt="彩丰楼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/05.png"
+                      alt="彩丰楼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/caifenglou/04.png"
+                      alt="彩丰楼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/06.png"
+                      alt="彩丰楼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/04.png"
+                      alt="彩丰楼前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/caifenglou/07.png"
+                      alt="彩丰楼主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/caifenglou/01.jpg"
+                      alt="彩丰楼后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene">
+          <div class="scene__grid">
+            <div class="meta meta--right">
+              <img
+                class="meta__logo meta__logo--zong"
+                src="./assets/career-moody-stage/yichuanzong/logo-transparent.png"
+                alt="一串粽 logo"
+              />
+              <div class="meta__copy">
+                <p>「蔡澜点心」端午定制礼盒</p>
+                <p>找回小时候的串粽记忆</p>
+                <p>喜欢的口味随心配，串着就走</p>
+                <p>兼顾礼盒装与门店零卖的设计方案</p>
+              </div>
+            </div>
+
+            <div
+              class="gallery gallery--medium"
+              data-carousel
+              data-images="./assets/career-moody-stage/yichuanzong/01.png|./assets/career-moody-stage/yichuanzong/02.jpg|./assets/career-moody-stage/yichuanzong/03.jpeg|./assets/career-moody-stage/yichuanzong/04.png|./assets/career-moody-stage/yichuanzong/05.png"
+              aria-label="一串粽静态构图提案"
+            >
+              <div class="gallery__slide is-active">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/02.jpg"
+                      alt="一串粽前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/yichuanzong/01.png"
+                      alt="一串粽主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/03.jpeg"
+                      alt="一串粽后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/05.png"
+                      alt="一串粽前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/yichuanzong/04.png"
+                      alt="一串粽主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/02.jpg"
+                      alt="一串粽后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="gallery__slide">
+                <div class="gallery__side gallery__side--left">
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/03.jpeg"
+                      alt="一串粽前一张预览"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__main">
+                  <div class="gallery__mainFrame">
+                    <img
+                      src="./assets/career-moody-stage/yichuanzong/05.png"
+                      alt="一串粽主图"
+                    />
+                  </div>
+                </div>
+                <div class="gallery__side gallery__side--right" data-next-trigger>
+                  <div class="gallery__sideInner">
+                    <img
+                      class="gallery__sideFull"
+                      src="./assets/career-moody-stage/yichuanzong/01.png"
+                      alt="一串粽后一张预览"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div class="archive">
+        <div class="row row--a">
+          <h3 class="rowTitle">蔡澜点心<br />“尝口月亮”中秋礼盒</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--four">
+              <figure class="thumb"><img src="./assets/career-moody/cailan-1.png" alt="蔡澜点心缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/cailan-2.jpg" alt="蔡澜点心缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/cailan-3.png" alt="蔡澜点心缩略图 3" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/cailan-4.png" alt="蔡澜点心缩略图 4" /></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row--b">
+          <h3 class="rowTitle">奈尔宝NEOBIO<br />飞行月饼礼盒</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--three">
+              <figure class="thumb"><img src="./assets/career-moody/neobio-1.png" alt="奈尔宝缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/neobio-2.jpg" alt="奈尔宝缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/neobio-3.png" alt="奈尔宝缩略图 3" /></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row--c">
+          <h3 class="rowTitle">moody<br />“月亮知道你的秘密”中秋礼盒</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--five">
+              <figure class="thumb"><img src="./assets/career-moody/mimi-1.png" alt="秘密月饼缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/mimi-2.png" alt="秘密月饼缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/mimi-3.jpg" alt="秘密月饼缩略图 3" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/mimi-4.jpg" alt="秘密月饼缩略图 4" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/mimi-5.jpg" alt="秘密月饼缩略图 5" /></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row--d">
+          <h3 class="rowTitle">moody<br />“送你一棵摇钱树”金桔年货</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--four">
+              <figure class="thumb"><img src="./assets/career-moody/tree-1.png" alt="摇钱树缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/tree-2.png" alt="摇钱树缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/tree-3.png" alt="摇钱树缩略图 3" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/tree-4.png" alt="摇钱树缩略图 4" /></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row--e">
+          <h3 class="rowTitle">moody<br />“XMAS-BOX”圣诞礼盒</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--five">
+              <figure class="thumb"><img src="./assets/career-moody/xmas-1.png" alt="XMAS-BOX 缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/xmas-2.png" alt="XMAS-BOX 缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/xmas-3.png" alt="XMAS-BOX 缩略图 3" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/xmas-4.jpg" alt="XMAS-BOX 缩略图 4" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/xmas-5.jpg" alt="XMAS-BOX 缩略图 5" /></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row--f">
+          <h3 class="rowTitle">moody<br />“假装自己是颗蛋”蛋黄小酥酥</h3>
+          <div class="rowMedia">
+            <div class="thumbs thumbs--five">
+              <figure class="thumb"><img src="./assets/career-moody/egg-yolk-1.JPG" alt="蛋黄小酥酥缩略图 1" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/egg-yolk-2.JPG" alt="蛋黄小酥酥缩略图 2" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/egg-yolk-3.JPG" alt="蛋黄小酥酥缩略图 3" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/egg-yolk-4.JPG" alt="蛋黄小酥酥缩略图 4" /></figure>
+              <figure class="thumb"><img src="./assets/career-moody/egg-yolk-5.JPG" alt="蛋黄小酥酥缩略图 5" /></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moodyFooterNav">
+        <a
+          class="moody__back moody__back--footer"
+          href="./index.html?returnTo=career-overview#career-overview"
+          aria-label="Back to career overview"
+        >
+          <svg class="moody__backIcon" viewBox="0 0 24 24" role="presentation">
+            <path d="M1 6.5C5.2 8.8 8.2 10.3 12 10.3C15.8 10.3 18.8 8.8 23 6.5C20.4 10.6 17.4 15.7 12 23C6.6 15.7 3.6 10.6 1 6.5Z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightboxClose" id="lightboxClose" aria-label="关闭">×</button>
+      <img id="lightboxImage" src="" alt="放大预览" />
+    </div>
+
+    <script>
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxClose = document.getElementById("lightboxClose");
+
+      document.querySelectorAll(".thumb img").forEach((img) => {
+        img.addEventListener("click", () => {
+          lightboxImage.src = img.src;
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImage.src = "";
+      }
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeLightbox();
+        }
+      });
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const activateMoodyPage = () => {
+        document.body.classList.add("moody-ready");
+      };
+
+      if (prefersReducedMotion) {
+        activateMoodyPage();
+      } else {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(activateMoodyPage);
+        });
+      }
+
+      const moodyCarousels = Array.from(document.querySelectorAll("[data-carousel]"));
+      const transitionDuration = prefersReducedMotion ? 0 : 1000;
+      const cleanupDelay = transitionDuration + 40;
+      const autoplayDelay = prefersReducedMotion ? 0 : 1000;
+      const autoplayInitialDelay = prefersReducedMotion ? 0 : 900;
+      const autoplayResumeDelay = prefersReducedMotion ? 0 : 240;
+      const wrapIndex = (value, length) => ((value % length) + length) % length;
+
+      function createGalleryState() {
+        const state = document.createElement("div");
+        state.className = "gallery__state";
+        state.setAttribute("aria-hidden", "true");
+        state.innerHTML = `
+          <div class="gallery__side gallery__side--left">
+            <div class="gallery__sideInner">
+              <img class="gallery__sideFull" alt="" />
+            </div>
+          </div>
+          <div class="gallery__main">
+            <div class="gallery__mainFrame">
+              <img alt="" />
+            </div>
+          </div>
+          <div class="gallery__side gallery__side--right">
+            <div class="gallery__sideInner">
+              <img class="gallery__sideFull" alt="" />
+            </div>
+          </div>
+        `;
+        return state;
+      }
+
+      function renderGalleryState(state, images, mainIndex, label, landscapes = null) {
+        const leftIndex = wrapIndex(mainIndex - 1, images.length);
+        const rightIndex = wrapIndex(mainIndex + 1, images.length);
+        const leftImage = state.querySelector(".gallery__side--left img");
+        const mainImage = state.querySelector(".gallery__main img");
+        const rightImage = state.querySelector(".gallery__side--right img");
+        const isLandscape = Boolean(landscapes && landscapes.has(images[mainIndex]));
+
+        leftImage.src = images[leftIndex];
+        mainImage.src = images[mainIndex];
+        rightImage.src = images[rightIndex];
+
+        leftImage.alt = `${label} 左侧预览 ${leftIndex + 1}`;
+        mainImage.alt = `${label} 主图 ${mainIndex + 1}`;
+        rightImage.alt = `${label} 右侧预览 ${rightIndex + 1}`;
+        state.classList.toggle("is-landscape-main-state", isLandscape);
+        mainImage.classList.toggle("is-landscape", isLandscape);
+      }
+
+      function getShiftDistance(state, direction) {
+        const mainRect = state.querySelector(".gallery__main").getBoundingClientRect();
+        const sideRect = state
+          .querySelector(direction === "next" ? ".gallery__side--right" : ".gallery__side--left")
+          .getBoundingClientRect();
+
+        return sideRect.left - mainRect.left;
+      }
+
+      function moveCarousel(carousel, direction) {
+        const data = carousel._carousel;
+
+        if (!data || data.locked || data.images.length < 2) {
+          return;
+        }
+
+        data.locked = true;
+        const delta = direction === "next" ? 1 : -1;
+        const nextIndex = wrapIndex(data.activeIndex + delta, data.images.length);
+        const outgoing = data.activeState;
+        const incoming = data.inactiveState;
+        const shift = getShiftDistance(outgoing, direction);
+
+        renderGalleryState(incoming, data.images, nextIndex, data.label, data.landscapes);
+
+        carousel.classList.add("is-animating");
+        carousel.dataset.direction = direction;
+
+        incoming.classList.remove("is-active", "is-exiting");
+        outgoing.classList.remove("is-entering");
+        incoming.classList.add("is-entering");
+        outgoing.classList.add("is-exiting");
+        incoming.setAttribute("aria-hidden", "false");
+
+        incoming.style.transition = "none";
+        outgoing.style.transition = "none";
+        incoming.style.transform = `translate3d(${shift}px, 0, 0) scale(1)`;
+        incoming.style.opacity = "1";
+        outgoing.style.transform = "translate3d(0, 0, 0) scale(1)";
+        outgoing.style.opacity = "1";
+
+        void incoming.offsetWidth;
+
+        incoming.style.transition = "";
+        outgoing.style.transition = "";
+
+        window.requestAnimationFrame(() => {
+          incoming.style.transform = "translate3d(0, 0, 0) scale(1)";
+          outgoing.style.transform = `translate3d(${-shift}px, 0, 0) scale(1)`;
+          outgoing.style.opacity = "0";
+          incoming.classList.add("is-active");
+          outgoing.classList.remove("is-active");
+        });
+
+        window.setTimeout(() => {
+          outgoing.classList.remove("is-exiting");
+          incoming.classList.remove("is-entering");
+          outgoing.setAttribute("aria-hidden", "true");
+          outgoing.style.transition = "";
+          outgoing.style.transform = "";
+          outgoing.style.opacity = "";
+          incoming.style.transition = "";
+          incoming.style.transform = "";
+          incoming.style.opacity = "";
+
+          data.activeIndex = nextIndex;
+          data.activeState = incoming;
+          data.inactiveState = outgoing;
+          carousel.dataset.activeIndex = String(nextIndex);
+          carousel.classList.remove("is-animating");
+          data.locked = false;
+        }, cleanupDelay);
+      }
+
+      function stopAutoplay(carousel) {
+        const data = carousel._carousel;
+
+        if (!data || data.autoplayId === null) {
+          return;
+        }
+
+        window.clearTimeout(data.autoplayId);
+        window.clearInterval(data.autoplayId);
+        data.autoplayId = null;
+      }
+
+      function startAutoplay(carousel, delay = autoplayInitialDelay) {
+        const data = carousel._carousel;
+
+        if (!data || prefersReducedMotion || data.images.length < 2 || data.autoplayId !== null) {
+          return;
+        }
+
+        const run = () => {
+          if (!data.locked) {
+            moveCarousel(carousel, "next");
+          }
+        };
+
+        data.autoplayId = window.setTimeout(() => {
+          run();
+          data.autoplayId = window.setInterval(run, autoplayDelay);
+        }, delay);
+      }
+
+      moodyCarousels.forEach((carousel) => {
+        const images = (carousel.dataset.images || "")
+          .split("|")
+          .map((item) => item.trim())
+          .filter(Boolean);
+        const landscapes = new Set(
+          (carousel.dataset.landscapes || "")
+            .split("|")
+            .map((item) => item.trim())
+            .filter(Boolean),
+        );
+
+        if (!images.length) {
+          return;
+        }
+
+        const label = carousel.getAttribute("aria-label") || "项目图片";
+        const stateA = createGalleryState();
+        const stateB = createGalleryState();
+        carousel.replaceChildren(stateA, stateB);
+        renderGalleryState(stateA, images, 0, label, landscapes);
+        stateA.classList.add("is-active");
+        stateA.setAttribute("aria-hidden", "false");
+
+        carousel._carousel = {
+          activeIndex: 0,
+          activeState: stateA,
+          inactiveState: stateB,
+          images,
+          landscapes,
+          label,
+          locked: false,
+          autoplayId: null,
+        };
+
+        carousel.addEventListener("pointerenter", () => {
+          const data = carousel._carousel;
+
+          if (data) {
+            stopAutoplay(carousel);
+          }
+        });
+
+        carousel.addEventListener("pointerleave", () => {
+          const data = carousel._carousel;
+
+          if (data) {
+            startAutoplay(carousel, autoplayResumeDelay);
+          }
+        });
+
+        [stateA, stateB].forEach((state) => {
+          state.querySelectorAll(".gallery__side").forEach((trigger, index) => {
+            const direction = index === 0 ? "prev" : "next";
+            trigger.addEventListener("click", (event) => {
+              event.preventDefault();
+              moveCarousel(carousel, direction);
+            });
+          });
+        });
+
+        startAutoplay(carousel);
+      });
+    </script>
+  </body>
+</html>
