@@ -22,6 +22,135 @@ const contactQrBackdrop = document.querySelector(".contactQrBackdrop");
 const LOADER_SEEN_KEY = "junru-portfolio-loader-seen";
 const CAREER_OVERVIEW_RETURN_Y_KEY = "junru-career-overview-return-y";
 const WHY_ME_RETURN_Y_KEY = "junru-why-me-return-y";
+const CHILD_PAGE_PRELOAD_TIMEOUT = 25000;
+const CHILD_PAGE_PRELOAD_ASSETS = [
+  "./assets/career-moody-stage/hemu/logo-transparent.png",
+  "./assets/career-moody-stage/hemu/02.jpg",
+  "./assets/career-moody-stage/hemu/01.jpg",
+  "./assets/career-moody-stage/hemu/03.jpg",
+  "./assets/career-moody-stage/hemu/05.jpg",
+  "./assets/career-moody-stage/hemu/04.jpg",
+  "./assets/career-moody-stage/hemu/06.jpg",
+  "./assets/career-moody-stage/caifenglou/logo-transparent.png",
+  "./assets/career-moody-stage/caifenglou/02.jpg",
+  "./assets/career-moody-stage/caifenglou/01.jpg",
+  "./assets/career-moody-stage/caifenglou/03.png",
+  "./assets/career-moody-stage/caifenglou/05.png",
+  "./assets/career-moody-stage/caifenglou/04.png",
+  "./assets/career-moody-stage/caifenglou/06.png",
+  "./assets/career-moody-stage/caifenglou/07.png",
+  "./assets/career-moody-stage/yichuanzong/logo-transparent.png",
+  "./assets/career-moody-stage/yichuanzong/02.jpg",
+  "./assets/career-moody-stage/yichuanzong/01.png",
+  "./assets/career-moody-stage/yichuanzong/03.jpeg",
+  "./assets/career-moody-stage/yichuanzong/05.png",
+  "./assets/career-moody-stage/yichuanzong/04.png",
+  "./assets/career-moody/cailan-1.png",
+  "./assets/career-moody/cailan-2.jpg",
+  "./assets/career-moody/cailan-3.png",
+  "./assets/career-moody/cailan-4.png",
+  "./assets/career-moody/neobio-1.png",
+  "./assets/career-moody/neobio-2.jpg",
+  "./assets/career-moody/neobio-3.png",
+  "./assets/career-moody/mimi-1.png",
+  "./assets/career-moody/mimi-2.png",
+  "./assets/career-moody/mimi-3.jpg",
+  "./assets/career-moody/mimi-4.jpg",
+  "./assets/career-moody/mimi-5.jpg",
+  "./assets/career-moody/tree-1.png",
+  "./assets/career-moody/tree-2.png",
+  "./assets/career-moody/tree-3.png",
+  "./assets/career-moody/tree-4.png",
+  "./assets/career-moody/xmas-1.png",
+  "./assets/career-moody/xmas-2.png",
+  "./assets/career-moody/xmas-3.png",
+  "./assets/career-moody/xmas-4.jpg",
+  "./assets/career-moody/xmas-5.jpg",
+  "./assets/career-moody/egg-yolk-1.JPG",
+  "./assets/career-moody/egg-yolk-2.JPG",
+  "./assets/career-moody/egg-yolk-3.JPG",
+  "./assets/career-moody/egg-yolk-4.JPG",
+  "./assets/career-moody/egg-yolk-5.JPG",
+  "./assets/zuijiao-chefs/IMG_0445.JPG",
+  "./assets/zuijiao-chefs/IMG_0774.JPG",
+  "./assets/zuijiao-chefs/IMG_4573.png",
+  "./assets/zuijiao-chefs/IMG_4578.png",
+  "./assets/zuijiao-chefs/IMG_4583.png",
+  "./assets/zuijiao-chefs/IMG_4624.png",
+  "./assets/zuijiao-chefs/IMG_4631.png",
+  "./assets/zuijiao-chefs/IMG_4633.png",
+  "./assets/zuijiao-chefs/IMG_4636.png",
+  "./assets/zuijiao-chefs/IMG_4642.png",
+  "./assets/zuijiao-diners/IMG_0443.png",
+  "./assets/zuijiao-diners/IMG_0467.png",
+  "./assets/zuijiao-diners/IMG_4570.png",
+  "./assets/zuijiao-diners/IMG_4574.png",
+  "./assets/zuijiao-diners/IMG_4577.png",
+  "./assets/zuijiao-diners/IMG_4580.png",
+  "./assets/zuijiao-diners/IMG_4586.png",
+  "./assets/zuijiao-diners/IMG_4594.png",
+  "./assets/zuijiao-diners/IMG_4628.png",
+  "./assets/zuijiao-diners/getimgdata-3.jpg",
+  "./assets/exory/logo-exory.png",
+  "./assets/exory/selene.jpg",
+  "./assets/exory/aria.jpg",
+  "./assets/exory/corrine.jpg",
+  "./assets/exory/adara.jpg",
+  "./assets/exory/canna.jpg",
+  "./assets/exory/danica.jpg",
+  "./assets/exory/iris.jpg",
+  "./assets/exory/lilin.jpg",
+  "./assets/exory/exory-02-sensual-products.png",
+  "./assets/exory/exory-02-sensual-main.jpg",
+  "./assets/exory/exory-02-sensual-rotate-02.jpg",
+  "./assets/exory/exory-02-sensual-rotate-03.jpg",
+  "./assets/exory/exory-03-rebuild-thread.png",
+  "./assets/exory/exory-03-rebuild-seamless.png",
+  "./assets/exory/exory-03-rebuild-hero.jpg",
+  "./assets/exory/exory-04-package-hand.mp4",
+  "./assets/exory/exory-04-package-socks.jpg",
+  "./assets/exory/exory-05-character-canna.jpg",
+  "./assets/exory/exory-05-character-selene.jpg",
+  "./assets/exory/exory-05-character-corrine.jpg",
+  "./assets/exory/exory-05-character-adara.jpg",
+  "./assets/exory/exory-05-character-danica.jpg",
+  "./assets/exory/exory-05-character-lilin.jpg",
+  "./assets/exory/exory-05-character-iris.jpg",
+  "./assets/exory/exory-05-character-aria.jpg",
+  "./assets/whyme-detail/planning-a1.jpg",
+  "./assets/whyme-detail/planning-b1.png",
+  "./assets/whyme-detail/planning-a2.jpg",
+  "./assets/whyme-detail/planning-b2.jpg",
+  "./assets/whyme-detail/planning-a3.jpg",
+  "./assets/whyme-detail/planning-b3.png",
+  "./assets/whyme-detail/planning-a4.png",
+  "./assets/whyme-detail/planning-b4.jpg",
+  "./assets/whyme-detail/planning-a5.jpg",
+  "./assets/whyme-detail/planning-b5.jpg",
+  "./assets/whyme-detail/planning-a6.png",
+  "./assets/whyme-detail/planning-b6.jpg",
+  "./assets/whyme-detail/planning-a7.jpg",
+  "./assets/whyme-detail/planning-b7.jpg",
+  "./assets/whyme-detail/planning-a8.jpg",
+  "./assets/whyme-detail/planning-b8.jpg",
+  "./assets/whyme-detail/planning-a9.jpg",
+  "./assets/whyme-detail/planning-b9.jpg",
+  "./assets/whyme-detail/shoot-1.JPG",
+  "./assets/whyme-detail/shoot-3.JPG",
+  "./assets/whyme-detail/shoot-2.JPG",
+  "./assets/whyme-detail/shoot-4.JPG",
+  "./assets/whyme-detail/shoot-5.JPG",
+  "./assets/whyme-detail/shoot-6.JPG",
+  "./assets/whyme-detail/shoot-7.JPG",
+  "./assets/whyme-detail/shoot-8.JPG",
+  "./assets/whyme-detail/space-waitan-1.jpg",
+  "./assets/whyme-detail/space-waitan-2.jpg",
+  "./assets/whyme-detail/space-waitan-3.jpg",
+  "./assets/whyme-detail/space-lianyi-2.jpg",
+  "./assets/whyme-detail/space-lianyi-1.jpg",
+  "./assets/whyme-detail/space-lianyi-3.jpg",
+  "./assets/whyme-detail/space-lianyi-4.jpg",
+];
 const urlParams = new URLSearchParams(window.location.search);
 const isCareerOverviewReturn =
   urlParams.get("returnTo") === "career-overview" &&
@@ -66,6 +195,14 @@ const loaderState = {
   frameId: 0,
 };
 
+const childAssetPreloadState = {
+  started: false,
+  settled: false,
+  completed: 0,
+  total: CHILD_PAGE_PRELOAD_ASSETS.length,
+  promise: Promise.resolve(),
+};
+
 const careerState = {
   frameId: 0,
 };
@@ -89,6 +226,86 @@ const loaderInsets = {
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
+}
+
+function isVideoAsset(url) {
+  return /\.(mp4|webm|ogg)$/i.test(url);
+}
+
+function waitForImageLoad(image) {
+  return new Promise((resolve, reject) => {
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", reject, { once: true });
+  });
+}
+
+async function preloadImageAsset(url) {
+  const image = new Image();
+  image.decoding = "async";
+  image.src = url;
+
+  if (!image.complete) {
+    await waitForImageLoad(image);
+  }
+
+  if (typeof image.decode === "function") {
+    try {
+      await image.decode();
+    } catch {
+      // Some browsers reject decode() for cached or already-decoded images.
+    }
+  }
+}
+
+async function preloadBinaryAsset(url) {
+  const response = await fetch(url, { cache: "force-cache" });
+
+  if (!response.ok) {
+    throw new Error(`Failed to preload ${url}`);
+  }
+
+  await response.blob();
+}
+
+function updateChildAssetProgress() {
+  if (!childAssetPreloadState.total || skipLoader) {
+    return;
+  }
+
+  const ratio = childAssetPreloadState.completed / childAssetPreloadState.total;
+  setLoaderTarget(0.8 + ratio * 0.18);
+}
+
+function preloadChildPageAssets() {
+  if (skipLoader || childAssetPreloadState.started) {
+    return childAssetPreloadState.promise;
+  }
+
+  childAssetPreloadState.started = true;
+
+  const preloadTasks = CHILD_PAGE_PRELOAD_ASSETS.map((url) => {
+    const task = isVideoAsset(url)
+      ? preloadBinaryAsset(url)
+      : preloadImageAsset(url);
+
+    return task.catch(() => null).finally(() => {
+      childAssetPreloadState.completed += 1;
+      updateChildAssetProgress();
+    });
+  });
+
+  const timeoutTask = new Promise((resolve) => {
+    window.setTimeout(resolve, CHILD_PAGE_PRELOAD_TIMEOUT);
+  });
+
+  childAssetPreloadState.promise = Promise.race([
+    Promise.allSettled(preloadTasks),
+    timeoutTask,
+  ]).finally(() => {
+    childAssetPreloadState.settled = true;
+  });
+
+  return childAssetPreloadState.promise;
 }
 
 function restoreCareerOverviewPosition() {
@@ -653,6 +870,7 @@ document.addEventListener(
       return;
     }
     setLoaderTarget(0.35);
+    preloadChildPageAssets();
     scheduleCareerTitleUpdate();
     scheduleWhyCorkTitleUpdate();
     scheduleWhyMeTitleUpdate();
@@ -684,16 +902,20 @@ window.addEventListener(
       restoreWhyMePosition();
       return;
     }
-    loaderState.ready = true;
-    setLoaderTarget(1);
+    setLoaderTarget(0.92);
     scheduleCareerTitleUpdate();
     scheduleWhyCorkTitleUpdate();
     scheduleWhyMeTitleUpdate();
     syncWhyCorkEmbedHeight();
 
-    if (!loaderState.frameId) {
-      loaderState.frameId = window.requestAnimationFrame(tickLoader);
-    }
+    preloadChildPageAssets().finally(() => {
+      loaderState.ready = true;
+      setLoaderTarget(1);
+
+      if (!loaderState.frameId) {
+        loaderState.frameId = window.requestAnimationFrame(tickLoader);
+      }
+    });
   },
   { once: true },
 );
@@ -741,6 +963,7 @@ if (contactPage) {
 
 if (!skipLoader && document.readyState !== "loading") {
   setLoaderTarget(0.35);
+  preloadChildPageAssets();
   scheduleCareerTitleUpdate();
   scheduleWhyCorkTitleUpdate();
   scheduleWhyMeTitleUpdate();
