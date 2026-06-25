@@ -22,7 +22,9 @@ const contactQrBackdrop = document.querySelector(".contactQrBackdrop");
 const LOADER_SEEN_KEY = "junru-portfolio-loader-seen";
 const CAREER_OVERVIEW_RETURN_Y_KEY = "junru-career-overview-return-y";
 const WHY_ME_RETURN_Y_KEY = "junru-why-me-return-y";
-const CHILD_PAGE_PRELOAD_TIMEOUT = 25000;
+const CHILD_PAGE_PRELOAD_TIMEOUT = 18000;
+const CHILD_PAGE_PROGRESS_START = 0.8;
+const CHILD_PAGE_PROGRESS_CAP = 0.97;
 const CHILD_PAGE_PRELOAD_ASSETS = [
   "./assets/career-moody-stage/hemu/logo-transparent.png",
   "./assets/career-moody-stage/hemu/02.jpg",
@@ -200,6 +202,7 @@ const childAssetPreloadState = {
   settled: false,
   completed: 0,
   total: CHILD_PAGE_PRELOAD_ASSETS.length,
+  startedAt: 0,
   promise: Promise.resolve(),
 };
 
@@ -272,8 +275,18 @@ function updateChildAssetProgress() {
     return;
   }
 
-  const ratio = childAssetPreloadState.completed / childAssetPreloadState.total;
-  setLoaderTarget(0.8 + ratio * 0.18);
+  const assetRatio =
+    childAssetPreloadState.completed / childAssetPreloadState.total;
+  const elapsed = childAssetPreloadState.startedAt
+    ? performance.now() - childAssetPreloadState.startedAt
+    : 0;
+  const timeRatio = clamp(elapsed / CHILD_PAGE_PRELOAD_TIMEOUT, 0, 1);
+  const visualRatio = Math.max(assetRatio, timeRatio * 0.94);
+
+  setLoaderTarget(
+    CHILD_PAGE_PROGRESS_START +
+      visualRatio * (CHILD_PAGE_PROGRESS_CAP - CHILD_PAGE_PROGRESS_START),
+  );
 }
 
 function preloadChildPageAssets() {
@@ -282,6 +295,7 @@ function preloadChildPageAssets() {
   }
 
   childAssetPreloadState.started = true;
+  childAssetPreloadState.startedAt = performance.now();
 
   const preloadTasks = CHILD_PAGE_PRELOAD_ASSETS.map((url) => {
     const task = isVideoAsset(url)
@@ -883,7 +897,7 @@ if (document.fonts?.ready) {
     if (skipLoader) {
       return;
     }
-    setLoaderTarget(0.8);
+    setLoaderTarget(CHILD_PAGE_PROGRESS_START);
     scheduleCareerTitleUpdate();
     scheduleWhyCorkTitleUpdate();
     scheduleWhyMeTitleUpdate();
@@ -902,7 +916,7 @@ window.addEventListener(
       restoreWhyMePosition();
       return;
     }
-    setLoaderTarget(0.92);
+    setLoaderTarget(0.9);
     scheduleCareerTitleUpdate();
     scheduleWhyCorkTitleUpdate();
     scheduleWhyMeTitleUpdate();
